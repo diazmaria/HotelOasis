@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+    <definition extends="default" name="reservas/list">
+        <put-attribute name="body" value="/WEB-INF/views/reservas/list.jspx"/>
+    </definition>
+	<definition extends="default" name="reservas/show">
+        <put-attribute name="body" value="/WEB-INF/views/reservas/show.jspx"/>
+    </definition>
+	<definition extends="default" name="reservas/create">
+        <put-attribute name="body" value="/WEB-INF/views/reservas/create.jspx"/>
+    </definition>
+	<definition extends="default" name="reservas/update">
+        <put-attribute name="body" value="/WEB-INF/views/reservas/update.jspx"/>
+    </definition>
+	<definition extends="default" name="reservas/findHabitacionesDisponibles">
+        <put-attribute name="body" value="/WEB-INF/views/reservas/findHabitacionesDisponibles.jspx"/>
+	</definition>
+	<definition extends="default" name="reservas/detallesHabitacionDisponible">
+        <put-attribute name="body" value="/WEB-INF/views/reservas/detallesHabitacionDisponible.jspx"/>
+	</definition>
+	<definition extends="default" name="reservas/reservarHabitacion">
+        <put-attribute name="body" value="/WEB-INF/views/reservas/reservarHabitacion.jspx"/>
+	</definition>
+	<definition extends="default" name="reservas/exitoReserva">
+        <put-attribute name="body" value="/WEB-INF/views/reservas/exitoReserva.jspx"/>
+	</definition>
+</tiles-definitions>

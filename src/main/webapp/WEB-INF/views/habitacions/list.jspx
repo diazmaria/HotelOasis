@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_es_uca_iw_hoteloasis_domain_Habitacion" items="${habitacions}" z="XElJ7VfPhmap9V7a0rCNxNiITjQ=">
+        <table:table data="${habitacions}" id="l_es_uca_iw_hoteloasis_domain_Habitacion" path="/habitacions" z="clwk92IAsUiIjGnuGvCMdSWlz04=">
+            <table:column id="c_es_uca_iw_hoteloasis_domain_Habitacion_numero" property="numero" z="jRSblcNUZuD0IFlXsB42mwcZcsQ="/>
+            <table:column id="c_es_uca_iw_hoteloasis_domain_Habitacion_tipo" property="tipo" z="+oJspDj7HNoZzxXrSNSE23W3mTE="/>
+            <table:column id="c_es_uca_iw_hoteloasis_domain_Habitacion_estado" property="estado" z="NKNQgesZ7da23Jfdb7iiL8f5FEY="/>
+            <table:column id="c_es_uca_iw_hoteloasis_domain_Habitacion_hotel" property="hotel" z="AYmh0e4cYH5CIJ5PkDFLwgUy1FU="/>
+            <table:column id="c_es_uca_iw_hoteloasis_domain_Habitacion_categoria" property="categoria" z="noUTQg7t2Rwh+Y3S/DZgNyjDE14="/>
+        </table:table>
+    </page:list>
+</div>

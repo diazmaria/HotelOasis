@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_es_uca_iw_hoteloasis_domain_Habitacion" object="${habitacion}" path="/habitacions" z="f/5Z7m7jDScgUz2bfssMjTb6x8c=">
+        <field:display field="numero" id="s_es_uca_iw_hoteloasis_domain_Habitacion_numero" object="${habitacion}" z="KdUddrpxaEYvbD3DT5xMQAItWFs="/>
+        <field:display field="tipo" id="s_es_uca_iw_hoteloasis_domain_Habitacion_tipo" object="${habitacion}" z="3UvymVZYepu1HdRrb0CUZIKIj5Y="/>
+        <field:display field="estado" id="s_es_uca_iw_hoteloasis_domain_Habitacion_estado" object="${habitacion}" z="rY+X/vAAvTUJ6ryQo4GAJ7G4b0Q="/>
+        <field:display field="hotel" id="s_es_uca_iw_hoteloasis_domain_Habitacion_hotel" object="${habitacion}" z="R9BGUd206NDnt08+X8V9duA5Wa0="/>
+        <field:display field="categoria" id="s_es_uca_iw_hoteloasis_domain_Habitacion_categoria" object="${habitacion}" z="zZCAKW0HYa5lcDHq1W2LLWS2UqY="/>
+    </page:show>
+</div>

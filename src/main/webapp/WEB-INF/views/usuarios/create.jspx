@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:create id="fc_es_uca_iw_hoteloasis_domain_Usuario" modelAttribute="usuario" path="/usuarios" render="${empty dependencies}" z="jnB0b2jbu6AtqYEvq6Ui7becdrI=">
+        <field:input field="nombre" id="c_es_uca_iw_hoteloasis_domain_Usuario_nombre" z="HpZJz16OqNIMR+vg+uy9BYS8K4M="/>
+        <field:input field="primer_apellido" id="c_es_uca_iw_hoteloasis_domain_Usuario_primer_apellido" z="5pGnO1n0jVyt2iXxjRrbpfAV57s="/>
+        <field:input field="segundo_apellido" id="c_es_uca_iw_hoteloasis_domain_Usuario_segundo_apellido" z="LIum5QbL0tysbc7aKwfSOHwBVEM="/>
+        <field:input field="nombre_usuario" id="c_es_uca_iw_hoteloasis_domain_Usuario_nombre_usuario" z="/E8gU/EHJGxJAPXlZ09hd/g2zjI="/>
+        <field:input field="clave" id="c_es_uca_iw_hoteloasis_domain_Usuario_clave" z="TLqdDEM19Wi76ijEXG/bA21+vBo="/>
+        <field:input field="email" id="c_es_uca_iw_hoteloasis_domain_Usuario_email" validationMessageCode="field_invalid_email" z="Wxn0dF2VXJwYcAowhdylRXtmbu4="/>
+        <field:checkbox field="enabled" id="c_es_uca_iw_hoteloasis_domain_Usuario_enabled" z="gBBAdOosheKSTaWwrVY9iQJ3EPw="/>
+        <field:select field="rol" id="c_es_uca_iw_hoteloasis_domain_Usuario_rol" itemValue="id" items="${rols}" path="/rols" z="Aa9nBO6B8/ue3JOlVFkCnEh9c0o="/>
+    </form:create>
+    <form:dependency dependencies="${dependencies}" id="d_es_uca_iw_hoteloasis_domain_Usuario" render="${not empty dependencies}" z="z+EdQF+x987YGIfAZwtfnvX7R+s="/>
+</div>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:create id="fc_es_uca_iw_hoteloasis_domain_Habitacion" modelAttribute="habitacion" path="/habitacions" render="${empty dependencies}" z="HdxifaGdgrdfHpmfjMM/Cjk0yq4=">
+        <field:input field="numero" id="c_es_uca_iw_hoteloasis_domain_Habitacion_numero" required="true" z="P6SLKny3DCPbOHZl8lRb7xzWPrA="/>
+        <field:select field="tipo" id="c_es_uca_iw_hoteloasis_domain_Habitacion_tipo" items="${habitacion_tipoes}" path="habitacion_tipoes" required="true" z="VJvMrZHGfMdGELQqZ4pbLmSaqnc="/>
+        <field:select field="estado" id="c_es_uca_iw_hoteloasis_domain_Habitacion_estado" items="${habitacion_estadoes}" path="habitacion_estadoes" z="WR8ZcVYb5LuZHpRxVlzbz3otaOU="/>
+        <field:select field="hotel" id="c_es_uca_iw_hoteloasis_domain_Habitacion_hotel" itemValue="id" items="${hotels}" path="/hotels" required="true" z="fzfqH4T6Ao9Ec84LatqgglwAevk="/>
+        <field:select field="categoria" id="c_es_uca_iw_hoteloasis_domain_Habitacion_categoria" itemValue="id" items="${categorias}" path="/categorias" required="true" z="P7A3zdovwlBEE4guvmIchBGXVs4="/>
+    </form:create>
+    <form:dependency dependencies="${dependencies}" id="d_es_uca_iw_hoteloasis_domain_Habitacion" render="${not empty dependencies}" z="XocR9Yf+Hij1RpuD5/FCMddIjfY="/>
+</div>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_es_uca_iw_hoteloasis_domain_Categoria" items="${categorias}" z="nAmNB8yMDwkW64KcYmYzwuSI/vA=">
+        <table:table data="${categorias}" id="l_es_uca_iw_hoteloasis_domain_Categoria" path="/categorias" z="lOCJe7gAzpADi1JZUcHEfm4N2P0=">
+            <table:column id="c_es_uca_iw_hoteloasis_domain_Categoria_nombre" property="nombre" z="nnHVsEpexULlSQoVP5I1huYxIFs="/>
+            <table:column id="c_es_uca_iw_hoteloasis_domain_Categoria_descripcion" property="descripcion" z="1GUyXbR8b7DFCFPcvIt4CxewIrA="/>
+            <table:column id="c_es_uca_iw_hoteloasis_domain_Categoria_precio_categoria" property="precio_categoria" z="g532Jz3gq3BoYRIw3dnvee3FOW0="/>
+            <table:column id="c_es_uca_iw_hoteloasis_domain_Categoria_hotel" property="hotel" z="Mj01kFyNJt8ULRId3AHAQBctzfY="/>
+        </table:table>
+    </page:list>
+</div>

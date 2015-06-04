@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security" 
+    xmlns:beans="http://www.springframework.org/schema/beans" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+    <!-- HTTP security configurations -->
+
+  		<http auto-config="true" use-expressions="true" request-matcher="regex" access-denied-page="/WEB-INF/views/accesoDenegado.jspx">
+    
+        <form-login login-processing-url="/resources/j_spring_security_check" login-page="/login" authentication-failure-url="/login?login_error=t" />
+        <logout logout-url="/resources/j_spring_security_logout" />
+        
+        
+        <!-- GENERAL -->
+        <!-- Raíz -->
+        <intercept-url pattern="\A/*" access="permitAll" />
+        <!-- Login -->
+        <intercept-url pattern="\A/login/*" access="permitAll" />
+        <intercept-url pattern="\A/login\?login_error=.*\Z" access="permitAll"/>
+		<!-- Cambiar de idioma desde página principal -->
+		<intercept-url pattern="\A/\?lang=.*\Z" access="permitAll" />
+		<!-- Cambiar de tema desde página principal -->
+		<intercept-url pattern="\A/\?theme=.*\Z" access="permitAll" />        
+        <!-- GENERAL -->
+        
+        <!-- Configure these elements to secure URIs in your application -->
+        
+    </http>
+    <!-- Configure Authentication mechanism -->
+    <authentication-manager alias="authenticationManager">
+    <!-- SHA-256 values can be produced using 'echo -n your_desired_password | sha256sum' (using normal *nix environments) -->
+       <!-- <authentication-provider>
+            <password-encoder hash="sha-256" />
+            <user-service>
+                <user name="admin" password="8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918" authorities="ROLE_ADMIN" />
+                <user name="user" password="04f8996da763b7a969b1028ee3007569eaf3a635486ddab211d512c85b9df8fb" authorities="ROLE_USER" />
+            </user-service>
+        </authentication-provider> -->
+            
+      <authentication-provider>
+<!--      	 <password-encoder hash="sha-256" /> -->
+     	 <jdbc-user-service data-source-ref="dataSource"
+users-by-username-query="SELECT usuario.nombre_usuario, usuario.clave as clave, usuario.enabled as enabled FROM usuario where usuario.nombre_usuario=?"
+      		authorities-by-username-query="SELECT usuario.nombre_usuario, rol.nombre FROM usuario left join rol on usuario.rol = rol.id 
+WHERE usuario.nombre_usuario=?" />
+      </authentication-provider> 
+    </authentication-manager>
+</beans:beans>

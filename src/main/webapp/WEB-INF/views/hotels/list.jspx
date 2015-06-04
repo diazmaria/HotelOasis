@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_es_uca_iw_hoteloasis_domain_Hotel" items="${hotels}" z="q53ASkvfEfmxU1B4SNTHpvZ08No=">
+        <table:table data="${hotels}" id="l_es_uca_iw_hoteloasis_domain_Hotel" path="/hotels" z="Q8x5nNWJRVdhjecCj0XuftRf1ec=">
+            <table:column id="c_es_uca_iw_hoteloasis_domain_Hotel_nombre" property="nombre" z="sq5AufVLF9SMZxYHTQUjzcqUKoE="/>
+            <table:column id="c_es_uca_iw_hoteloasis_domain_Hotel_provincia" property="provincia" z="xA1qHGiRmrqOBblBkySpXBErjtA="/>
+            <table:column id="c_es_uca_iw_hoteloasis_domain_Hotel_poblacion" property="poblacion" z="EVjiXVR20seifnLhJNay8D6KrVc="/>
+            <table:column id="c_es_uca_iw_hoteloasis_domain_Hotel_direccion" property="direccion" z="LKYDe8FswLbA7D6dtTsHfzLOjhQ="/>
+            <table:column id="c_es_uca_iw_hoteloasis_domain_Hotel_telefono" property="telefono" z="xRbbcFdM43ClDNhADlFk/a+WfrQ="/>
+            <table:column id="c_es_uca_iw_hoteloasis_domain_Hotel_estrellas" property="estrellas" z="UF8wYptM0fNr1uup+dSssfEHlsw="/>
+            <table:column id="c_es_uca_iw_hoteloasis_domain_Hotel_dias_maximos" property="estrellas" z="UF8wYptM0fNr1uup+dSssfEHlsw="/>
+            <table:column id="c_es_uca_iw_hoteloasis_domain_Hotel_dias_adelanto" property="estrellas" z="UF8wYptM0fNr1uup+dSssfEHlsw="/>
+        </table:table>
+    </page:list>
+</div>

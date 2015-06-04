@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_es_uca_iw_hoteloasis_domain_Hotel" modelAttribute="hotel" path="/hotels" versionField="Version" z="7rvUF+3YRmPcB/MQUtJ4dwRFjTI=">
+        <field:input field="nombre" id="c_es_uca_iw_hoteloasis_domain_Hotel_nombre" max="30" required="true" z="Voh4PBYNhfv7q9h+zF5dJR/clXc="/>
+        <field:input field="provincia" id="c_es_uca_iw_hoteloasis_domain_Hotel_provincia" max="30" min="4" required="true" z="C2AXKcX5ZBA2UHM4FyHpGKpdYG0="/>
+        <field:input field="poblacion" id="c_es_uca_iw_hoteloasis_domain_Hotel_poblacion" max="30" min="4" required="true" z="4fkQCgas9NcTmq4ncozpHszWjDA="/>
+        <field:input field="direccion" id="c_es_uca_iw_hoteloasis_domain_Hotel_direccion" max="30" min="6" required="true" z="BGS1Nh8zfxavAXbsVBt2PEQqxbo="/>
+        <field:input field="telefono" id="c_es_uca_iw_hoteloasis_domain_Hotel_telefono" max="20" min="9" required="true" validationRegex="[0-9]+" z="d4yShBkmr5u6RuQgMMUpIe6S1XI="/>
+        <field:input field="estrellas" id="c_es_uca_iw_hoteloasis_domain_Hotel_estrellas" required="true" z="CPKbSJ9hA2I+ZmBWXxoslnIotdE="/>
+        <field:input field="precio_hab_simple" id="c_es_uca_iw_hoteloasis_domain_Hotel_precio_hab_simple" required="true" z="gDQI+AFpov/PXPVJlc0eMKl7y6A="/>
+        <field:input field="precio_hab_doble" id="c_es_uca_iw_hoteloasis_domain_Hotel_precio_hab_doble" required="true" z="VdM0D7bvxGkUznBxD2EQjMTP/68="/>
+        <field:input field="precio_cama_sup" id="c_es_uca_iw_hoteloasis_domain_Hotel_precio_cama_sup" required="true" z="Yek9+lO2fMi1+tL24ZO8/ooQN/4="/>
+        <field:input field="dias_maximos" id="c_es_uca_iw_hoteloasis_domain_Hotel_dias_maximos" required="true" z="x4tZcrmbFt1+at831c5JW//8Z7w="/>
+        <field:input field="dias_adelanto" id="c_es_uca_iw_hoteloasis_domain_Hotel_dias_adelanto" required="true" z="mGunS1NCJl3l5isVzlW2Duebe8A="/>
+        <field:simple field="habitaciones" id="c_es_uca_iw_hoteloasis_domain_Hotel_habitaciones" messageCode="entity_reference_not_managed" messageCodeAttribute="Habitacion" z="6YD3YYg+JWgT7rCpy4+8rRmHe40="/>
+        <field:simple field="reservas" id="c_es_uca_iw_hoteloasis_domain_Hotel_reservas" messageCode="entity_reference_not_managed" messageCodeAttribute="Reserva" z="uQPFGR0tv5+P6X0G8Fo7b1b44i4="/>
+        <field:simple field="categorias" id="c_es_uca_iw_hoteloasis_domain_Hotel_categorias" messageCode="entity_reference_not_managed" messageCodeAttribute="Categoria" z="O1FDFwA2kUs6+P6rkot4N+BpceE="/>
+    </form:update>
+</div>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_es_uca_iw_hoteloasis_domain_Hotel" object="${hotel}" path="/hotels" z="pbIj9uisEg5FW34c1Q/3+yhO8H4=">
+        <field:display field="nombre" id="s_es_uca_iw_hoteloasis_domain_Hotel_nombre" object="${hotel}" z="wNxsykO1qgPIuDi5GTvbFRFlQh4="/>
+        <field:display field="provincia" id="s_es_uca_iw_hoteloasis_domain_Hotel_provincia" object="${hotel}" z="SLXa9fqctUVNhJmtmi8JOyD/XxA="/>
+        <field:display field="poblacion" id="s_es_uca_iw_hoteloasis_domain_Hotel_poblacion" object="${hotel}" z="Prjz6P5KHZOEjOdLLp0UVMb9J+c="/>
+        <field:display field="direccion" id="s_es_uca_iw_hoteloasis_domain_Hotel_direccion" object="${hotel}" z="lR2nQHQamH+4RpnVxpgXpHUi5E4="/>
+        <field:display field="telefono" id="s_es_uca_iw_hoteloasis_domain_Hotel_telefono" object="${hotel}" z="nKwXGWIQBoWZ89ZRMOXQgj3kWPM="/>
+        <field:display field="estrellas" id="s_es_uca_iw_hoteloasis_domain_Hotel_estrellas" object="${hotel}" z="kqDHaeLSm4HwEGeUQy2fT52YGEs="/>
+        <field:display field="precio_hab_simple" id="s_es_uca_iw_hoteloasis_domain_Hotel_precio_hab_simple" object="${hotel}" z="LsXrKzNWVhzL3aNt7f3sHOMYUZ4="/>
+        <field:display field="precio_hab_doble" id="s_es_uca_iw_hoteloasis_domain_Hotel_precio_hab_doble" object="${hotel}" z="+VXHU5NaalMAGqtHoz4rk+H6UKc="/>
+        <field:display field="precio_cama_sup" id="s_es_uca_iw_hoteloasis_domain_Hotel_precio_cama_sup" object="${hotel}" z="Hd4ltRd+6sgwGed0/Y1Nfn2Z5k8="/>
+        <field:display field="dias_maximos" id="s_es_uca_iw_hoteloasis_domain_Hotel_dias_maximos" object="${hotel}" z="7N1v1NPECuoe3nBWh5Wv5XSsFLc="/>
+        <field:display field="dias_adelanto" id="s_es_uca_iw_hoteloasis_domain_Hotel_dias_adelanto" object="${hotel}" z="04oj4QpLLzq7kmTHrQFVCCqxiVo="/>
+    </page:show>
+</div>

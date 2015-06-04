@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_es_uca_iw_hoteloasis_domain_Reserva" object="${reserva}" path="/reservas" z="jmuaJBKZ7CqUXub+ihTZvPkISQ0=">
+        <field:display date="true" dateTimePattern="${reserva_fecha_reserva_date_format}" field="fecha_reserva" id="s_es_uca_iw_hoteloasis_domain_Reserva_fecha_reserva" object="${reserva}" z="fdS9A2QEMpwF2qslvakd7/Ts8+Y="/>
+        <field:display date="true" dateTimePattern="${reserva_fecha_entrada_date_format}" field="fecha_entrada" id="s_es_uca_iw_hoteloasis_domain_Reserva_fecha_entrada" object="${reserva}" z="NFAu2rjszOdAnPLNn6D2OGsv9xU="/>
+        <field:display date="true" dateTimePattern="${reserva_fecha_salida_date_format}" field="fecha_salida" id="s_es_uca_iw_hoteloasis_domain_Reserva_fecha_salida" object="${reserva}" z="jjPABdOUDx2NnQsW0ahImjwtfXs="/>
+        <field:display field="cama_supletoria" id="s_es_uca_iw_hoteloasis_domain_Reserva_cama_supletoria" object="${reserva}" z="Nkzc64Ar+8pVCvJkeZgae9cGnGk="/>
+        <field:display date="true" dateTimePattern="${reserva_fecha_cancelacion_date_format}" field="fecha_cancelacion" id="s_es_uca_iw_hoteloasis_domain_Reserva_fecha_cancelacion" object="${reserva}" z="QsAIhD90ByU53IfRR3FIS0myZWE="/>
+        <field:display field="hotel" id="s_es_uca_iw_hoteloasis_domain_Reserva_hotel" object="${reserva}" z="4+1dEQWb3ANowvmg9k5hGiHc1zA="/>
+        <field:display field="categoria" id="s_es_uca_iw_hoteloasis_domain_Reserva_categoria" object="${reserva}" z="qqVkfeu3P88sFPyqgaQFBojb2E0="/>
+        <field:display field="tipo" id="s_es_uca_iw_hoteloasis_domain_Reserva_tipo" object="${reserva}" z="Wz/v+JuM9iN/1SG5A48H7oDr0B8="/>
+        <field:display field="coste_total" id="s_es_uca_iw_hoteloasis_domain_Reserva_coste_total" object="${reserva}" z="vt6EfdiaTGbB4epU/pIROIFcb7U="/>
+        <field:display field="usuario" id="s_es_uca_iw_hoteloasis_domain_Reserva_usuario" object="${reserva}" z="DDIzddTYG3G2PnuVCkSn9egyshk="/>
+    </page:show>
+</div>

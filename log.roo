@@ -1,0 +1,102 @@
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2015-05-23 22:39:25
+project --topLevelPackage es.uca.iw.hoteloasis --projectName HotelOasis --java 7 --packaging WAR
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log closed at 2015-05-23 22:39:29
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2015-05-23 22:41:15
+jpa setup --provider HIBERNATE --database MYSQL --databaseName hoteloasis --username root
+entity jpa --class ~.domain.Hotel --testAutomatically
+field string --fieldName nombre --notNull
+field string --fieldName provincia --notNull --sizeMin 4
+field string --fieldName poblacion --notNull --sizeMin 4
+field string --fieldName direccion --notNull --sizeMin 6
+field string --fieldName telefono --notNull --sizeMin 9
+field number --type int --fieldName estrellas --notNull
+field number --type double --fieldName precio_hab_simple --notNull
+field number --type double --fieldName precio_hab_doble --notNull
+field number --type double --fieldName precio_cama_sup --notNull
+field number --type int --fieldName dias_maximos
+enum type --class ~.domain.Habitacion_tipo
+enum constant --name SIMPLE
+enum constant --name DOBLE
+enum type --class ~.domain.Habitacion_estado
+enum constant --name LIBRE
+enum constant --name OCUPADA
+enum constant --name RESERVADA
+entity jpa --class ~.domain.Habitacion --testAutomatically
+field number --type int --fieldName numero --notNull
+field enum --fieldName tipo --type ~.domain.Habitacion_tipo --notNull
+field enum --fieldName estado --type ~.domain.Habitacion_estado
+entity jpa --class ~.domain.Categoria --testAutomatically
+field string --fieldName name --notNull
+field string --fieldName descripcion
+field number --type double --fieldName precio_categoria --notNull
+entity jpa --class ~.domain.Reserva --testAutomatically
+field date --type java.util.Date --fieldName fecha_reserva --notNull
+field date --type java.util.Date --fieldName fecha_entrada --notNull
+field date --type java.util.Date --fieldName fecha_salida --notNull
+field enum --type ~.domain.Habitacion_tipo --fieldName tipo_habitacion --notNull
+field boolean --fieldName cama_supletoria --notNull
+field date --type java.util.Date --fieldName fecha_cancelacion
+focus --class ~.domain.Habitacion
+field reference --type ~.domain.Hotel --fieldName hotel --notNull --cardinality MANY_TO_ONE
+field reference --type ~.domain.Categoria --fieldName categoria --notNull --cardinality MANY_TO_ONE
+focus --class ~.domain.Reserva
+field reference --type ~.domain.Hotel --fieldName hotel --notNull --cardinality MANY_TO_ONE
+field reference --type ~.domain.Categoria --fieldName categoria --notNull --cardinality MANY_TO_ONE
+focus --class ~.domain.Categoria
+field reference --type ~.domain.Hotel --fieldName hotel --notNull --cardinality MANY_TO_ONE
+field set --type ~.domain.Habitacion --fieldName habitaciones --mappedBy categoria --cardinality ONE_TO_MANY
+focus --class ~.domain.Hotel
+field set --type ~.domain.Habitacion --fieldName habitaciones --mappedBy hotel --cardinality ONE_TO_MANY
+field set --type ~.domain.Reserva --fieldName reservas --mappedBy hotel --cardinality ONE_TO_MANY
+field set --type ~.domain.Categoria --fieldName categorias --mappedBy hotel --cardinality ONE_TO_MANY
+web mvc setup
+web mvc all --package ~.web
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2015-05-30 11:16:05
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log closed at 2015-05-30 11:43:35
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2015-05-30 23:35:33
+focus --class ~.domain.Reserva
+field number --type double --fieldName coste_total
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log closed at 2015-05-31 00:12:48
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2015-06-02 11:49:24
+web mvc install language --code es
+focus --class ~.domain.Hotel
+field number --type int --fieldName dias_adelanto --notNull
+entity jpa --class ~.domain.Usuario
+entity jpa --class ~.domain.Usuario --testAutomatically 
+field string --fieldName nombre --notNull --sizeMin 2 --sizeMax 30
+field string --fieldName apellidos --notNull --sizeMin 2 --sizeMax 30
+field string --fieldName nombre_usuario --notNull --sizeMin 2 --sizeMax 30
+field string --fieldName clave --notNull --sizeMin 4 --sizeMax 15
+field string --fieldName email --notNull --sizeMax 20
+field boolean --fieldName enabled --notNull true
+field string --fieldName segundo_apellido --notNull --sizeMin 2 --sizeMax 30
+field string --fieldName primer_apellido --notNull --sizeMin 2 --sizeMax 30
+focus --class ~.domain.Reserva
+field reference --type ~.domain.Usuario --fieldName usuario
+web mvc all --package ~.web
+entity jpa --class ~.domain.Rol
+field string --fieldName nombre --notNull --sizeMax 20
+focus --class ~.domain.Usuario
+field set --fieldName roles --type ~.domain.Rol
+web mvc all --package ~.web
+entity jpa --class Estancia --testAutomatically
+field date --type java.util.Date  --fieldName fecha_check_in
+field date --type java.util.Date  --fieldName fecha_check_out
+field reference --fieldName reserva --type ~.domain.Reserva
+field reference --fieldName habitacion --type ~.domain.Habitacion
+field reference --fieldName usuario --type ~.domain.Usuario
+security setup
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log closed at 2015-06-03 02:58:41
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2015-06-03 12:38:09
+focus --class ~.domain.Usuario
+finder list
+finder add --finderName findUsuariosByNombre_usuarioEquals
+finder list
+finder list
+finder list
+finder add --finderName findUsuariosByRol
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log closed at 2015-06-03 13:56:15
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2015-06-04 13:00:31
+focus --class ~.domain.Rol
+finder list
+finder add --finderName findRolsByNombreEquals

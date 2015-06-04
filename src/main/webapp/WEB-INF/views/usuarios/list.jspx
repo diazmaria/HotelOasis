@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_es_uca_iw_hoteloasis_domain_Usuario" items="${usuarios}" z="xqTvsAh016YQcxpk9cyzBO2KGQ4=">
+        <table:table data="${usuarios}" id="l_es_uca_iw_hoteloasis_domain_Usuario" path="/usuarios" z="N9VzkrevrUMh3i4bRbSBYBYsgJg=">
+            <table:column id="c_es_uca_iw_hoteloasis_domain_Usuario_nombre" property="nombre" z="7GAt+l78kDsNQyY4D2uO72aT2Nk="/>
+            <table:column id="c_es_uca_iw_hoteloasis_domain_Usuario_primer_apellido" property="primer_apellido" z="/IPW/f+7NFkp/NZ/62e5GN36iNg="/>
+            <table:column id="c_es_uca_iw_hoteloasis_domain_Usuario_segundo_apellido" property="segundo_apellido" z="CRUCUr0lUJ3AKG9d8Tzy8OhWA4g="/>
+            <table:column id="c_es_uca_iw_hoteloasis_domain_Usuario_nombre_usuario" property="nombre_usuario" z="3PAvsrfOn1R5OLKIatNUAd0BvC4="/>
+            <table:column id="c_es_uca_iw_hoteloasis_domain_Usuario_clave" property="clave" z="kk5dKkw8w9sIR29lF3YTJB6AU54="/>
+            <table:column id="c_es_uca_iw_hoteloasis_domain_Usuario_email" property="email" z="r0xeVTVjrZjYMo8c4vVcMie/JWg="/>
+        </table:table>
+    </page:list>
+</div>
