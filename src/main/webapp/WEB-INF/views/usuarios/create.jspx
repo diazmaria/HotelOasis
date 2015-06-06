@@ -3,12 +3,12 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <form:create id="fc_es_uca_iw_hoteloasis_domain_Usuario" modelAttribute="usuario" path="/usuarios" render="${empty dependencies}" z="jnB0b2jbu6AtqYEvq6Ui7becdrI=">
-        <field:input field="nombre" id="c_es_uca_iw_hoteloasis_domain_Usuario_nombre" z="HpZJz16OqNIMR+vg+uy9BYS8K4M="/>
-        <field:input field="primer_apellido" id="c_es_uca_iw_hoteloasis_domain_Usuario_primer_apellido" z="5pGnO1n0jVyt2iXxjRrbpfAV57s="/>
-        <field:input field="segundo_apellido" id="c_es_uca_iw_hoteloasis_domain_Usuario_segundo_apellido" z="LIum5QbL0tysbc7aKwfSOHwBVEM="/>
-        <field:input field="nombre_usuario" id="c_es_uca_iw_hoteloasis_domain_Usuario_nombre_usuario" z="/E8gU/EHJGxJAPXlZ09hd/g2zjI="/>
-        <field:input field="clave" id="c_es_uca_iw_hoteloasis_domain_Usuario_clave" z="TLqdDEM19Wi76ijEXG/bA21+vBo="/>
-        <field:input field="email" id="c_es_uca_iw_hoteloasis_domain_Usuario_email" validationMessageCode="field_invalid_email" z="Wxn0dF2VXJwYcAowhdylRXtmbu4="/>
+        <field:input field="nombre" id="c_es_uca_iw_hoteloasis_domain_Usuario_nombre" max="30" min="2" required="true" z="Xf2DQth6H6AdlCVL4T0gIYH4R9Y="/>
+        <field:input field="primer_apellido" id="c_es_uca_iw_hoteloasis_domain_Usuario_primer_apellido" max="30" min="2" required="true" z="+8JkNL7h7ZCA3+C/YVdMNv5116c="/>
+        <field:input field="segundo_apellido" id="c_es_uca_iw_hoteloasis_domain_Usuario_segundo_apellido" max="30" min="2" required="true" z="SQh/j3WJJj0fxdZbn8Tg86pnm48="/>
+        <field:input field="nombre_usuario" id="c_es_uca_iw_hoteloasis_domain_Usuario_nombre_usuario" max="30" min="2" required="true" z="o/7okflt66/imedbqwLpPZinVcg="/>
+        <field:textarea field="clave" id="c_es_uca_iw_hoteloasis_domain_Usuario_clave" required="true" z="7oPwKNReaKaJjihYV/JkOX45Ko0="/>
+        <field:textarea field="email" id="c_es_uca_iw_hoteloasis_domain_Usuario_email" required="true" validationMessageCode="field_invalid_email" z="6CpPX2tKcQbSs1bRRfz91lNrfeY="/>
         <field:checkbox field="enabled" id="c_es_uca_iw_hoteloasis_domain_Usuario_enabled" z="gBBAdOosheKSTaWwrVY9iQJ3EPw="/>
         <field:select field="rol" id="c_es_uca_iw_hoteloasis_domain_Usuario_rol" itemValue="id" items="${rols}" path="/rols" z="Aa9nBO6B8/ue3JOlVFkCnEh9c0o="/>
     </form:create>

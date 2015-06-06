@@ -91,12 +91,12 @@ privileged aspect Hotel_Roo_JavaBean {
         this.dias_maximos = dias_maximos;
     }
     
-    public int Hotel.getDias_adelanto() {
-        return this.dias_adelanto;
+    public int Hotel.getDias_antelacion() {
+        return this.dias_antelacion;
     }
     
-    public void Hotel.setDias_adelanto(int dias_adelanto) {
-        this.dias_adelanto = dias_adelanto;
+    public void Hotel.setDias_antelacion(int dias_antelacion) {
+        this.dias_antelacion = dias_antelacion;
     }
     
     public Set<Habitacion> Hotel.getHabitaciones() {

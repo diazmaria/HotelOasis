@@ -24,7 +24,7 @@ privileged aspect HotelDataOnDemand_Roo_DataOnDemand {
     
     public Hotel HotelDataOnDemand.getNewTransientHotel(int index) {
         Hotel obj = new Hotel();
-        setDias_adelanto(obj, index);
+        setDias_antelacion(obj, index);
         setDias_maximos(obj, index);
         setDireccion(obj, index);
         setEstrellas(obj, index);
@@ -38,9 +38,9 @@ privileged aspect HotelDataOnDemand_Roo_DataOnDemand {
         return obj;
     }
     
-    public void HotelDataOnDemand.setDias_adelanto(Hotel obj, int index) {
-        int dias_adelanto = index;
-        obj.setDias_adelanto(dias_adelanto);
+    public void HotelDataOnDemand.setDias_antelacion(Hotel obj, int index) {
+        int dias_antelacion = index;
+        obj.setDias_antelacion(dias_antelacion);
     }
     
     public void HotelDataOnDemand.setDias_maximos(Hotel obj, int index) {

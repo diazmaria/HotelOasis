@@ -1,4 +1,6 @@
 package es.uca.iw.hoteloasis.domain;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -7,6 +9,7 @@ import javax.persistence.TypedQuery;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.apache.commons.codec.binary.Hex;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
 import org.springframework.roo.addon.tostring.RooToString;
@@ -19,50 +22,67 @@ public class Usuario {
 
     /**
      */
-//    @NotNull
-//    @Size(min = 2, max = 30)
+    @NotNull
+    @Size(min = 2, max = 30)
     private String nombre;
 
     /**
      */
-//    @NotNull
-//    @Size(min = 2, max = 30)
+    @NotNull
+    @Size(min = 2, max = 30)
     private String primer_apellido;
 
     /**
      */
-//    @NotNull
-//    @Size(min = 2, max = 30)
+    @NotNull
+    @Size(min = 2, max = 30)
     private String segundo_apellido;
 
     /**
      */
-//    @NotNull
-//    @Size(min = 2, max = 30)
+    @NotNull
+    @Size(min = 2, max = 30)
     private String nombre_usuario;
 
     /**
      */
-//    @NotNull
-//    @Size(min = 4, max = 15)
+    @NotNull
+    @Size(max = 300)
     private String clave;
 
     /**
      */
-//    @NotNull
-//    @Size(max = 20)
+    @NotNull
+    @Size(max = 50)
     private String email;
 
     /**
      */
-//    @NotNull
+    @NotNull
     private Boolean enabled;
 
     /**
-     */@ManyToOne
+     */
+    @ManyToOne
     private Rol rol;
 
      
+    //CONSTRUCTORES
+	public Usuario() {
+    }
+
+    public Usuario(String nombre, String primer_apellido, String segundo_apellido, String email, String nombre_usuario, String clave, Boolean enabled, Rol rol) {
+        this.nombre = nombre;
+        this.primer_apellido = primer_apellido;
+        this.segundo_apellido = segundo_apellido;
+        this.email = email;
+        this.nombre_usuario = nombre_usuario;
+        this.clave = clave;
+        this.enabled = enabled;
+        this.rol = rol;
+    }
+    
+    
     //BUSCADORES PERSONALIZADOS
      
     //BUSCAR POR NOMBRE DE USUARIO
@@ -81,4 +101,12 @@ public class Usuario {
         query.setParameter("rol", rol);
         return query.getResultList();
     }
+	
+	//ENCRIPTAR CONTRASEÑA SHA256
+	public static String sha256(String original) throws NoSuchAlgorithmException {
+		MessageDigest md = MessageDigest.getInstance("SHA-256");
+        md.update(original.getBytes());
+        byte[] digest = md.digest();
+        return new String(Hex.encodeHexString(digest));
+	}
 }

@@ -26,30 +26,35 @@
 					<p>El <u>nombre de usuario</u> y la <u>contraseña</u> proporcionados le servirán para gestionar sus reservas y acceder a los servicios del hotel.
 					</p>
 					
+					<c:if test="${not empty errores}">
+			    		<c:forEach items="${errores}" var="error">
+			    			<span class="errors">${error}</span><br/><br/>
+			    		</c:forEach>
+			    	</c:if>
 			
 					<p>
 						<b><label>Nombre: </label></b>
-						<input type="text" name="nombre"></input>
+						<input type="text" name="nombre" required="true" value="${nombre}"></input>
 					</p>
 					<p>
 						<b><label>Primer apellido: </label></b>
-						<input type="text" name="primer_apellido"></input>
+						<input type="text" name="primer_apellido" required="true" value="${primer_apellido}"></input>
 					</p>
 					<p>
 						<b><label>Segundo apellido: </label></b>
-						<input type="text" name="segundo_apellido"></input>
+						<input type="text" name="segundo_apellido" required="true" value="${segundo_apellido}"></input>
 					</p>
 					<p>
 						<b><label>E-mail</label></b>
-						<input type="text" name="email"></input>
+						<input type="text" name="email" required="true" value="${email}"></input>
 					</p>
 					<p>
 						<b><label>Nombre de usuario: </label></b>
-						<input type="text" name="nombre_usuario"></input>
+						<input type="text" name="nombre_usuario" required="true" value="${nombre_usuario}"></input>
 					</p>
 					<p>
 						<b><label>Contraseña: </label></b>
-						<input type="password" name="clave"></input>
+						<input type="password" name="clave" required="true"></input>
 					</p>
 				</c:if>
 				<br/>
@@ -60,7 +65,7 @@
 				<input type="hidden" name="fecha_entrada" value="${fecha_entrada}"/>
 				<input type="hidden" name="fecha_salida" value="${fecha_salida}"/>
 				<input type="hidden" name="cama_supletoria" value="${cama_supletoria}"/>	
-				<input type="hidden" name="coste_total" value="${coste_total}"/>
+				<input type="hidden" name="coste_reserva" value="${coste_reserva}"/>
 				<input type="submit" class ="enviar" name="action" value="reservar"></input>
 			</form>
 	</div>

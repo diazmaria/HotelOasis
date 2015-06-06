@@ -13,6 +13,6 @@
         <field:display field="precio_hab_doble" id="s_es_uca_iw_hoteloasis_domain_Hotel_precio_hab_doble" object="${hotel}" z="+VXHU5NaalMAGqtHoz4rk+H6UKc="/>
         <field:display field="precio_cama_sup" id="s_es_uca_iw_hoteloasis_domain_Hotel_precio_cama_sup" object="${hotel}" z="Hd4ltRd+6sgwGed0/Y1Nfn2Z5k8="/>
         <field:display field="dias_maximos" id="s_es_uca_iw_hoteloasis_domain_Hotel_dias_maximos" object="${hotel}" z="7N1v1NPECuoe3nBWh5Wv5XSsFLc="/>
-        <field:display field="dias_adelanto" id="s_es_uca_iw_hoteloasis_domain_Hotel_dias_adelanto" object="${hotel}" z="04oj4QpLLzq7kmTHrQFVCCqxiVo="/>
+        <field:display field="dias_antelacion" id="s_es_uca_iw_hoteloasis_domain_Hotel_dias_antelacion" object="${hotel}" z="l8Tm8MdF2zlj30W3oHJz1+5Wu4Q="/>
     </page:show>
 </div>

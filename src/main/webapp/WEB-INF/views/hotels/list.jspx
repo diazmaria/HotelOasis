@@ -10,8 +10,8 @@
             <table:column id="c_es_uca_iw_hoteloasis_domain_Hotel_direccion" property="direccion" z="LKYDe8FswLbA7D6dtTsHfzLOjhQ="/>
             <table:column id="c_es_uca_iw_hoteloasis_domain_Hotel_telefono" property="telefono" z="xRbbcFdM43ClDNhADlFk/a+WfrQ="/>
             <table:column id="c_es_uca_iw_hoteloasis_domain_Hotel_estrellas" property="estrellas" z="UF8wYptM0fNr1uup+dSssfEHlsw="/>
-            <table:column id="c_es_uca_iw_hoteloasis_domain_Hotel_dias_maximos" property="estrellas" z="UF8wYptM0fNr1uup+dSssfEHlsw="/>
-            <table:column id="c_es_uca_iw_hoteloasis_domain_Hotel_dias_adelanto" property="estrellas" z="UF8wYptM0fNr1uup+dSssfEHlsw="/>
+            <table:column id="c_es_uca_iw_hoteloasis_domain_Hotel_dias_maximos" property="dias_maximos" z="UF8wYptM0fNr1uup+dSssfEHlsw="/>
+            <table:column id="c_es_uca_iw_hoteloasis_domain_Hotel_dias_antelacion" property="dias_antelacion" z="UF8wYptM0fNr1uup+dSssfEHlsw="/>
         </table:table>
     </page:list>
 </div>

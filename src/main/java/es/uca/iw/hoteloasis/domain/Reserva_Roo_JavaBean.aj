@@ -76,12 +76,12 @@ privileged aspect Reserva_Roo_JavaBean {
         this.categoria = categoria;
     }
     
-    public double Reserva.getCoste_total() {
-        return this.coste_total;
+    public double Reserva.getCoste_reserva() {
+        return this.coste_reserva;
     }
     
-    public void Reserva.setCoste_total(double coste_total) {
-        this.coste_total = coste_total;
+    public void Reserva.setCoste_reserva(double coste_reserva) {
+        this.coste_reserva = coste_reserva;
     }
     
     public Usuario Reserva.getUsuario() {

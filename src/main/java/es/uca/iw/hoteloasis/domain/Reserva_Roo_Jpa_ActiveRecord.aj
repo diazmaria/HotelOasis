@@ -14,7 +14,7 @@ privileged aspect Reserva_Roo_Jpa_ActiveRecord {
     @PersistenceContext
     transient EntityManager Reserva.entityManager;
     
-    public static final List<String> Reserva.fieldNames4OrderClauseFilter = java.util.Arrays.asList("fecha_reserva", "fecha_entrada", "fecha_salida", "tipo", "cama_supletoria", "fecha_cancelacion", "hotel", "categoria", "coste_total", "usuario");
+    public static final List<String> Reserva.fieldNames4OrderClauseFilter = java.util.Arrays.asList("fecha_reserva", "fecha_entrada", "fecha_salida", "tipo", "cama_supletoria", "fecha_cancelacion", "hotel", "categoria", "coste_reserva", "usuario");
     
     public static final EntityManager Reserva.entityManager() {
         EntityManager em = new Reserva().entityManager;

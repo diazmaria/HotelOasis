@@ -5,9 +5,9 @@
 	    <jsp:output omit-xml-declaration="yes"/>
 	    
 	   
-    	<h1 style="color: #2D9918; margin-top: -30px">	<br/>Se ha creado la reserva con éxito</h1><br/>
+    	<h1 style="color: #2D9918; margin-top: -30px">	<br/>Se ha creado la reserva con éxito</h1>
 
-	 	<p>Su código de reserva es: <u>(Código)</u></p>
+	 	Su código de reserva es: <h4 style="display: inline-block"><u>${codigo}</u></h4>
     
 	</div>
 </jsp:root>

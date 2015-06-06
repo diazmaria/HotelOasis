@@ -11,7 +11,7 @@
         <field:display field="hotel" id="s_es_uca_iw_hoteloasis_domain_Reserva_hotel" object="${reserva}" z="4+1dEQWb3ANowvmg9k5hGiHc1zA="/>
         <field:display field="categoria" id="s_es_uca_iw_hoteloasis_domain_Reserva_categoria" object="${reserva}" z="qqVkfeu3P88sFPyqgaQFBojb2E0="/>
         <field:display field="tipo" id="s_es_uca_iw_hoteloasis_domain_Reserva_tipo" object="${reserva}" z="Wz/v+JuM9iN/1SG5A48H7oDr0B8="/>
-        <field:display field="coste_total" id="s_es_uca_iw_hoteloasis_domain_Reserva_coste_total" object="${reserva}" z="vt6EfdiaTGbB4epU/pIROIFcb7U="/>
         <field:display field="usuario" id="s_es_uca_iw_hoteloasis_domain_Reserva_usuario" object="${reserva}" z="DDIzddTYG3G2PnuVCkSn9egyshk="/>
+        <field:display field="coste_reserva" id="s_es_uca_iw_hoteloasis_domain_Reserva_coste_reserva" object="${reserva}" z="85ITaggrS5iAcS+2mJ1O1ZhSwr4="/>
     </page:show>
 </div>

@@ -38,11 +38,17 @@ privileged aspect UsuarioDataOnDemand_Roo_DataOnDemand {
     
     public void UsuarioDataOnDemand.setClave(Usuario obj, int index) {
         String clave = "clave_" + index;
+        if (clave.length() > 300) {
+            clave = clave.substring(0, 300);
+        }
         obj.setClave(clave);
     }
     
     public void UsuarioDataOnDemand.setEmail(Usuario obj, int index) {
         String email = "foo" + index + "@bar.com";
+        if (email.length() > 50) {
+            email = email.substring(0, 50);
+        }
         obj.setEmail(email);
     }
     
@@ -53,16 +59,25 @@ privileged aspect UsuarioDataOnDemand_Roo_DataOnDemand {
     
     public void UsuarioDataOnDemand.setNombre(Usuario obj, int index) {
         String nombre = "nombre_" + index;
+        if (nombre.length() > 30) {
+            nombre = nombre.substring(0, 30);
+        }
         obj.setNombre(nombre);
     }
     
     public void UsuarioDataOnDemand.setNombre_usuario(Usuario obj, int index) {
         String nombre_usuario = "nombre_usuario_" + index;
+        if (nombre_usuario.length() > 30) {
+            nombre_usuario = nombre_usuario.substring(0, 30);
+        }
         obj.setNombre_usuario(nombre_usuario);
     }
     
     public void UsuarioDataOnDemand.setPrimer_apellido(Usuario obj, int index) {
         String primer_apellido = "primer_apellido_" + index;
+        if (primer_apellido.length() > 30) {
+            primer_apellido = primer_apellido.substring(0, 30);
+        }
         obj.setPrimer_apellido(primer_apellido);
     }
     
@@ -73,6 +88,9 @@ privileged aspect UsuarioDataOnDemand_Roo_DataOnDemand {
     
     public void UsuarioDataOnDemand.setSegundo_apellido(Usuario obj, int index) {
         String segundo_apellido = "segundo_apellido_" + index;
+        if (segundo_apellido.length() > 30) {
+            segundo_apellido = segundo_apellido.substring(0, 30);
+        }
         obj.setSegundo_apellido(segundo_apellido);
     }
     

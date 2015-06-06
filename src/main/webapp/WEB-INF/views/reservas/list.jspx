@@ -7,9 +7,9 @@
             <table:column date="true" dateTimePattern="${reserva_fecha_reserva_date_format}" id="c_es_uca_iw_hoteloasis_domain_Reserva_fecha_reserva" property="fecha_reserva" z="uPAdKg4b7FKWKufSq7a3HbxhsPA="/>
             <table:column date="true" dateTimePattern="${reserva_fecha_entrada_date_format}" id="c_es_uca_iw_hoteloasis_domain_Reserva_fecha_entrada" property="fecha_entrada" z="UkQfH7eZne6TlLHVzJQw4iOouDM="/>
             <table:column date="true" dateTimePattern="${reserva_fecha_salida_date_format}" id="c_es_uca_iw_hoteloasis_domain_Reserva_fecha_salida" property="fecha_salida" z="ghnLbYiSdTBJZQ8RMwE24lwO6nY="/>
-            <table:column id="c_es_uca_iw_hoteloasis_domain_Reserva_cama_supletoria" property="cama_supletoria" z="dDfrUjNhFccs33ELXQVFmcba6kc="/>
-            <table:column date="true" dateTimePattern="${reserva_fecha_cancelacion_date_format}" id="c_es_uca_iw_hoteloasis_domain_Reserva_fecha_cancelacion" property="fecha_cancelacion" z="ODjbFRfJRwbSAQVxf3iID9GKDOs="/>
+            <table:column id="c_es_uca_iw_hoteloasis_domain_Reserva_categoria" property="categoria" z="?"/>
             <table:column id="c_es_uca_iw_hoteloasis_domain_Reserva_tipo" property="tipo" z="nW+ycgzqSv2Kdi7DatunLV+KROY="/>
+            <table:column id="c_es_uca_iw_hoteloasis_domain_Reserva_cama_supletoria" property="cama_supletoria" z="dDfrUjNhFccs33ELXQVFmcba6kc="/>
         </table:table>
     </page:list>
 </div>

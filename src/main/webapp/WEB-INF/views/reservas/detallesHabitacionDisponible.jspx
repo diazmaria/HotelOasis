@@ -44,6 +44,7 @@
 						<tr>
 							<td align="center"><b><c:out value="Noches" /></b></td>
 							<td align="center"><b><c:out value="Coste/noche" /></b></td>
+							<td align="center"><b><c:out value="Factor categoría" /></b></td>
 							<c:choose>
 								<c:when test="${cama_supletoria == true}">
 									<td align="center"><b><c:out value="Coste cama supletoria infantil/noche" /></b></td>
@@ -54,12 +55,13 @@
 						<tr>
 							<td align="center"><c:out value="${dias}" /></td>
 							<td align="center"><c:out value="${coste_habitacion}€" /></td>
+							<td align="center"><c:out value="${factor_categoria}" /></td>
 							<c:choose>
 								<c:when test="${cama_supletoria == true}">
 									<td align="center"><c:out value="${coste_cama_supletoria}€" /></td>
 								</c:when>
 							</c:choose>
-							<td align="center" style="color: #CB001D"><b><c:out value="${coste_total}€" /></b></td>
+							<td align="center" style="color: #CB001D"><b><c:out value="${coste_reserva}€" /></b></td>
 						</tr>
 					</table>
 				</div>
@@ -70,7 +72,7 @@
 				<input type="hidden" name="tipo" value="${tipo}"/>
 				<input type="hidden" name="fecha_entrada" value="${fecha_entrada}"/>
 				<input type="hidden" name="fecha_salida" value="${fecha_salida}"/>
-				<input type="hidden" name="coste_total" value="${coste_total}"/>
+				<input type="hidden" name="coste_reserva" value="${coste_reserva}"/>
 				<input type="hidden" name="cama_supletoria" value="${cama_supletoria}"/>
         		
 				<input type="submit" class ="enviar" name="action" value="reservar"/>

@@ -45,7 +45,7 @@ privileged aspect ReservaDataOnDemand_Roo_DataOnDemand {
         Reserva obj = new Reserva();
         setCama_supletoria(obj, index);
         setCategoria(obj, index);
-        setCoste_total(obj, index);
+        setCoste_reserva(obj, index);
         setFecha_cancelacion(obj, index);
         setFecha_entrada(obj, index);
         setFecha_reserva(obj, index);
@@ -65,9 +65,9 @@ privileged aspect ReservaDataOnDemand_Roo_DataOnDemand {
         obj.setCategoria(categoria);
     }
     
-    public void ReservaDataOnDemand.setCoste_total(Reserva obj, int index) {
-        double coste_total = new Integer(index).doubleValue();
-        obj.setCoste_total(coste_total);
+    public void ReservaDataOnDemand.setCoste_reserva(Reserva obj, int index) {
+        double coste_reserva = new Integer(index).doubleValue();
+        obj.setCoste_reserva(coste_reserva);
     }
     
     public void ReservaDataOnDemand.setFecha_cancelacion(Reserva obj, int index) {

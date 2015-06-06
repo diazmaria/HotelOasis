@@ -13,9 +13,9 @@
         <field:input field="precio_hab_doble" id="c_es_uca_iw_hoteloasis_domain_Hotel_precio_hab_doble" required="true" z="VdM0D7bvxGkUznBxD2EQjMTP/68="/>
         <field:input field="precio_cama_sup" id="c_es_uca_iw_hoteloasis_domain_Hotel_precio_cama_sup" required="true" z="Yek9+lO2fMi1+tL24ZO8/ooQN/4="/>
         <field:input field="dias_maximos" id="c_es_uca_iw_hoteloasis_domain_Hotel_dias_maximos" required="true" z="x4tZcrmbFt1+at831c5JW//8Z7w="/>
-        <field:input field="dias_adelanto" id="c_es_uca_iw_hoteloasis_domain_Hotel_dias_adelanto" required="true" z="mGunS1NCJl3l5isVzlW2Duebe8A="/>
         <field:simple field="habitaciones" id="c_es_uca_iw_hoteloasis_domain_Hotel_habitaciones" messageCode="entity_reference_not_managed" messageCodeAttribute="Habitacion" z="6YD3YYg+JWgT7rCpy4+8rRmHe40="/>
         <field:simple field="reservas" id="c_es_uca_iw_hoteloasis_domain_Hotel_reservas" messageCode="entity_reference_not_managed" messageCodeAttribute="Reserva" z="uQPFGR0tv5+P6X0G8Fo7b1b44i4="/>
         <field:simple field="categorias" id="c_es_uca_iw_hoteloasis_domain_Hotel_categorias" messageCode="entity_reference_not_managed" messageCodeAttribute="Categoria" z="O1FDFwA2kUs6+P6rkot4N+BpceE="/>
+        <field:input field="dias_antelacion" id="c_es_uca_iw_hoteloasis_domain_Hotel_dias_antelacion" required="true" z="5Jho3LXPfCqUzNfUO/FQWigskSo="/>
     </form:update>
 </div>

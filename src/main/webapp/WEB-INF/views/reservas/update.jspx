@@ -11,7 +11,7 @@
         <field:select field="hotel" id="c_es_uca_iw_hoteloasis_domain_Reserva_hotel" itemValue="id" items="${hotels}" path="/hotels" required="true" z="2zD4BCYSkDV0Bwnvppds8EJWfbs="/>
         <field:select field="categoria" id="c_es_uca_iw_hoteloasis_domain_Reserva_categoria" itemValue="id" items="${categorias}" path="/categorias" required="true" z="P7JS31KytNvy5DXyMSu7070Cb4U="/>
         <field:select field="tipo" id="c_es_uca_iw_hoteloasis_domain_Reserva_tipo" items="${habitacion_tipoes}" path="habitacion_tipoes" required="true" z="+kaCtM5yFv0eZtU4LBPHM659K4k="/>
-        <field:input field="coste_total" id="c_es_uca_iw_hoteloasis_domain_Reserva_coste_total" z="v2Slc9mcynt+J/HBwHu3hpT+P5A="/>
         <field:select field="usuario" id="c_es_uca_iw_hoteloasis_domain_Reserva_usuario" itemValue="id" items="${usuarios}" path="/usuarios" z="iTTWiO3XBcua9DR0apQeaYyamHw="/>
+        <field:input field="coste_reserva" id="c_es_uca_iw_hoteloasis_domain_Reserva_coste_reserva" z="/QTyluo/WA5t0x8segGt0HAX/zM="/>
     </form:update>
 </div>

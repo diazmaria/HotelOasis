@@ -74,7 +74,7 @@ public class Hotel {
     /**
      */
     @NotNull
-    private int dias_adelanto;
+    private int dias_antelacion;
     
     /**
      */
