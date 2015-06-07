@@ -47,7 +47,15 @@
 	<intercept-url pattern="\A/usuarios/\d*.*\Z" access="hasAnyRole('Recepcionista', 'Administrador')"/>
 	<intercept-url pattern="\A/usuarios\?form\Z" access="hasAnyRole('Recepcionista', 'Administrador')"/>
 	
+	<!-- ESTANCIA -->
+	<intercept-url pattern="\A/estancias\Z" method="GET" access="hasAnyRole('Administrador', 'Recepcionista', 'Usuario')"/>
+	<intercept-url pattern="\A/estancias/\d*.*\Z" access="hasAnyRole('Recepcionista', 'Administrador')"/>
+	<intercept-url pattern="\A/estancias\?form\Z" access="hasAnyRole('Recepcionista', 'Administrador')"/>
 	
+	<!-- TARIFA -->
+	<intercept-url pattern="\A/tarifas\Z" method="GET" access="hasAnyRole('Administrador', 'Recepcionista', 'Usuario')"/>
+	<intercept-url pattern="\A/tarifas/\d*.*\Z" access="hasAnyRole('Recepcionista', 'Administrador')"/>
+	<intercept-url pattern="\A/tarifas\?form\Z" access="hasAnyRole('Recepcionista', 'Administrador')"/>
 	
 	
 	

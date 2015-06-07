@@ -4,10 +4,12 @@
 package es.uca.iw.hoteloasis.web;
 
 import es.uca.iw.hoteloasis.domain.Categoria;
+import es.uca.iw.hoteloasis.domain.Estancia;
 import es.uca.iw.hoteloasis.domain.Habitacion;
 import es.uca.iw.hoteloasis.domain.Hotel;
 import es.uca.iw.hoteloasis.domain.Reserva;
 import es.uca.iw.hoteloasis.domain.Rol;
+import es.uca.iw.hoteloasis.domain.Tarifa;
 import es.uca.iw.hoteloasis.domain.Usuario;
 import es.uca.iw.hoteloasis.web.ApplicationConversionServiceFactoryBean;
 import org.springframework.beans.factory.annotation.Configurable;
@@ -38,6 +40,30 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         return new org.springframework.core.convert.converter.Converter<java.lang.String, es.uca.iw.hoteloasis.domain.Categoria>() {
             public es.uca.iw.hoteloasis.domain.Categoria convert(String id) {
                 return getObject().convert(getObject().convert(id, Long.class), Categoria.class);
+            }
+        };
+    }
+    
+    public Converter<Estancia, String> ApplicationConversionServiceFactoryBean.getEstanciaToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<es.uca.iw.hoteloasis.domain.Estancia, java.lang.String>() {
+            public String convert(Estancia estancia) {
+                return new StringBuilder().append(estancia.getFecha_check_in()).append(' ').append(estancia.getFecha_check_out()).toString();
+            }
+        };
+    }
+    
+    public Converter<Long, Estancia> ApplicationConversionServiceFactoryBean.getIdToEstanciaConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, es.uca.iw.hoteloasis.domain.Estancia>() {
+            public es.uca.iw.hoteloasis.domain.Estancia convert(java.lang.Long id) {
+                return Estancia.findEstancia(id);
+            }
+        };
+    }
+    
+    public Converter<String, Estancia> ApplicationConversionServiceFactoryBean.getStringToEstanciaConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, es.uca.iw.hoteloasis.domain.Estancia>() {
+            public es.uca.iw.hoteloasis.domain.Estancia convert(String id) {
+                return getObject().convert(getObject().convert(id, Long.class), Estancia.class);
             }
         };
     }
@@ -138,6 +164,30 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         };
     }
     
+    public Converter<Tarifa, String> ApplicationConversionServiceFactoryBean.getTarifaToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<es.uca.iw.hoteloasis.domain.Tarifa, java.lang.String>() {
+            public String convert(Tarifa tarifa) {
+                return new StringBuilder().append(tarifa.getServicio()).append(' ').append(tarifa.getCoste()).toString();
+            }
+        };
+    }
+    
+    public Converter<Long, Tarifa> ApplicationConversionServiceFactoryBean.getIdToTarifaConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, es.uca.iw.hoteloasis.domain.Tarifa>() {
+            public es.uca.iw.hoteloasis.domain.Tarifa convert(java.lang.Long id) {
+                return Tarifa.findTarifa(id);
+            }
+        };
+    }
+    
+    public Converter<String, Tarifa> ApplicationConversionServiceFactoryBean.getStringToTarifaConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, es.uca.iw.hoteloasis.domain.Tarifa>() {
+            public es.uca.iw.hoteloasis.domain.Tarifa convert(String id) {
+                return getObject().convert(getObject().convert(id, Long.class), Tarifa.class);
+            }
+        };
+    }
+    
     public Converter<Usuario, String> ApplicationConversionServiceFactoryBean.getUsuarioToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<es.uca.iw.hoteloasis.domain.Usuario, java.lang.String>() {
             public String convert(Usuario usuario) {
@@ -166,6 +216,9 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         registry.addConverter(getCategoriaToStringConverter());
         registry.addConverter(getIdToCategoriaConverter());
         registry.addConverter(getStringToCategoriaConverter());
+        registry.addConverter(getEstanciaToStringConverter());
+        registry.addConverter(getIdToEstanciaConverter());
+        registry.addConverter(getStringToEstanciaConverter());
         registry.addConverter(getHabitacionToStringConverter());
         registry.addConverter(getIdToHabitacionConverter());
         registry.addConverter(getStringToHabitacionConverter());
@@ -178,6 +231,9 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         registry.addConverter(getRolToStringConverter());
         registry.addConverter(getIdToRolConverter());
         registry.addConverter(getStringToRolConverter());
+        registry.addConverter(getTarifaToStringConverter());
+        registry.addConverter(getIdToTarifaConverter());
+        registry.addConverter(getStringToTarifaConverter());
         registry.addConverter(getUsuarioToStringConverter());
         registry.addConverter(getIdToUsuarioConverter());
         registry.addConverter(getStringToUsuarioConverter());
