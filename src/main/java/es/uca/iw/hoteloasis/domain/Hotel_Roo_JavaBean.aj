@@ -7,6 +7,7 @@ import es.uca.iw.hoteloasis.domain.Categoria;
 import es.uca.iw.hoteloasis.domain.Habitacion;
 import es.uca.iw.hoteloasis.domain.Hotel;
 import es.uca.iw.hoteloasis.domain.Reserva;
+import es.uca.iw.hoteloasis.domain.Tarifa;
 import java.util.Set;
 
 privileged aspect Hotel_Roo_JavaBean {
@@ -121,6 +122,14 @@ privileged aspect Hotel_Roo_JavaBean {
     
     public void Hotel.setCategorias(Set<Categoria> categorias) {
         this.categorias = categorias;
+    }
+    
+    public Tarifa Hotel.getTarifa() {
+        return this.tarifa;
+    }
+    
+    public void Hotel.setTarifa(Tarifa tarifa) {
+        this.tarifa = tarifa;
     }
     
 }

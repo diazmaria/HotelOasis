@@ -5,6 +5,7 @@ package es.uca.iw.hoteloasis.domain;
 
 import es.uca.iw.hoteloasis.domain.Hotel;
 import es.uca.iw.hoteloasis.domain.HotelDataOnDemand;
+import es.uca.iw.hoteloasis.domain.TarifaDataOnDemand;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.Random;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 privileged aspect HotelDataOnDemand_Roo_DataOnDemand {
@@ -21,6 +23,9 @@ privileged aspect HotelDataOnDemand_Roo_DataOnDemand {
     private Random HotelDataOnDemand.rnd = new SecureRandom();
     
     private List<Hotel> HotelDataOnDemand.data;
+    
+    @Autowired
+    TarifaDataOnDemand HotelDataOnDemand.tarifaDataOnDemand;
     
     public Hotel HotelDataOnDemand.getNewTransientHotel(int index) {
         Hotel obj = new Hotel();

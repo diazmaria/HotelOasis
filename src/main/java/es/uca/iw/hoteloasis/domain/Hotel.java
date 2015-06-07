@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 
 @RooJavaBean
 @RooToString
@@ -75,7 +76,7 @@ public class Hotel {
      */
     @NotNull
     private int dias_antelacion;
-    
+
     /**
      */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "hotel")
@@ -90,4 +91,9 @@ public class Hotel {
      */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "hotel")
     private Set<Categoria> categorias = new HashSet<Categoria>();
+
+    /**
+     */
+    @ManyToOne
+    private Tarifa tarifa;
 }

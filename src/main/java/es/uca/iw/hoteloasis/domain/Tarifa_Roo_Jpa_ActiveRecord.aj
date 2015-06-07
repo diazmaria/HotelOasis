@@ -3,97 +3,97 @@
 
 package es.uca.iw.hoteloasis.domain;
 
-import es.uca.iw.hoteloasis.domain.Hotel;
+import es.uca.iw.hoteloasis.domain.Tarifa;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.springframework.transaction.annotation.Transactional;
 
-privileged aspect Hotel_Roo_Jpa_ActiveRecord {
+privileged aspect Tarifa_Roo_Jpa_ActiveRecord {
     
     @PersistenceContext
-    transient EntityManager Hotel.entityManager;
+    transient EntityManager Tarifa.entityManager;
     
-    public static final List<String> Hotel.fieldNames4OrderClauseFilter = java.util.Arrays.asList("nombre", "provincia", "poblacion", "direccion", "telefono", "estrellas", "precio_hab_simple", "precio_hab_doble", "precio_cama_sup", "dias_maximos", "dias_antelacion", "habitaciones", "reservas", "categorias", "tarifa");
+    public static final List<String> Tarifa.fieldNames4OrderClauseFilter = java.util.Arrays.asList("servicio", "coste");
     
-    public static final EntityManager Hotel.entityManager() {
-        EntityManager em = new Hotel().entityManager;
+    public static final EntityManager Tarifa.entityManager() {
+        EntityManager em = new Tarifa().entityManager;
         if (em == null) throw new IllegalStateException("Entity manager has not been injected (is the Spring Aspects JAR configured as an AJC/AJDT aspects library?)");
         return em;
     }
     
-    public static long Hotel.countHotels() {
-        return entityManager().createQuery("SELECT COUNT(o) FROM Hotel o", Long.class).getSingleResult();
+    public static long Tarifa.countTarifas() {
+        return entityManager().createQuery("SELECT COUNT(o) FROM Tarifa o", Long.class).getSingleResult();
     }
     
-    public static List<Hotel> Hotel.findAllHotels() {
-        return entityManager().createQuery("SELECT o FROM Hotel o", Hotel.class).getResultList();
+    public static List<Tarifa> Tarifa.findAllTarifas() {
+        return entityManager().createQuery("SELECT o FROM Tarifa o", Tarifa.class).getResultList();
     }
     
-    public static List<Hotel> Hotel.findAllHotels(String sortFieldName, String sortOrder) {
-        String jpaQuery = "SELECT o FROM Hotel o";
+    public static List<Tarifa> Tarifa.findAllTarifas(String sortFieldName, String sortOrder) {
+        String jpaQuery = "SELECT o FROM Tarifa o";
         if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
             jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
             if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {
                 jpaQuery = jpaQuery + " " + sortOrder;
             }
         }
-        return entityManager().createQuery(jpaQuery, Hotel.class).getResultList();
+        return entityManager().createQuery(jpaQuery, Tarifa.class).getResultList();
     }
     
-    public static Hotel Hotel.findHotel(Long id) {
+    public static Tarifa Tarifa.findTarifa(Long id) {
         if (id == null) return null;
-        return entityManager().find(Hotel.class, id);
+        return entityManager().find(Tarifa.class, id);
     }
     
-    public static List<Hotel> Hotel.findHotelEntries(int firstResult, int maxResults) {
-        return entityManager().createQuery("SELECT o FROM Hotel o", Hotel.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
+    public static List<Tarifa> Tarifa.findTarifaEntries(int firstResult, int maxResults) {
+        return entityManager().createQuery("SELECT o FROM Tarifa o", Tarifa.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
     }
     
-    public static List<Hotel> Hotel.findHotelEntries(int firstResult, int maxResults, String sortFieldName, String sortOrder) {
-        String jpaQuery = "SELECT o FROM Hotel o";
+    public static List<Tarifa> Tarifa.findTarifaEntries(int firstResult, int maxResults, String sortFieldName, String sortOrder) {
+        String jpaQuery = "SELECT o FROM Tarifa o";
         if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
             jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
             if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {
                 jpaQuery = jpaQuery + " " + sortOrder;
             }
         }
-        return entityManager().createQuery(jpaQuery, Hotel.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
+        return entityManager().createQuery(jpaQuery, Tarifa.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
     }
     
     @Transactional
-    public void Hotel.persist() {
+    public void Tarifa.persist() {
         if (this.entityManager == null) this.entityManager = entityManager();
         this.entityManager.persist(this);
     }
     
     @Transactional
-    public void Hotel.remove() {
+    public void Tarifa.remove() {
         if (this.entityManager == null) this.entityManager = entityManager();
         if (this.entityManager.contains(this)) {
             this.entityManager.remove(this);
         } else {
-            Hotel attached = Hotel.findHotel(this.id);
+            Tarifa attached = Tarifa.findTarifa(this.id);
             this.entityManager.remove(attached);
         }
     }
     
     @Transactional
-    public void Hotel.flush() {
+    public void Tarifa.flush() {
         if (this.entityManager == null) this.entityManager = entityManager();
         this.entityManager.flush();
     }
     
     @Transactional
-    public void Hotel.clear() {
+    public void Tarifa.clear() {
         if (this.entityManager == null) this.entityManager = entityManager();
         this.entityManager.clear();
     }
     
     @Transactional
-    public Hotel Hotel.merge() {
+    public Tarifa Tarifa.merge() {
         if (this.entityManager == null) this.entityManager = entityManager();
-        Hotel merged = this.entityManager.merge(this);
+        Tarifa merged = this.entityManager.merge(this);
         this.entityManager.flush();
         return merged;
     }
