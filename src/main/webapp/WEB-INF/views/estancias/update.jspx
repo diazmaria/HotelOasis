@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_es_uca_iw_hoteloasis_domain_Estancia" modelAttribute="estancia" path="/estancias" versionField="Version" z="PcvHF6bQ0x8psKI+bZ+oX+8/wEg=">
+        <field:datetime dateTimePattern="${estancia_fecha_check_in_date_format}" field="fecha_check_in" id="c_es_uca_iw_hoteloasis_domain_Estancia_fecha_check_in" z="JVzPXt0J12QLxcMqLMhTgwePmLY="/>
+        <field:datetime dateTimePattern="${estancia_fecha_check_out_date_format}" field="fecha_check_out" id="c_es_uca_iw_hoteloasis_domain_Estancia_fecha_check_out" z="k/HLt/4fG8rXEGOGIFKE2GX6pzI="/>
+        <field:select field="reserva" id="c_es_uca_iw_hoteloasis_domain_Estancia_reserva" itemValue="id" items="${reservas}" path="/reservas" z="2Hr1bIQhw1bd8e9NvC3iXs+xs4c="/>
+        <field:select field="habitacion" id="c_es_uca_iw_hoteloasis_domain_Estancia_habitacion" itemValue="id" items="${habitacions}" path="/habitacions" z="Aem2jY8gf1BF3AMVy5zvnSRvwnA="/>
+        <field:select field="usuario" id="c_es_uca_iw_hoteloasis_domain_Estancia_usuario" itemValue="id" items="${usuarios}" path="/usuarios" z="7IlL10fWWCurajpqQjMJSbmal0s="/>
+    </form:update>
+</div>

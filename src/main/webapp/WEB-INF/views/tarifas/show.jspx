@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_es_uca_iw_hoteloasis_domain_Tarifa" object="${tarifa}" path="/tarifas" z="FU48uTfbf4YRGyTpr4w4Dt2bh7Y=">
+        <field:display field="servicio" id="s_es_uca_iw_hoteloasis_domain_Tarifa_servicio" object="${tarifa}" z="vT3yzVF8iKXQ2/XLlpI77F/mXCw="/>
+        <field:display field="coste" id="s_es_uca_iw_hoteloasis_domain_Tarifa_coste" object="${tarifa}" z="yZtn5OVfQ3ajrStZwXMuD9ePkNk="/>
+    </page:show>
+</div>
