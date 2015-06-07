@@ -25,14 +25,14 @@
             <sec:authorize access="permitAll">
             <menu:item id="fi_habitaciones_disponibles" messageCode="global_menu_find" url="/reservas?find=HabitacionesDisponibles&amp;form" z="user-managed"/>
         	</sec:authorize>
-           
+            
             <sec:authorize access="hasAnyRole('Administrador', 'Recepcionista')">
             <menu:item id="i_reserva_new" messageCode="global_menu_new" url="/reservas?form" z="/YDemNL7KpX4bazkkJ9CXIcPd2I="/>
             <menu:item id="i_reserva_list" messageCode="global_menu_list" url="/reservas?page=1&amp;size=${empty param.size ? 10 : param.size}" z="SXqVfp1MeDZeV3cOwFeTM7bxywo="/>
        		</sec:authorize>
        		
-       		<sec:authorize access="hasAnyRole('Administrador', 'Recepcionista', 'Usuario')">
-            <menu:item id="fi_reserva_cancelar" url="/reservas?cancelar"/>
+       		<sec:authorize access="hasAnyRole('Administrador', 'Recepcionista','Usuario')">
+       		<menu:item id="fi_reserva_cancelar" url="/reservas?cancelarform" z="user-managed"/>
        		</sec:authorize>
        		
        		

@@ -25,4 +25,10 @@
 	<definition extends="default" name="reservas/exitoReserva">
         <put-attribute name="body" value="/WEB-INF/views/reservas/exitoReserva.jspx"/>
 	</definition>
+		<definition extends="default" name="reservas/exitoCancelar">
+        <put-attribute name="body" value="/WEB-INF/views/reservas/exitoCancelar.jspx"/>
+	</definition>
+	<definition extends="default" name="reservas/cancelarReserva">
+        <put-attribute name="body" value="/WEB-INF/views/reservas/cancelarReserva.jspx"/>
+	</definition>
 </tiles-definitions>

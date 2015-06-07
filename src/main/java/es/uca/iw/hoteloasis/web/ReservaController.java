@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.Random;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -33,7 +32,8 @@ import es.uca.iw.hoteloasis.domain.Usuario;
 @RequestMapping("/reservas")
 @Controller
 @RooWebScaffold(path = "reservas", formBackingObject = Reserva.class)
-public class ReservaController {
+
+public class ReservaController{
 
     //------CU1 ------ MOSTRAR FORMULARIO BÚSQUEDA HABITACIONES DISPONIBLES
     @RequestMapping(params = { "find=HabitacionesDisponibles", "form" }, method = RequestMethod.GET)
@@ -140,7 +140,7 @@ public class ReservaController {
     
     //------CU2 ------ RESERVAR HABITACIÓN (COMPROBAR AUTENTICACIÓN USUARIO, MOSTRAR FORMULARIO REGISGTRO SI NO AUTENTICADO)
     @RequestMapping(params = {"completar"}, method = RequestMethod.POST, produces = "text/html")
-    public String reservarHabitacion(@RequestParam("hotel") Hotel hotel, @RequestParam("categoria") Categoria categoria, @RequestParam("tipo") Habitacion_tipo tipo, @RequestParam("fecha_entrada") @DateTimeFormat(style = "M-") Date fecha_entrada, @RequestParam("fecha_salida") @DateTimeFormat(style = "M-") Date fecha_salida, @RequestParam(value = "cama_supletoria", required = false) Boolean cama_supletoria, @RequestParam("coste_reserva") double coste_reserva, HttpServletRequest httpServletRequest, Model uiModel) {
+    public String reservarHabitacion(@RequestParam("hotel") Hotel hotel, @RequestParam("categoria") Categoria categoria, @RequestParam("tipo") Habitacion_tipo tipo, @RequestParam("fecha_entrada") @DateTimeFormat(style = "M-") Date fecha_entrada, @RequestParam("fecha_salida") @DateTimeFormat(style = "M-") Date fecha_salida, @RequestParam(value = "cama_supletoria", required = false) Boolean cama_supletoria, @RequestParam("coste_reserva") double coste_reserva, HttpServletRequest httpServletRequest, Model uiModel){
 
 	    uiModel.addAttribute("hotel", hotel);
 	    uiModel.addAttribute("categoria", categoria);
@@ -198,6 +198,8 @@ public class ReservaController {
 			Matcher m = p.matcher(email);
 			
 			//Validación del formulario de registro
+			if (Usuario.findUsuariosByNombreUsuarioEquals(nombre_usuario) != null) 
+				errores.add("El nombre de usuario " + nombre_usuario + " está ya en uso.");
     		if (nombre.length() <2 || nombre.length() > 30) errores.add("El tamaño del nombre debe estar entre 2 y 30.");
     		if (primer_apellido.length() <2 || primer_apellido.length() > 30) errores.add("El tamaño del primer apellido debe estar entre 2 y 30.");
     		if (segundo_apellido.length() <2 || segundo_apellido.length() > 30) errores.add("El tamaño de segundo apellido debe estar entre 2 y 30.");
@@ -254,4 +256,30 @@ public class ReservaController {
     	 }
         	 return "reservas/exitoReserva";
     }
+    
+    
+    
+    //------CU3 ------ MOSTRAR FORMULARIO CANCELAR RESERVA
+	@RequestMapping(params = { "cancelarform" }, method = RequestMethod.GET, produces = "text/html")
+	public String cancelarform(HttpServletRequest httpServletRequest, Model uiModel){
+	
+		return"reservas/cancelarReserva";
+	}
+	
+	
+	
+	//------CU3 ------ CANCELAR RESERVA Y MOSTRAR ÉXITO/FRACASO CANCELACIÓN
+	@RequestMapping(params = { "cancelar" }, method = RequestMethod.POST, produces = "text/html")
+	public String cancelarReserva(@RequestParam("id") long id,HttpServletRequest httpServletRequest, Model uiModel){
+		Reserva reserva = Reserva.findReserva(id);
+		
+		
+		
+		reserva.setFecha_cancelacion(new Date());
+		reserva.setCoste_reserva(1);
+		reserva.persist();
+		return "reservas/exitoCancelar";
+	}
+
+    
 }
