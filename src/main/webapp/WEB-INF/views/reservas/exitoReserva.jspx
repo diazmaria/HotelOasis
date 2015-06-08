@@ -4,10 +4,8 @@
 	    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
 	    <jsp:output omit-xml-declaration="yes"/>
 	    
-	   
-    	<h1 style="color: #2D9918; margin-top: -30px">	<br/>Se ha creado la reserva con éxito</h1>
-
-	 	Su código de reserva es: <h4 style="display: inline-block"><u>${codigo}</u></h4>
+    	<h1>Se ha realizado su reserva con éxito</h1><br/>
+	 	<h3>Su código de reserva es: ${codigo}</h3><br/>
     
 	</div>
 </jsp:root>

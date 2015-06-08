@@ -5,21 +5,23 @@
 	    <jsp:output omit-xml-declaration="yes"/>
 	    
 	    <util:panel id="ff_es_uca_iw_domain_Reserva" title="Cancelar reserva">
+	    <h2 style="color:#113660">Cancelar reserva</h2>
 	    	<c:if test="${not empty error}">
-	    		<span class="errors"><c:out value="${error}"/></span><br/><br/>
-	    	</c:if>
+			<span class="errors"><c:out value="${error}" /></span>
+			<br/><br/>
+			</c:if>
 		    <form action="/HotelOasis/reservas?cancelar" method="post">
 		    	
 		    	<div>
-		        	<strong><label>Código de la reserva:  </label></strong>
+		        	<b><label>Código de la reserva:  </label></b>
 		        	<div class="box">
-		        		<input type="text" name="id"/>
+		        		<input type="number" name="id" required="true"/>
+		        		
 		        	</div>
 		        </div>
 		        <br/>
-		    	<input type="submit" class ="enviar" name="action" value="cancelar"/>
+			<p style="display:inline-block; margin-right:43px; margin-left:5px">¿Cancelar reserva?</p> <input type="submit" class ="enviar" name="action" value="continuar"/>  
 		    </form>
-		    <p></p>
 	    </util:panel>
 	</div>
 </jsp:root>

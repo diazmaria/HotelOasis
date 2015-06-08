@@ -1,6 +1,5 @@
 package es.uca.iw.hoteloasis.web;
 import java.security.Principal;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -37,10 +36,10 @@ public class EstanciaController {
 
 		Reserva reserva = Reserva.findReserva(id);
 
-		//comprobar que la reserva existe
+		//Comprobamos que la reserva existe
 		if(reserva==null)
 		{
-			uiModel.addAttribute("error", "El numero de reserva es incorrecto");
+			uiModel.addAttribute("error", "Error: El número de reserva es erróneo.");
 			return "estancias/checkin";
 		}
 		
@@ -50,30 +49,36 @@ public class EstanciaController {
 		Usuario usuario = Usuario.findUsuariosByNombreUsuarioEquals(principal.getName());
 		List<Habitacion> habitaciones = Habitacion.findHabitacionsByTipoAndCategoriaAndEstado(tipo, categoria, estado).getResultList();
 		
-		//comprobar que la reserva pertenece al usuario logueado en ese momento
+		//Comprobamos que la reserva pertenece al usuario logueado en ese momento
 		if (usuario.getRol()==(Rol.findRol(3l))) {
 			if (!reserva.getUsuario().equals(usuario)) {
-				uiModel.addAttribute("error", "Este número de reserva no le pertenece");
+				uiModel.addAttribute("error", "Error: Este número de reserva no le pertenece.");
 				return "estancias/checkin"; 
 			}
 		}
 		
-		// Se intenta hacer el checkin de nuevo
+		//Comprobamos que la reserva no haya sido cancelada
+		if(reserva.getFecha_cancelacion() != null){
+			uiModel.addAttribute("error", "Error: Esta reserva ha sido cancelada, no se puede hacer check-in.");
+			return "estancias/checkin";
+		}
+		
+		//Intentamos hacer el check-in de nuevo
 		if (Estancia.countFindEstanciasByReserva(reserva)!=0) {
-			uiModel.addAttribute("error", "El check-in de esta reserva ya ha sido realizado");
+			uiModel.addAttribute("error", "Error: El check-in de esta reserva ya ha sido realizado.");
 			return "estancias/checkin"; 
 		}
-		//compruebo que se hace el chekin el día de la reserva
+		//Comprobamos que se hace el check-in el día de la reserva
 		Calendar c = Calendar.getInstance();
 		c.setTime(new Date());
 		c.add(Calendar.DATE, -1);
 		if (reserva.getFecha_entrada().after(new Date()) || reserva.getFecha_entrada().before(c.getTime())) {
-			uiModel.addAttribute("error", "Su reserva no es para hoy");
+			uiModel.addAttribute("error", "Error: Su reserva no es para hoy.");
 			return "estancias/checkin"; 
 		}
-		//compruebo que hay habitaciones libres
+		//Comprobamos que hay habitaciones disponibles
 		if(habitaciones.isEmpty()){
-			uiModel.addAttribute("error", "No hay habitaciones libres");
+			uiModel.addAttribute("error", "Error: No hay habitaciones disponibles.");
 			return "estancias/checkin";
 		}
 		

@@ -164,9 +164,11 @@ a.menu, a.menu:link, a.menu:visited {display:block; width:150px; height:25px;}
 	
 /* text styles */
 
-h1,h2,h3 {
+h1,h2,h3,h4 {
 	font-family: "Expressway", Helvetica, sans-serif;
 	color: #2D9918;
+	margin-top: 0px;
+	margin-left: 5px;
 }
 
 h1 {

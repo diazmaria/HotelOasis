@@ -17,7 +17,7 @@ import org.springframework.roo.addon.tostring.RooToString;
 
 @RooJavaBean
 @RooToString
-@RooJpaActiveRecord(finders = { "findUsuariosByNombreUsuarioEquals", "findUsuariosByRol" })
+@RooJpaActiveRecord(finders = { "findUsuariosByNombreUsuarioEquals", "findUsuariosByRol"})
 public class Usuario {
 
     /**

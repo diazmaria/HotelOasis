@@ -16,7 +16,7 @@ import org.springframework.roo.addon.tostring.RooToString;
 
 @RooJavaBean
 @RooToString
-@RooJpaActiveRecord(finders = "findHabitacionesDisponibles")
+@RooJpaActiveRecord(finders = { "findHabitacionesDisponibles" })
 public class Reserva {
 
     /**
