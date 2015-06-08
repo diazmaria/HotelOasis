@@ -25,4 +25,7 @@
 <definition extends="default" name="estancias/detallesCheckout">
         <put-attribute name="body" value="/WEB-INF/views/estancias/detallesCheckout.jspx"/>
     </definition>
+<definition extends="default" name="estancias/factura">
+        <put-attribute name="body" value="/WEB-INF/views/estancias/factura.jspx"/>
+    </definition>
 </tiles-definitions>
