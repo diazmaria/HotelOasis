@@ -19,4 +19,10 @@
 <definition extends="default" name="estancias/exitoCheckin">
         <put-attribute name="body" value="/WEB-INF/views/estancias/exitoCheckin.jspx"/>
     </definition>
+<definition extends="default" name="estancias/checkout">
+        <put-attribute name="body" value="/WEB-INF/views/estancias/checkout.jspx"/>
+    </definition>
+<definition extends="default" name="estancias/detallesCheckout">
+        <put-attribute name="body" value="/WEB-INF/views/estancias/detallesCheckout.jspx"/>
+    </definition>
 </tiles-definitions>

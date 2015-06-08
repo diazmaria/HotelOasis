@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+	
+  	<h2>Check-out realizado con exito</h2>
+  	<br/>
+  	<c:if test="${aux==1}">
+  		<font color='#FF0000'>Realiza el Check-out antes de la fecha prevista, se le cobrará la el total de su reserva.</font>
+  	</c:if>
+  	<c:if test="${aux==2}">
+  		<font color='#FF0000'>Realiza el Check-out después de la fecha prevista, se le cobrarán los días extra.</font>
+  	</c:if>
+  	<br/>
+  	<blockquote>
+	  	<h2>Detalles de la estancia:</h2>
+	  	<br/>
+	  	<div>
+	  	<h3>Datos personales:</h3>
+	  		<blockquote>
+			  	<strong>Nombre: </strong>${usuario.nombre} <br/>
+			  	<strong>Primer Apellido: </strong>${usuario.primer_apellido}<br/>
+			  	<strong>Segundo Apellido: </strong>${usuario.segundo_apellido}
+		  	</blockquote>
+		</div>
+	  	<br/>
+	  	<div>
+	  	<h3>Datos de la Reserva:</h3>
+	  		<blockquote>
+			  	<strong>Hotel: </strong>${hotel} <br/>
+			  	<strong>Fecha reserva: </strong> 
+			  		<fmt:formatDate type ="date" value="${reserva.fecha_reserva}" ></fmt:formatDate><br/>
+			  	<strong>Fecha entrada: </strong> 
+			  		<fmt:formatDate type ="date" value="${reserva.fecha_entrada}" ></fmt:formatDate><br/>
+			  	<strong>Fecha de salida: </strong>
+			  		<fmt:formatDate type ="date" value="${reserva.fecha_salida}" ></fmt:formatDate><br/>
+			  	<c:if test="${reserva.cama_supletoria==true}">
+			  		<strong>Cama supletoria: </strong>${reserva.cama_supletoria}
+			  	</c:if>
+		  	</blockquote>
+		</div>
+	  	<br/>
+	  	<div>
+	  	<h3>Datos de la Estancia:</h3>
+	  		<blockquote>
+			  	<strong>Hotel: </strong>${hotel} <br/>
+			  	<strong>Habitación: </strong>${habitacion.numero}<br/>
+			  	<strong>Categoría: </strong>${categoria.nombre}
+			  	<strong>Tipo: </strong>${tipo}<br/>
+			  	<strong>Fecha check-in: </strong>
+			  		<fmt:formatDate type ="date" value="${estancia.fecha_check_in}" ></fmt:formatDate><br/>
+			  	<strong>Fecha check-out: </strong>
+			  		<fmt:formatDate type ="date" value="${estancia.fecha_check_out}" ></fmt:formatDate><br/>
+		  	</blockquote>
+		 </div>
+		 <br/>  
+		 <div>	
+		 <hr alingn="center" noshade="noshade" size="3" width="80%" />
+		 <h3>Datos de facturación:</h3>
+			 <blockquote>
+			  	<strong>Días: </strong>${dias} días.<br/>
+			  	<strong>Precio habitación: </strong>${precio_hab} €<br/>
+				<c:if test="${categoria.precio_categoria>1}">
+					<strong>Suplemento por categoría: </strong>${categoria.precio_categoria} <br/>
+				</c:if>
+			  	<c:if test="${reserva.cama_supletoria==true}">
+			  		<strong>Cama supletoria: </strong>${cama}<br/>
+			  	</c:if>
+			  	<strong>Total estancia: </strong>${total} €
+			</blockquote>
+		</div>
+	  	<br/><br/> 	
+  	</blockquote>
+</div>

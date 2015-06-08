@@ -38,6 +38,7 @@
             	<menu:item id="i_estancia_list" messageCode="global_menu_list" url="/estancias?page=1&amp;size=${empty param.size ? 10 : param.size}" z="kGrZYpZD3DrTQS2/QBj7JJtFeX0="/>
        		</sec:authorize>
        		<menu:item id="i_estancia_checkin" messageCode="global_generic" url="/estancias?find=checkin&amp;form" z="user-managed"/>
+       		<menu:item id="fi_estancia_checkout" messageCode="global_generic" url="/estancias?checkoutform" z="user-managed"/>
        		</menu:category>
        	</sec:authorize>
         <!-- HABITACION -->
