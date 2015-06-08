@@ -304,4 +304,11 @@ public class ReservaController {
         reserva.persist();
     	return "reservas/exitoCancelar";
     }
+    
+    //------ EXTRA ------ LISTADO CON LAS RESERVAS DE UN USUARIO
+	@RequestMapping(method = RequestMethod.GET, params = "reservasActivas", produces = "text/html")
+    public String misreservas(Principal principal, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel){
+		uiModel.addAttribute("reservas", Reserva.findReservasByUsuario(Usuario.findUsuariosByNombreUsuarioEquals(principal.getName())).getResultList());
+		return "reservas/reservasUsuario";
+    }
 }

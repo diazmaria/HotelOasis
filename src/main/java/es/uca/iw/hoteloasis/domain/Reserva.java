@@ -16,7 +16,7 @@ import org.springframework.roo.addon.tostring.RooToString;
 
 @RooJavaBean
 @RooToString
-@RooJpaActiveRecord(finders = { "findHabitacionesDisponibles" })
+@RooJpaActiveRecord(finders = {"findHabitacionesDisponibles", "findReservasByUsuario"})
 public class Reserva {
 
     /**
@@ -118,5 +118,15 @@ public class Reserva {
         long habitacionesReservadas = tQuery.getSingleResult();
         long habitacionesDisponibles = (habitacionesTotales - habitacionesReservadas);
         return habitacionesDisponibles;
+    }
+    
+    //BUSCAR RESERVAS ACTUALES REALIZADAS POR UN USUARIO (RESERVAS NO CANCELADAS)
+    public static TypedQuery<Reserva> findReservasByUsuario(Usuario usuario){
+        EntityManager em = Reserva.entityManager();
+        String query = "SELECT o FROM Reserva AS o WHERE o.usuario = :usuario " + "AND o.fecha_cancelacion IS NULL" + " AND o.fecha_salida >= :hoy "+ "AND o not in (SELECT e.reserva from Estancia AS e WHERE e.reserva = o)";
+        TypedQuery<Reserva> q = em.createQuery(query, Reserva.class);
+        q.setParameter("usuario", usuario);
+        q.setParameter("hoy", new Date());
+        return q;
     }
 }

@@ -9,7 +9,6 @@
             <table:column id="c_es_uca_iw_hoteloasis_domain_Usuario_segundo_apellido" property="segundo_apellido" z="CRUCUr0lUJ3AKG9d8Tzy8OhWA4g="/>
             <table:column id="c_es_uca_iw_hoteloasis_domain_Usuario_nombre_usuario" property="nombre_usuario" z="3PAvsrfOn1R5OLKIatNUAd0BvC4="/>
             <table:column id="c_es_uca_iw_hoteloasis_domain_Usuario_email" property="email" z="r0xeVTVjrZjYMo8c4vVcMie/JWg="/>
-            <table:column id="c_es_uca_iw_hoteloasis_domain_Usuario_clave" property="clave" z="kk5dKkw8w9sIR29lF3YTJB6AU54="/>
         </table:table>
     </page:list>
 </div>

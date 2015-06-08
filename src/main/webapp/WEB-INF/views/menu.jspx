@@ -29,6 +29,9 @@
             <sec:authorize access="hasAnyRole('Administrador', 'Recepcionista','Usuario')">
                 <menu:item id="fi_reserva_cancelar" url="/reservas?cancelarform" z="user-managed"/>
             </sec:authorize>
+            <sec:authorize access="hasAnyRole('Administrador', 'Recepcionista','Usuario')">
+                <menu:item id="fi_reserva_usuario" url="/reservas?reservasActivas" z="user-managed"/>
+            </sec:authorize>
         </menu:category>
         <!-- ESTANCIA -->
         <sec:authorize access="hasAnyRole('Administrador', 'Recepcionista','Usuario')">	

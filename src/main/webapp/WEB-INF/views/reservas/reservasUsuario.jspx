@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_es_uca_iw_hoteloasis_domain_Reserva" items="${reservas}" z="?">
+        <table:tabla data="${reservas}" id="l_es_uca_iw_hoteloasis_domain_Reserva" path="/reservas" z="user-managed">
+            <table:column id="c_es_uca_iw_hoteloasis_domain_Reserva_codigo" property="id" z="?"/>
+            <table:column date="true" dateTimePattern="${reserva_fecha_reserva_date_format}" id="c_es_uca_iw_hoteloasis_domain_Reserva_fecha_reserva" property="fecha_reserva" z="?"/>
+            <table:column date="true" dateTimePattern="${reserva_fecha_entrada_date_format}" id="c_es_uca_iw_hoteloasis_domain_Reserva_fecha_entrada" property="fecha_entrada" z="19BEfdZ9yto554QpoqhTQjjB2sc="/>
+            <table:column date="true" dateTimePattern="${reserva_fecha_salida_date_format}" id="c_es_uca_iw_hoteloasis_domain_Reserva_fecha_salida" property="fecha_salida" z="Pcurf0Q1mniI45PzMHVHkxh3gu0="/>
+            <table:column id="c_es_uca_iw_hoteloasis_domain_Reserva_hotel" property="hotel" z="4Nd16N8SKU152trGvty6BAFmW5s="/>
+            <table:column id="c_es_uca_iw_hoteloasis_domain_Reserva_categoria" property="categoria" z="?"/>
+            <table:column id="c_es_uca_iw_hoteloasis_domain_Reserva_tipo" property="tipo" z="pv7hgYNBqEJGrd6TDcL1JvQJ/4s="/>
+            <table:column id="c_es_uca_iw_hoteloasis_domain_Reserva_cama_supletoria" property="cama_supletoria" z="?"/>
+        	<table:column id="c_es_uca_iw_hoteloasis_domain_Reserva_coste_reserva" property="coste_reserva" z="?"/>
+        	
+        </table:tabla>
+    </page:list>
+</div>
+
