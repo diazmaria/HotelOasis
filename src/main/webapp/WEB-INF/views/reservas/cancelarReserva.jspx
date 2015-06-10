@@ -14,10 +14,10 @@
 		    	
 		    	<div>
 		        	<b><label>Código de la reserva:  </label></b>
-		        	<div class="box">
+		        	
 		        		<input type="number" name="id" required="true"/>
 		        		
-		        	</div>
+		        	
 		        </div>
 		        <br/>
 			<p style="display:inline-block; margin-right:43px; margin-left:5px">¿Cancelar reserva?</p> <input type="submit" class ="enviar" name="action" value="continuar"/>  

@@ -3,24 +3,73 @@
 
 package es.uca.iw.hoteloasis.domain;
 
+import es.uca.iw.hoteloasis.domain.Hotel;
 import es.uca.iw.hoteloasis.domain.Tarifa;
 
 privileged aspect Tarifa_Roo_JavaBean {
     
-    public String Tarifa.getServicio() {
-        return this.servicio;
+    public double Tarifa.getLlamada_nacional() {
+        return this.llamada_nacional;
     }
     
-    public void Tarifa.setServicio(String servicio) {
-        this.servicio = servicio;
+    public void Tarifa.setLlamada_nacional(double llamada_nacional) {
+        this.llamada_nacional = llamada_nacional;
     }
     
-    public double Tarifa.getCoste() {
-        return this.coste;
+    public double Tarifa.getLlamada_internacional() {
+        return this.llamada_internacional;
     }
     
-    public void Tarifa.setCoste(double coste) {
-        this.coste = coste;
+    public void Tarifa.setLlamada_internacional(double llamada_internacional) {
+        this.llamada_internacional = llamada_internacional;
+    }
+    
+    public double Tarifa.getInternet() {
+        return this.internet;
+    }
+    
+    public void Tarifa.setInternet(double internet) {
+        this.internet = internet;
+    }
+    
+    public double Tarifa.getCancel_mas_cinco_dias() {
+        return this.cancel_mas_cinco_dias;
+    }
+    
+    public void Tarifa.setCancel_mas_cinco_dias(double cancel_mas_cinco_dias) {
+        this.cancel_mas_cinco_dias = cancel_mas_cinco_dias;
+    }
+    
+    public double Tarifa.getCancel_dos_cinco_dias() {
+        return this.cancel_dos_cinco_dias;
+    }
+    
+    public void Tarifa.setCancel_dos_cinco_dias(double cancel_dos_cinco_dias) {
+        this.cancel_dos_cinco_dias = cancel_dos_cinco_dias;
+    }
+    
+    public double Tarifa.getCancel_uno_dos_dias() {
+        return this.cancel_uno_dos_dias;
+    }
+    
+    public void Tarifa.setCancel_uno_dos_dias(double cancel_uno_dos_dias) {
+        this.cancel_uno_dos_dias = cancel_uno_dos_dias;
+    }
+    
+    public double Tarifa.getCancel_mismo_dia() {
+        return this.cancel_mismo_dia;
+    }
+    
+    public void Tarifa.setCancel_mismo_dia(double cancel_mismo_dia) {
+        this.cancel_mismo_dia = cancel_mismo_dia;
+    }
+    
+    public Hotel Tarifa.getHotel() {
+        return this.hotel;
+    }
+    
+    public void Tarifa.setHotel(Hotel hotel) {
+        this.hotel = hotel;
     }
     
 }

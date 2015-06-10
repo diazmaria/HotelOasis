@@ -6,6 +6,7 @@ package es.uca.iw.hoteloasis.domain;
 import es.uca.iw.hoteloasis.domain.Estancia;
 import es.uca.iw.hoteloasis.domain.EstanciaDataOnDemand;
 import es.uca.iw.hoteloasis.domain.HabitacionDataOnDemand;
+import es.uca.iw.hoteloasis.domain.LlamadaDataOnDemand;
 import es.uca.iw.hoteloasis.domain.ReservaDataOnDemand;
 import es.uca.iw.hoteloasis.domain.UsuarioDataOnDemand;
 import java.security.SecureRandom;
@@ -31,6 +32,9 @@ privileged aspect EstanciaDataOnDemand_Roo_DataOnDemand {
     
     @Autowired
     HabitacionDataOnDemand EstanciaDataOnDemand.habitacionDataOnDemand;
+    
+    @Autowired
+    LlamadaDataOnDemand EstanciaDataOnDemand.llamadaDataOnDemand;
     
     @Autowired
     ReservaDataOnDemand EstanciaDataOnDemand.reservaDataOnDemand;

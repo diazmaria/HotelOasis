@@ -4,9 +4,8 @@
 package es.uca.iw.hoteloasis.domain;
 
 import es.uca.iw.hoteloasis.domain.Categoria;
-import es.uca.iw.hoteloasis.domain.Habitacion;
 import es.uca.iw.hoteloasis.domain.Hotel;
-import java.util.Set;
+import es.uca.iw.hoteloasis.domain.Minibar;
 
 privileged aspect Categoria_Roo_JavaBean {
     
@@ -42,12 +41,12 @@ privileged aspect Categoria_Roo_JavaBean {
         this.hotel = hotel;
     }
     
-    public Set<Habitacion> Categoria.getHabitaciones() {
-        return this.habitaciones;
+    public Minibar Categoria.getMinibar() {
+        return this.minibar;
     }
     
-    public void Categoria.setHabitaciones(Set<Habitacion> habitaciones) {
-        this.habitaciones = habitaciones;
+    public void Categoria.setMinibar(Minibar minibar) {
+        this.minibar = minibar;
     }
     
 }

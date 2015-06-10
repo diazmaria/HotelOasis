@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jsp:root xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:spring="http://www.springframework.org/tags" version="2.0">
+	<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
+		xmlns:form="urn:jsptagdir:/WEB-INF/tags/form"
+		xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+		<jsp:directive.page contentType="text/html;charset=UTF-8" />
+		<jsp:output omit-xml-declaration="yes" />
+
+		<util:panel id="ff_es_uca_iw_domain_Reserva" title="Consumo de servicios">
+			<h2 style="color: #113660; margin-bottom:20px">Consumo de servicios</h2>
+
+			<form action="/HotelOasis/estancias" method="get">
+			<input type="hidden" name="servicios" />
+			<div>
+			<c:if test="${not empty habitaciones}"><b><label>Nº de Habitación: </label></b></c:if>
+					
+			<c:choose>
+			<c:when test="${empty habitaciones}">
+			<p style="margin-left:5px">Usted no dispone de ninguna habitación asignada hasta el momento.</p>
+			</c:when>
+			<c:otherwise>
+			<select name="habitacion">
+			<c:forEach items="${habitaciones}" var="habitacion">
+			<option value="${habitacion.id}">Hab. Nº${habitacion.numero} - ${habitacion.hotel.nombre}</option>
+			</c:forEach>
+			</select>
+			</c:otherwise>
+			</c:choose>
+					
+				</div>
+				<br />
+				<c:if test="${not empty habitaciones}"><p style="display:inline-block; margin-right:32px; margin-left:5px">¿Consumir servicios?</p> <input type="submit" class ="enviar" name="action" value="continuar"/></c:if>
+			</form>
+		</util:panel>
+	</div>
+</jsp:root>

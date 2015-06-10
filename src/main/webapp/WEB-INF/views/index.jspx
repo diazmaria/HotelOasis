@@ -3,12 +3,13 @@
   <jsp:output omit-xml-declaration="yes" />
   <spring:message var="app_name" code="application_name" htmlEscape="false" />
   <spring:message var="title" code="welcome_titlepane" arguments="${app_name}" htmlEscape="false" />
-  <util:panel id="title" title="${title}">
-    <h3>
-      <spring:message code="welcome_h3" arguments="${app_name}" />
+  <util:panel id="title" title="Hotel Oasis">
+    <h3 style="color:#113660">
+      <spring:message code="welcome_h3" arguments="la cadena hotelera Hotel Oasis" />
     </h3>
-    <p>
+    <p style="margin-left:5px">
       <spring:message code="welcome_text" />
-    </p>
-  </util:panel>
-</div>
+<div id="comslider_in_point_674748" style="text-align:center"></div><script type="text/javascript">var oCOMScript674748=document.createElement('script');oCOMScript674748.src="http://commondatastorage.googleapis.com/comslider/target/users/1433880428x5356a15d66dcaa6cac36f326815aaccd/comslider.js?timestamp=1433880674";oCOMScript674748.type='text/javascript';document.getElementsByTagName("head").item(0).appendChild(oCOMScript674748);</script> 
+</p>
+  </util:panel></div>
+  

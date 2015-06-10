@@ -3,6 +3,7 @@
 
 package es.uca.iw.hoteloasis.domain;
 
+import es.uca.iw.hoteloasis.domain.Hotel;
 import es.uca.iw.hoteloasis.domain.Tarifa;
 import es.uca.iw.hoteloasis.domain.TarifaDataOnDemand;
 import java.security.SecureRandom;
@@ -24,19 +25,55 @@ privileged aspect TarifaDataOnDemand_Roo_DataOnDemand {
     
     public Tarifa TarifaDataOnDemand.getNewTransientTarifa(int index) {
         Tarifa obj = new Tarifa();
-        setCoste(obj, index);
-        setServicio(obj, index);
+        setCancel_dos_cinco_dias(obj, index);
+        setCancel_mas_cinco_dias(obj, index);
+        setCancel_mismo_dia(obj, index);
+        setCancel_uno_dos_dias(obj, index);
+        setHotel(obj, index);
+        setInternet(obj, index);
+        setLlamada_internacional(obj, index);
+        setLlamada_nacional(obj, index);
         return obj;
     }
     
-    public void TarifaDataOnDemand.setCoste(Tarifa obj, int index) {
-        double coste = new Integer(index).doubleValue();
-        obj.setCoste(coste);
+    public void TarifaDataOnDemand.setCancel_dos_cinco_dias(Tarifa obj, int index) {
+        double cancel_dos_cinco_dias = new Integer(index).doubleValue();
+        obj.setCancel_dos_cinco_dias(cancel_dos_cinco_dias);
     }
     
-    public void TarifaDataOnDemand.setServicio(Tarifa obj, int index) {
-        String servicio = "servicio_" + index;
-        obj.setServicio(servicio);
+    public void TarifaDataOnDemand.setCancel_mas_cinco_dias(Tarifa obj, int index) {
+        double cancel_mas_cinco_dias = new Integer(index).doubleValue();
+        obj.setCancel_mas_cinco_dias(cancel_mas_cinco_dias);
+    }
+    
+    public void TarifaDataOnDemand.setCancel_mismo_dia(Tarifa obj, int index) {
+        double cancel_mismo_dia = new Integer(index).doubleValue();
+        obj.setCancel_mismo_dia(cancel_mismo_dia);
+    }
+    
+    public void TarifaDataOnDemand.setCancel_uno_dos_dias(Tarifa obj, int index) {
+        double cancel_uno_dos_dias = new Integer(index).doubleValue();
+        obj.setCancel_uno_dos_dias(cancel_uno_dos_dias);
+    }
+    
+    public void TarifaDataOnDemand.setHotel(Tarifa obj, int index) {
+        Hotel hotel = null;
+        obj.setHotel(hotel);
+    }
+    
+    public void TarifaDataOnDemand.setInternet(Tarifa obj, int index) {
+        double internet = new Integer(index).doubleValue();
+        obj.setInternet(internet);
+    }
+    
+    public void TarifaDataOnDemand.setLlamada_internacional(Tarifa obj, int index) {
+        double llamada_internacional = new Integer(index).doubleValue();
+        obj.setLlamada_internacional(llamada_internacional);
+    }
+    
+    public void TarifaDataOnDemand.setLlamada_nacional(Tarifa obj, int index) {
+        double llamada_nacional = new Integer(index).doubleValue();
+        obj.setLlamada_nacional(llamada_nacional);
     }
     
     public Tarifa TarifaDataOnDemand.getSpecificTarifa(int index) {

@@ -8,6 +8,7 @@
             <table:column id="c_es_uca_iw_hoteloasis_domain_Categoria_descripcion" property="descripcion" z="1GUyXbR8b7DFCFPcvIt4CxewIrA="/>
             <table:column id="c_es_uca_iw_hoteloasis_domain_Categoria_precio_categoria" property="precio_categoria" z="g532Jz3gq3BoYRIw3dnvee3FOW0="/>
             <table:column id="c_es_uca_iw_hoteloasis_domain_Categoria_hotel" property="hotel" z="Mj01kFyNJt8ULRId3AHAQBctzfY="/>
+            <table:column id="c_es_uca_iw_hoteloasis_domain_Categoria_minibar" property="minibar" z="6olLe+LMtbsOVuSfnD8TG0J4hq8="/>
         </table:table>
     </page:list>
 </div>

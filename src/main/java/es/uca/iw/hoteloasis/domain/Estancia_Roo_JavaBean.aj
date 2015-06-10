@@ -3,11 +3,14 @@
 
 package es.uca.iw.hoteloasis.domain;
 
+import es.uca.iw.hoteloasis.domain.Bebida_consumo;
 import es.uca.iw.hoteloasis.domain.Estancia;
 import es.uca.iw.hoteloasis.domain.Habitacion;
+import es.uca.iw.hoteloasis.domain.Llamada;
 import es.uca.iw.hoteloasis.domain.Reserva;
 import es.uca.iw.hoteloasis.domain.Usuario;
 import java.util.Date;
+import java.util.Set;
 
 privileged aspect Estancia_Roo_JavaBean {
     
@@ -49,6 +52,22 @@ privileged aspect Estancia_Roo_JavaBean {
     
     public void Estancia.setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+    
+    public Set<Bebida_consumo> Estancia.getBebida_consumo() {
+        return this.bebida_consumo;
+    }
+    
+    public void Estancia.setBebida_consumo(Set<Bebida_consumo> bebida_consumo) {
+        this.bebida_consumo = bebida_consumo;
+    }
+    
+    public Llamada Estancia.getLlamadas() {
+        return this.llamadas;
+    }
+    
+    public void Estancia.setLlamadas(Llamada llamadas) {
+        this.llamadas = llamadas;
     }
     
 }

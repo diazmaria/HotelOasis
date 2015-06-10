@@ -20,7 +20,6 @@
 		        <br/><p style="display:inline-block; margin-right:43px; margin-left:5px">¿Revisar factura?</p>
 		    	<input type="submit" class ="enviar" name="action" value="factura"/>
 		    </form>
-		    <p></p>
 	    </util:panel>
 	</div>
 </jsp:root>

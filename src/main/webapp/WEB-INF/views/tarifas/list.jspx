@@ -4,8 +4,12 @@
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_es_uca_iw_hoteloasis_domain_Tarifa" items="${tarifas}" z="i4wQ6QMN51Ckgs/yAzRr9DHCuxE=">
         <table:table data="${tarifas}" id="l_es_uca_iw_hoteloasis_domain_Tarifa" path="/tarifas" z="XcxRUk52auUDaJegtP4JLIPGHss=">
-            <table:column id="c_es_uca_iw_hoteloasis_domain_Tarifa_servicio" property="servicio" z="OVeGrA1ilhdpSob3P81S3Hssudo="/>
-            <table:column id="c_es_uca_iw_hoteloasis_domain_Tarifa_coste" property="coste" z="ABRbf4Fi3IwbvlZ/IfCwD4JhjUI="/>
+            <table:column id="c_es_uca_iw_hoteloasis_domain_Tarifa_llamada_nacional" property="llamada_nacional" z="zI9yh3RU4yqRkuJ/CpPfxTz1lJQ="/>
+            <table:column id="c_es_uca_iw_hoteloasis_domain_Tarifa_llamada_internacional" property="llamada_internacional" z="L7SBlGSq7E6FIlqEGsVQ8Z10sXI="/>
+            <table:column id="c_es_uca_iw_hoteloasis_domain_Tarifa_internet" property="internet" z="XtEIIbboPCjZJevDfjh8ktXOqoc="/>
+            <table:column id="c_es_uca_iw_hoteloasis_domain_Tarifa_cancel_mas_cinco_dias" property="cancel_mas_cinco_dias" z="0Xm+PjYxLRRROsWGsR/vlxbH+O0="/>
+            <table:column id="c_es_uca_iw_hoteloasis_domain_Tarifa_cancel_dos_cinco_dias" property="cancel_dos_cinco_dias" z="RYqjj/9FLtqv2auyPaLpVZyEIgU="/>
+            <table:column id="c_es_uca_iw_hoteloasis_domain_Tarifa_cancel_uno_dos_dias" property="cancel_uno_dos_dias" z="wm9ZihosCRJcNjqXxjqqtzHv+VY="/>
         </table:table>
     </page:list>
 </div>

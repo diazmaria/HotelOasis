@@ -14,7 +14,7 @@ privileged aspect Estancia_Roo_Jpa_ActiveRecord {
     @PersistenceContext
     transient EntityManager Estancia.entityManager;
     
-    public static final List<String> Estancia.fieldNames4OrderClauseFilter = java.util.Arrays.asList("fecha_check_in", "fecha_check_out", "reserva", "habitacion", "usuario");
+    public static final List<String> Estancia.fieldNames4OrderClauseFilter = java.util.Arrays.asList("fecha_check_in", "fecha_check_out", "reserva", "habitacion", "usuario", "bebida_consumo", "llamadas");
     
     public static final EntityManager Estancia.entityManager() {
         EntityManager em = new Estancia().entityManager;

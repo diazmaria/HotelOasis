@@ -8,9 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.joda.time.Days;
 import org.joda.time.LocalDate;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -21,7 +19,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import es.uca.iw.hoteloasis.domain.Estancia;
 import es.uca.iw.hoteloasis.domain.Categoria;
 import es.uca.iw.hoteloasis.domain.Habitacion_tipo;
@@ -223,92 +220,68 @@ public class ReservaController {
 
     //------CU3 ------ CANCELAR RESERVA Y MOSTRAR ÉXITO/FRACASO CANCELACIÓN
     @RequestMapping(params = { "cancelar" }, method = RequestMethod.POST, produces = "text/html")
-    public String cancelarReserva(@RequestParam("id") long id, Principal principal, HttpServletRequest httpServletRequest, Model uiModel) {	
-        
+    public String cancelarReserva(@RequestParam("id") long id, Principal principal, HttpServletRequest httpServletRequest, Model uiModel) {
         long id_reserva = Long.parseLong(httpServletRequest.getParameter("id"));
         Usuario usuario = Usuario.findUsuariosByNombreUsuarioEquals(principal.getName());
         Rol rol = usuario.getRol();
-        
-        if (Reserva.findReserva(id_reserva) == null){
-        	uiModel.addAttribute("error", "El número de reserva es erróneo.");
-        	return "reservas/cancelarReserva";
+        if (Reserva.findReserva(id_reserva) == null) {
+            uiModel.addAttribute("error", "El número de reserva es erróneo.");
+            return "reservas/cancelarReserva";
         }
-        
         Usuario usuario_reserva = Reserva.findReserva(id_reserva).getUsuario();
-        
-        if (Reserva.findReserva(id).getFecha_cancelacion() != null){
-        	uiModel.addAttribute("error", "Error: No es posible cancelar esta reserva, ya ha sido cancelada.");
-        	return "reservas/cancelarReserva";
+        if (Reserva.findReserva(id).getFecha_cancelacion() != null) {
+            uiModel.addAttribute("error", "Error: No es posible cancelar esta reserva, ya ha sido cancelada.");
+            return "reservas/cancelarReserva";
         }
-         
-        if (!usuario_reserva.equals(usuario) && rol.equals(Rol.findRolsByNombreEquals("Usuario").getSingleResult())){
-        	uiModel.addAttribute("error", "Error: Este código de reserva no le pertenece.");
-        	return "reservas/cancelarReserva";
+        if (!usuario_reserva.equals(usuario) && rol.equals(Rol.findRolsByNombreEquals("Usuario").getSingleResult())) {
+            uiModel.addAttribute("error", "Error: Este código de reserva no le pertenece.");
+            return "reservas/cancelarReserva";
         }
-
-        if (!Estancia.findEstanciasByReserva(Reserva.findReserva(id)).getResultList().isEmpty()){
-        	uiModel.addAttribute("error", "Error: No es posible cancelar esta reserva, ya se hizo el check-in.");
-        	return "reservas/cancelarReserva";
+        if (!Estancia.findEstanciasByReserva(Reserva.findReserva(id)).getResultList().isEmpty()) {
+            uiModel.addAttribute("error", "Error: No es posible cancelar esta reserva, ya se hizo el check-in.");
+            return "reservas/cancelarReserva";
         }
-        
         int dias = Days.daysBetween(new LocalDate(new Date()), new LocalDate(Reserva.findReserva(Long.parseLong(httpServletRequest.getParameter("id"))).getFecha_entrada())).getDays();
-        if (dias < 0){
-        	uiModel.addAttribute("error", "Error: No es posible cancelar esta reserva porque la fecha de entrada ya ha pasado.");
-        	return "reservas/cancelarReserva";
+        if (dias < 0) {
+            uiModel.addAttribute("error", "Error: No es posible cancelar esta reserva porque la fecha de entrada ya ha pasado.");
+            return "reservas/cancelarReserva";
         }
-          
         Reserva r = Reserva.findReserva(Long.parseLong(httpServletRequest.getParameter("id")));
         double coste_reserva = r.getCoste_reserva();
-        
         uiModel.addAttribute("hotel", r.getHotel());
         uiModel.addAttribute("categoria", r.getCategoria());
         uiModel.addAttribute("tipo", r.getTipo());
         uiModel.addAttribute("coste_reserva", coste_reserva);
         String cama;
-        
-        if(r.getCama_supletoria() == null)
-        	 cama = "No";
-        else
-        	cama = "Si";
-        
+        if (r.getCama_supletoria() == null) cama = "No"; else cama = "Si";
         uiModel.addAttribute("cama_supletoria", cama);
         uiModel.addAttribute("fecha_entrada", new SimpleDateFormat("dd-MMM-yyyy").format(r.getFecha_entrada()));
         uiModel.addAttribute("fecha_salida", new SimpleDateFormat("dd-MMM-yyyy").format(r.getFecha_salida()));
         uiModel.addAttribute("fecha_reserva", new SimpleDateFormat("dd-MMM-yyyy").format(r.getFecha_reserva()));
-        
         int compensacion;
-        
-        if (dias >= 5) compensacion = 0;
-        else if (dias >= 2 && dias < 5) compensacion = 10;
-        else if (dias >= 1 && dias < 2) compensacion = 30;
-        else compensacion = 100;
-        
+        if (dias >= 5) compensacion = 0; else if (dias >= 2 && dias < 5) compensacion = 10; else if (dias >= 1 && dias < 2) compensacion = 30; else compensacion = 100;
         uiModel.addAttribute("id", id);
         uiModel.addAttribute("dias", dias);
         uiModel.addAttribute("compensacion", compensacion);
-        
-        double importe_total = (((double)compensacion/100)*coste_reserva);
-        
+        double importe_total = (((double) compensacion / 100) * coste_reserva);
         uiModel.addAttribute("importe_total", importe_total);
-        
         return "reservas/detallesCancelarReserva";
     }
-    
+
     //------CU3 ------ CANCELAR RESERVA (AÑADIR FECHA DE CANCELACIÓN BD)
     @RequestMapping(params = { "cancelarReservaOk" }, method = RequestMethod.POST, produces = "text/html")
-    public String cancelarReservaOk(@RequestParam("id") long id, @RequestParam("compensacion") double compensacion, HttpServletRequest httpServletRequest, Model uiModel){	
-        
+    public String cancelarReservaOk(@RequestParam("id") long id, @RequestParam("compensacion") double compensacion, HttpServletRequest httpServletRequest, Model uiModel) {
         Reserva reserva = Reserva.findReserva(id);
         reserva.setFecha_cancelacion(new Date());
         reserva.setCoste_reserva(compensacion);
         reserva.persist();
-    	return "reservas/exitoCancelar";
+        return "reservas/exitoCancelar";
     }
-    
+
     //------ EXTRA ------ LISTADO CON LAS RESERVAS DE UN USUARIO
-	@RequestMapping(method = RequestMethod.GET, params = "reservasActivas", produces = "text/html")
-    public String misreservas(Principal principal, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel){
-		uiModel.addAttribute("reservas", Reserva.findReservasByUsuario(Usuario.findUsuariosByNombreUsuarioEquals(principal.getName())).getResultList());
-		return "reservas/reservasUsuario";
+    @RequestMapping(method = RequestMethod.GET, params = "reservasActivas", produces = "text/html")
+    public String misreservas(Principal principal, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
+        uiModel.addAttribute("reservas", Reserva.findReservasByUsuario(Usuario.findUsuariosByNombreUsuarioEquals(principal.getName())).getResultList());
+        return "reservas/reservasUsuario";
     }
 }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jsp:root xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:form="http://www.springframework.org/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+	<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+	    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+	    <jsp:output omit-xml-declaration="yes"/>
+	    
+	    <h2 style="color:#113660; margin-bottom:25px">Elegir Servicio</h2>
+	    
+	    <form action="/HotelOasis/estancias" id="servicios">
+	    	<input type="hidden" name="servicios"/>
+	    	<input type="hidden" name="estancia" value="${estancia.id}"/>
+			
+			<img src="/HotelOasis/resources/images/bebida.png"/>
+			<input style="margin-left:10px;margin-right:20px" class="enviar" type="submit" name="minibar" value="Bebidas Minibar"/>
+			<img src="/HotelOasis/resources/images/llamada_nacional.png"/>
+			<input style="margin-left:10px;margin-right:20px; margin-top:-10px" class="enviar" type="submit" name="llamada_nacional" value="Llamada nacional"/>
+			<img src="/HotelOasis/resources/images/llamada_internacional.png"/>
+			<input style="margin-left:10px;margin-right:20px" class="enviar" type="submit" name="llamada_internacional" value="Llamada internacional"/>
+			<img src="/HotelOasis/resources/images/internet.png"/>
+			<input style="margin-left:10px;margin-right:20px" class="enviar" type="submit" name="internet" value="Acceso a internet"/>
+	    </form><br/>
+	</div>
+</jsp:root>

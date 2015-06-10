@@ -28,4 +28,23 @@
 <definition extends="default" name="estancias/factura">
         <put-attribute name="body" value="/WEB-INF/views/estancias/factura.jspx"/>
     </definition>
+<definition extends="default" name="estancias/elegirHabitacionServicios">
+        <put-attribute name="body" value="/WEB-INF/views/estancias/elegirHabitacionServicios.jspx"/>
+</definition>
+<definition extends="default" name="estancias/elegirServicio">
+        <put-attribute name="body" value="/WEB-INF/views/estancias/elegirServicio.jspx"/>
+</definition>
+<definition extends="default" name="estancias/servicioLlamada">
+        <put-attribute name="body" value="/WEB-INF/views/estancias/servicioLlamada.jspx"/>
+</definition>
+<definition extends="default" name="estancias/servicioInternet">
+        <put-attribute name="body" value="/WEB-INF/views/estancias/servicioInternet.jspx"/>
+</definition>
+<definition extends="default" name="estancias/servicioMinibar">
+        <put-attribute name="body" value="/WEB-INF/views/estancias/servicioMinibar.jspx"/>
+</definition>
+<definition extends="default" name="estancias/consumoComunicacion">
+        <put-attribute name="body" value="/WEB-INF/views/estancias/consumoComunicacion.jspx"/>
+</definition>
+
 </tiles-definitions>

@@ -7,6 +7,8 @@ import es.uca.iw.hoteloasis.domain.Categoria;
 import es.uca.iw.hoteloasis.domain.CategoriaDataOnDemand;
 import es.uca.iw.hoteloasis.domain.Hotel;
 import es.uca.iw.hoteloasis.domain.HotelDataOnDemand;
+import es.uca.iw.hoteloasis.domain.Minibar;
+import es.uca.iw.hoteloasis.domain.MinibarDataOnDemand;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -28,10 +30,14 @@ privileged aspect CategoriaDataOnDemand_Roo_DataOnDemand {
     @Autowired
     HotelDataOnDemand CategoriaDataOnDemand.hotelDataOnDemand;
     
+    @Autowired
+    MinibarDataOnDemand CategoriaDataOnDemand.minibarDataOnDemand;
+    
     public Categoria CategoriaDataOnDemand.getNewTransientCategoria(int index) {
         Categoria obj = new Categoria();
         setDescripcion(obj, index);
         setHotel(obj, index);
+        setMinibar(obj, index);
         setNombre(obj, index);
         setPrecio_categoria(obj, index);
         return obj;
@@ -45,6 +51,11 @@ privileged aspect CategoriaDataOnDemand_Roo_DataOnDemand {
     public void CategoriaDataOnDemand.setHotel(Categoria obj, int index) {
         Hotel hotel = hotelDataOnDemand.getRandomHotel();
         obj.setHotel(hotel);
+    }
+    
+    public void CategoriaDataOnDemand.setMinibar(Categoria obj, int index) {
+        Minibar minibar = minibarDataOnDemand.getRandomMinibar();
+        obj.setMinibar(minibar);
     }
     
     public void CategoriaDataOnDemand.setNombre(Categoria obj, int index) {

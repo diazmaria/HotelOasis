@@ -8,5 +8,7 @@
         <field:select field="reserva" id="c_es_uca_iw_hoteloasis_domain_Estancia_reserva" itemValue="id" items="${reservas}" path="/reservas" z="2Hr1bIQhw1bd8e9NvC3iXs+xs4c="/>
         <field:select field="habitacion" id="c_es_uca_iw_hoteloasis_domain_Estancia_habitacion" itemValue="id" items="${habitacions}" path="/habitacions" z="Aem2jY8gf1BF3AMVy5zvnSRvwnA="/>
         <field:select field="usuario" id="c_es_uca_iw_hoteloasis_domain_Estancia_usuario" itemValue="id" items="${usuarios}" path="/usuarios" z="7IlL10fWWCurajpqQjMJSbmal0s="/>
+        <field:select field="bebida_consumo" id="c_es_uca_iw_hoteloasis_domain_Estancia_bebida_consumo" itemValue="id" items="${bebida_consumoes}" multiple="true" path="/bebida_consumoes" z="xTco8M4KtDrUJ/CwympnQrUWHDc="/>
+        <field:select field="llamadas" id="c_es_uca_iw_hoteloasis_domain_Estancia_llamadas" itemValue="id" items="${llamadas}" path="/llamadas" z="SzX6qZFaowYlTConxMH/TCtUPN4="/>
     </form:update>
 </div>

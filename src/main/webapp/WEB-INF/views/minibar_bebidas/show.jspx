@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_es_uca_iw_hoteloasis_domain_Minibar_bebida" object="${minibar_bebida}" path="/minibar_bebidas" z="9DKXlsQtUv37iNG5/K9Buyp4k2o=">
+        <field:display field="cantidad" id="s_es_uca_iw_hoteloasis_domain_Minibar_bebida_cantidad" object="${minibar_bebida}" z="7c08Hje67vhbpS7gvO1v683ZEdM="/>
+        <field:display field="minibar" id="s_es_uca_iw_hoteloasis_domain_Minibar_bebida_minibar" object="${minibar_bebida}" z="b2SJlF1ooa29Hhku+NECnqbnJuQ="/>
+        <field:display field="bebida" id="s_es_uca_iw_hoteloasis_domain_Minibar_bebida_bebida" object="${minibar_bebida}" z="x8l/PffbAAYLUHv5w/WUdAyKyxQ="/>
+    </page:show>
+</div>

@@ -27,24 +27,23 @@
                 <menu:item id="i_reserva_list" messageCode="global_menu_list" url="/reservas?page=1&amp;size=${empty param.size ? 10 : param.size}" z="SXqVfp1MeDZeV3cOwFeTM7bxywo="/>
             </sec:authorize>
             <sec:authorize access="hasAnyRole('Administrador', 'Recepcionista','Usuario')">
-                <menu:item id="fi_reserva_cancelar" url="/reservas?cancelarform" z="user-managed"/>
-            </sec:authorize>
-            <sec:authorize access="hasAnyRole('Administrador', 'Recepcionista','Usuario')">
                 <menu:item id="fi_reserva_usuario" url="/reservas?reservasActivas" z="user-managed"/>
+                <menu:item id="fi_reserva_cancelar" url="/reservas?cancelarform" z="user-managed"/>
             </sec:authorize>
         </menu:category>
         <!-- ESTANCIA -->
-        <sec:authorize access="hasAnyRole('Administrador', 'Recepcionista','Usuario')">	
-        <menu:category id="c_estancia" z="VM5dC06St/mOutQXgoGBnsefPQE=">
-            <sec:authorize access="hasAnyRole('Administrador', 'Recepcionista')">
-            	<menu:item id="i_estancia_new" messageCode="global_menu_new" url="/estancias?form" z="+TX96i4SH/TWeSIi9bSkwBlGQrI="/>
-            	<menu:item id="i_estancia_list" messageCode="global_menu_list" url="/estancias?page=1&amp;size=${empty param.size ? 10 : param.size}" z="kGrZYpZD3DrTQS2/QBj7JJtFeX0="/>
-       		</sec:authorize>
-       		<menu:item id="i_estancia_checkin" messageCode="global_generic" url="/estancias?find=checkin&amp;form" z="user-managed"/>
-       		<menu:item id="fi_estancia_checkout" messageCode="global_generic" url="/estancias?checkoutform" z="user-managed"/>
-       		<menu:item id="fi_estancia_factura" messageCode="global_generic" url="/estancias?facturaform" z="user-managed"/>
-       		</menu:category>
-       	</sec:authorize>
+        <sec:authorize access="hasAnyRole('Administrador', 'Recepcionista','Usuario')">
+            <menu:category id="c_estancia" z="VM5dC06St/mOutQXgoGBnsefPQE=">
+                <sec:authorize access="hasAnyRole('Administrador', 'Recepcionista')">
+                    <menu:item id="i_estancia_new" messageCode="global_menu_new" url="/estancias?form" z="+TX96i4SH/TWeSIi9bSkwBlGQrI="/>
+                    <menu:item id="i_estancia_list" messageCode="global_menu_list" url="/estancias?page=1&amp;size=${empty param.size ? 10 : param.size}" z="kGrZYpZD3DrTQS2/QBj7JJtFeX0="/>
+                </sec:authorize>
+                <menu:item id="i_estancia_checkin" messageCode="global_generic" url="/estancias?find=checkin&amp;form" z="user-managed"/>
+                <menu:item id="fi_estancia_checkout" messageCode="global_generic" url="/estancias?checkoutform" z="user-managed"/>
+                <menu:item id="fi_estancia_servicios" messageCode="global_generic" url="/estancias?servicios" z="user-managed"/>
+                <menu:item id="fi_estancia_factura" messageCode="global_generic" url="/estancias?facturaform" z="user-managed"/>
+            </menu:category>
+        </sec:authorize>
         <!-- HABITACION -->
         <sec:authorize access="hasRole('Administrador')">
             <menu:category id="c_habitacion" z="RrtKJE3IGuh9SjqhuNimhB5sZJY=">
@@ -68,10 +67,45 @@
         </sec:authorize>
         <!-- TARIFA -->
         <sec:authorize access="hasAnyRole('Administrador', 'Recepcionista')">
-        	<menu:category id="c_tarifa" z="58iuq9S7m8KodUcR5ujPMkBIMnc=">
-            	<menu:item id="i_tarifa_new" messageCode="global_menu_new" url="/tarifas?form" z="AWzK6XSEqS0ldADRgZ0JC7vLfaw="/>
-            	<menu:item id="i_tarifa_list" messageCode="global_menu_list" url="/tarifas?page=1&amp;size=${empty param.size ? 10 : param.size}" z="utMO8Z9Fs2VT7OtHEF9FKbmuhkQ="/>
-        	</menu:category>
+            <menu:category id="c_tarifa" z="58iuq9S7m8KodUcR5ujPMkBIMnc=">
+                <menu:item id="i_tarifa_new" messageCode="global_menu_new" url="/tarifas?form" z="AWzK6XSEqS0ldADRgZ0JC7vLfaw="/>
+                <menu:item id="i_tarifa_list" messageCode="global_menu_list" url="/tarifas?page=1&amp;size=${empty param.size ? 10 : param.size}" z="utMO8Z9Fs2VT7OtHEF9FKbmuhkQ="/>
+            </menu:category>
+        </sec:authorize>
+        <!-- MINIBAR -->
+        <sec:authorize access="hasAnyRole('Administrador', 'Recepcionista')">
+            <menu:category id="c_minibar" z="8Gc7S6ICTE++CVqTxd+jZVBz/w8=">
+                <menu:item id="i_minibar_new" messageCode="global_menu_new" url="/minibars?form" z="SmuYEAPxviii9vmFBf+0C/712rQ="/>
+                <menu:item id="i_minibar_list" messageCode="global_menu_list" url="/minibars?page=1&amp;size=${empty param.size ? 10 : param.size}" z="9I1rmoLU8oYAJrVvATrtfwCxrrA="/>
+            </menu:category>
+        </sec:authorize>
+        <!-- BEBIDA -->
+        <sec:authorize access="hasAnyRole('Administrador', 'Recepcionista')">
+            <menu:category id="c_bebida" z="/1h4cuuphnvz1CJs87EusrLQvFc=">
+                <menu:item id="i_bebida_new" messageCode="global_menu_new" url="/bebidas?form" z="UVhllwmrp0s31MTPAAG9mLczLDo="/>
+                <menu:item id="i_bebida_list" messageCode="global_menu_list" url="/bebidas?page=1&amp;size=${empty param.size ? 10 : param.size}" z="wxnFLBgcHZTA3Dll5jKpLsw/m8I="/>
+            </menu:category>
+        </sec:authorize>
+        <!-- MINIBAR_BEBIDA -->
+        <sec:authorize access="hasAnyRole('Administrador', 'Recepcionista')">
+            <menu:category id="c_minibar_bebida" z="cvuvd/Jmi6sNEHx8lFPp4l8fXoQ=">
+                <menu:item id="i_minibar_bebida_new" messageCode="global_menu_new" url="/minibar_bebidas?form" z="t8G/3PQR/ybv5e+vgnCXJ7v7xX4="/>
+                <menu:item id="i_minibar_bebida_list" messageCode="global_menu_list" url="/minibar_bebidas?page=1&amp;size=${empty param.size ? 10 : param.size}" z="APRIq3enXTZxfTlGat5f4vxA1RI="/>
+            </menu:category>
+        </sec:authorize>
+        <!-- BEBIDA_CONSUMO -->
+        <sec:authorize access="hasAnyRole('Administrador', 'Recepcionista')">
+            <menu:category id="c_bebida_consumo" z="SVNGfqbiJXHadOmkP/ZCE1KZiTw=">
+                <menu:item id="i_bebida_consumo_new" messageCode="global_menu_new" url="/bebida_consumoes?form" z="vw7RaU+XPQXFXw81MUNW7JiAj28="/>
+                <menu:item id="i_bebida_consumo_list" messageCode="global_menu_list" url="/bebida_consumoes?page=1&amp;size=${empty param.size ? 10 : param.size}" z="Vh1CNiOjYXWVq7k8vtlFyt7HF7c="/>
+            </menu:category>
+        </sec:authorize>
+        <!-- LLAMADA -->
+        <sec:authorize access="hasAnyRole('Administrador', 'Recepcionista')">
+        <menu:category id="c_llamada" z="fGSRARRnKvzlJ4jA2dP2z5Cs5ZM=">
+            <menu:item id="i_llamada_new" messageCode="global_menu_new" url="/llamadas?form" z="Kdm6j0BFJnIyt3S01p4aKZF+l7A="/>
+            <menu:item id="i_llamada_list" messageCode="global_menu_list" url="/llamadas?page=1&amp;size=${empty param.size ? 10 : param.size}" z="HxE3afWEaVWWNiRV9BUczeAAVAo="/>
+        </menu:category>
         </sec:authorize>
     </menu:menu>
 </div>

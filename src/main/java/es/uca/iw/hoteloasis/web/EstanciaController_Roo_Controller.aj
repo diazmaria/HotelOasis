@@ -3,8 +3,10 @@
 
 package es.uca.iw.hoteloasis.web;
 
+import es.uca.iw.hoteloasis.domain.Bebida_consumo;
 import es.uca.iw.hoteloasis.domain.Estancia;
 import es.uca.iw.hoteloasis.domain.Habitacion;
+import es.uca.iw.hoteloasis.domain.Llamada;
 import es.uca.iw.hoteloasis.domain.Reserva;
 import es.uca.iw.hoteloasis.domain.Usuario;
 import es.uca.iw.hoteloasis.web.EstanciaController;
@@ -99,7 +101,9 @@ privileged aspect EstanciaController_Roo_Controller {
     void EstanciaController.populateEditForm(Model uiModel, Estancia estancia) {
         uiModel.addAttribute("estancia", estancia);
         addDateTimeFormatPatterns(uiModel);
+        uiModel.addAttribute("bebida_consumoes", Bebida_consumo.findAllBebida_consumoes());
         uiModel.addAttribute("habitacions", Habitacion.findAllHabitacions());
+        uiModel.addAttribute("llamadas", Llamada.findAllLlamadas());
         uiModel.addAttribute("reservas", Reserva.findAllReservas());
         uiModel.addAttribute("usuarios", Usuario.findAllUsuarios());
     }

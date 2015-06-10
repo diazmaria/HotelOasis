@@ -3,6 +3,7 @@
 
 package es.uca.iw.hoteloasis.web;
 
+import es.uca.iw.hoteloasis.domain.Hotel;
 import es.uca.iw.hoteloasis.domain.Tarifa;
 import es.uca.iw.hoteloasis.web.TarifaController;
 import java.io.UnsupportedEncodingException;
@@ -86,6 +87,7 @@ privileged aspect TarifaController_Roo_Controller {
     
     void TarifaController.populateEditForm(Model uiModel, Tarifa tarifa) {
         uiModel.addAttribute("tarifa", tarifa);
+        uiModel.addAttribute("hotels", Hotel.findAllHotels());
     }
     
     String TarifaController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

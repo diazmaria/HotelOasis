@@ -3,7 +3,13 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <form:update id="fu_es_uca_iw_hoteloasis_domain_Tarifa" modelAttribute="tarifa" path="/tarifas" versionField="Version" z="Wj23NFAczjWn3xAiJulRB9U3jbs=">
-        <field:input field="servicio" id="c_es_uca_iw_hoteloasis_domain_Tarifa_servicio" required="true" z="Fy4biFDfsaQEttIZhWbYxClnwc4="/>
-        <field:input field="coste" id="c_es_uca_iw_hoteloasis_domain_Tarifa_coste" z="CounoLUsbzBWVnF39kca9ojnJDM="/>
+        <field:input field="llamada_nacional" id="c_es_uca_iw_hoteloasis_domain_Tarifa_llamada_nacional" required="true" z="1IM7i6v8v7bE2MZUguj7RDtojEY="/>
+        <field:input field="llamada_internacional" id="c_es_uca_iw_hoteloasis_domain_Tarifa_llamada_internacional" required="true" z="vu3zxBIKh4A2YDrNdk4EUb9MnVg="/>
+        <field:input field="internet" id="c_es_uca_iw_hoteloasis_domain_Tarifa_internet" required="true" z="L+nUVdVhSqzzpguxC5fJP4VNNoA="/>
+        <field:input field="cancel_mas_cinco_dias" id="c_es_uca_iw_hoteloasis_domain_Tarifa_cancel_mas_cinco_dias" required="true" z="wd9erO7qQn7B0w/U0+hvIx28fPs="/>
+        <field:input field="cancel_dos_cinco_dias" id="c_es_uca_iw_hoteloasis_domain_Tarifa_cancel_dos_cinco_dias" required="true" z="i1CiEguRRZbsxtb1MmcZJ+3h+Sk="/>
+        <field:input field="cancel_uno_dos_dias" id="c_es_uca_iw_hoteloasis_domain_Tarifa_cancel_uno_dos_dias" required="true" z="0JRtXEC7/rT22auj1L+SAWv3fLs="/>
+        <field:input field="cancel_mismo_dia" id="c_es_uca_iw_hoteloasis_domain_Tarifa_cancel_mismo_dia" required="true" z="vt6MmxY4leVqGfqF/ZDZsQR//28="/>
+        <field:select field="hotel" id="c_es_uca_iw_hoteloasis_domain_Tarifa_hotel" itemValue="id" items="${hotels}" path="/hotels" z="aHlwmaUUG3m0/rcyFcx3lDhWMRs="/>
     </form:update>
 </div>

@@ -7,5 +7,6 @@
         <field:display field="descripcion" id="s_es_uca_iw_hoteloasis_domain_Categoria_descripcion" object="${categoria}" z="a8250KjQoBeoKBsJ5UnmgzhOJGc="/>
         <field:display field="precio_categoria" id="s_es_uca_iw_hoteloasis_domain_Categoria_precio_categoria" object="${categoria}" z="cf7aDOCDcivcL+pc7pKgT7BVhwM="/>
         <field:display field="hotel" id="s_es_uca_iw_hoteloasis_domain_Categoria_hotel" object="${categoria}" z="r3VBvlXwqTJlha2nOag8m8MsAC0="/>
+        <field:display field="minibar" id="s_es_uca_iw_hoteloasis_domain_Categoria_minibar" object="${categoria}" z="7+H4zomR+uOTbO3961leQVndGVM="/>
     </page:show>
 </div>

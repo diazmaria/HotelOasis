@@ -14,7 +14,7 @@ privileged aspect Tarifa_Roo_Jpa_ActiveRecord {
     @PersistenceContext
     transient EntityManager Tarifa.entityManager;
     
-    public static final List<String> Tarifa.fieldNames4OrderClauseFilter = java.util.Arrays.asList("servicio", "coste");
+    public static final List<String> Tarifa.fieldNames4OrderClauseFilter = java.util.Arrays.asList("llamada_nacional", "llamada_internacional", "internet", "cancel_mas_cinco_dias", "cancel_dos_cinco_dias", "cancel_uno_dos_dias", "cancel_mismo_dia", "hotel");
     
     public static final EntityManager Tarifa.entityManager() {
         EntityManager em = new Tarifa().entityManager;

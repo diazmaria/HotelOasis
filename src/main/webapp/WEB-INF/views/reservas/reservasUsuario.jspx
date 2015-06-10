@@ -4,6 +4,7 @@
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_es_uca_iw_hoteloasis_domain_Reserva" items="${reservas}" z="?">
         <table:tabla data="${reservas}" id="l_es_uca_iw_hoteloasis_domain_Reserva" path="/reservas" z="user-managed">
+            <h2 style="color:#113660">Mis reservas</h2>
             <table:column id="c_es_uca_iw_hoteloasis_domain_Reserva_codigo" property="id" z="?"/>
             <table:column date="true" dateTimePattern="${reserva_fecha_reserva_date_format}" id="c_es_uca_iw_hoteloasis_domain_Reserva_fecha_reserva" property="fecha_reserva" z="?"/>
             <table:column date="true" dateTimePattern="${reserva_fecha_entrada_date_format}" id="c_es_uca_iw_hoteloasis_domain_Reserva_fecha_entrada" property="fecha_entrada" z="19BEfdZ9yto554QpoqhTQjjB2sc="/>

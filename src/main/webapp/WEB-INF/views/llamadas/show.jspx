@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_es_uca_iw_hoteloasis_domain_Llamada" object="${llamada}" path="/llamadas" z="K3iWCbn3DFO+DvD3jQiq9a9JhD8=">
+        <field:display field="minutos_nacionales" id="s_es_uca_iw_hoteloasis_domain_Llamada_minutos_nacionales" object="${llamada}" z="c6tBYOjtF0E+AbJxq2UrBImvOJU="/>
+        <field:display field="minutos_internacionales" id="s_es_uca_iw_hoteloasis_domain_Llamada_minutos_internacionales" object="${llamada}" z="qPbU2wFDAaC/D/iHCwsLgNXeLgw="/>
+        <field:display field="estancia" id="s_es_uca_iw_hoteloasis_domain_Llamada_estancia" object="${llamada}" z="kmLnwVvB/naiiLeXwtu4/cteqhM="/>
+        <field:display field="minutos_internet" id="s_es_uca_iw_hoteloasis_domain_Llamada_minutos_internet" object="${llamada}" z="QEesQKSscZzHL2Xk1/9q5EjTG1A="/>
+    </page:show>
+</div>

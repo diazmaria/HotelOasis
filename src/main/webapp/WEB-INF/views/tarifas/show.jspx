@@ -3,7 +3,13 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:show id="ps_es_uca_iw_hoteloasis_domain_Tarifa" object="${tarifa}" path="/tarifas" z="FU48uTfbf4YRGyTpr4w4Dt2bh7Y=">
-        <field:display field="servicio" id="s_es_uca_iw_hoteloasis_domain_Tarifa_servicio" object="${tarifa}" z="vT3yzVF8iKXQ2/XLlpI77F/mXCw="/>
-        <field:display field="coste" id="s_es_uca_iw_hoteloasis_domain_Tarifa_coste" object="${tarifa}" z="yZtn5OVfQ3ajrStZwXMuD9ePkNk="/>
+        <field:display field="llamada_nacional" id="s_es_uca_iw_hoteloasis_domain_Tarifa_llamada_nacional" object="${tarifa}" z="R9N4XtM5/qizaaXuFCDc8HZn+Hw="/>
+        <field:display field="llamada_internacional" id="s_es_uca_iw_hoteloasis_domain_Tarifa_llamada_internacional" object="${tarifa}" z="QV9rTaGc3sKmZ5p7VMyvf6SEj6Q="/>
+        <field:display field="internet" id="s_es_uca_iw_hoteloasis_domain_Tarifa_internet" object="${tarifa}" z="Fb4E294w93cBj6EP5SPt8koXvOA="/>
+        <field:display field="cancel_mas_cinco_dias" id="s_es_uca_iw_hoteloasis_domain_Tarifa_cancel_mas_cinco_dias" object="${tarifa}" z="CmG196Bv7m2+4oNpWUpMM+UowEo="/>
+        <field:display field="cancel_dos_cinco_dias" id="s_es_uca_iw_hoteloasis_domain_Tarifa_cancel_dos_cinco_dias" object="${tarifa}" z="h2ZAXb2tFzVHwUvg/gz+N4nTzNc="/>
+        <field:display field="cancel_uno_dos_dias" id="s_es_uca_iw_hoteloasis_domain_Tarifa_cancel_uno_dos_dias" object="${tarifa}" z="pUr3/Y63z+9SyDfJfF1Nkjg3ag8="/>
+        <field:display field="cancel_mismo_dia" id="s_es_uca_iw_hoteloasis_domain_Tarifa_cancel_mismo_dia" object="${tarifa}" z="5afV8BE9AvzT+cT573FrPxMzcmA="/>
+        <field:display field="hotel" id="s_es_uca_iw_hoteloasis_domain_Tarifa_hotel" object="${tarifa}" z="yMnb6jG65//kJiiKi/CbIAB+Da0="/>
     </page:show>
 </div>

@@ -110,7 +110,7 @@ body {
 
 .quicklinks {
 	clear:both; 
-	padding-bottom: 15px
+	padding-bottom: 22px
 }
 .quicklinks span {
 	float: right;
@@ -471,3 +471,5 @@ label {
     margin-right:auto;
     text-align:center;
 }
+
+#servicios{text-align:center !important;}

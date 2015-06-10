@@ -3,10 +3,7 @@
 
 package es.uca.iw.hoteloasis.web;
 
-import es.uca.iw.hoteloasis.domain.Categoria;
-import es.uca.iw.hoteloasis.domain.Habitacion;
 import es.uca.iw.hoteloasis.domain.Hotel;
-import es.uca.iw.hoteloasis.domain.Reserva;
 import es.uca.iw.hoteloasis.domain.Tarifa;
 import es.uca.iw.hoteloasis.web.HotelController;
 import java.io.UnsupportedEncodingException;
@@ -90,9 +87,6 @@ privileged aspect HotelController_Roo_Controller {
     
     void HotelController.populateEditForm(Model uiModel, Hotel hotel) {
         uiModel.addAttribute("hotel", hotel);
-        uiModel.addAttribute("categorias", Categoria.findAllCategorias());
-        uiModel.addAttribute("habitacions", Habitacion.findAllHabitacions());
-        uiModel.addAttribute("reservas", Reserva.findAllReservas());
         uiModel.addAttribute("tarifas", Tarifa.findAllTarifas());
     }
     

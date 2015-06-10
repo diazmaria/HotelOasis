@@ -5,7 +5,6 @@
   
     <jsp:output omit-xml-declaration="yes"/>
 			    
-		
 		<c:if test="${not empty errores}">
 	    	<c:forEach items="${errores}" var="error">
 	    		<span class="errores">${error}</span><br/><br/>
@@ -16,6 +15,7 @@
 	    </c:if>
 	    
     <form:find finderName="HabitacionesDisponibles" id="ff_es_uca_iw_hoteloasis_domain_Habitacion" path="/reservas" z="?">
+        <h2 style="color:#113660; margin-bottom:27px">Buscar habitaciones disponibles</h2>
         <field:select disableFormBinding="true" field="hotel" id="f_es_uca_iw_hoteloasis_domain_Reserva_hotel" itemLabel="nombre" itemValue="id" items="${hotels}" path="/hotels" required="true" z="user-managed"/>
         <field:select disableFormBinding="true" field="categoria" id="f_es_uca_iw_hoteloasis_domain_Reserva_categoria" itemLabel="nombre" itemValue="id" items="${categorias}" path="/categorias" required="true" z="user-managed"/>
         <field:select disableFormBinding="true" field="tipo" id="f_es_uca_iw_hoteloasis_domain_Reserva_tipo" items="${tipos}" path="/habitacion_tipos" required="true" z="?"/>

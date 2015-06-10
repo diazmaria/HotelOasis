@@ -4,16 +4,14 @@
     <jsp:output omit-xml-declaration="yes"/>
 	
   	<h2>Check-out realizado con exito</h2>
-  	<br/>
   	<c:if test="${aux==1}">
-  		<font color='#FF0000'>Realiza el Check-out antes de la fecha prevista, se le cobrará la el total de su reserva.</font>
+  		<p style="margin-left:5px">Al realizar el check-out antes de la fecha prevista, se le ha cobrado el importe completo de su reserva.</p>
   	</c:if>
   	<c:if test="${aux==2}">
-  		<font color='#FF0000'>Realiza el Check-out después de la fecha prevista, se le cobrarán los días extra.</font>
+  		<p style="margin-left:5px">Al realizar el check-out después de la fecha prevista, se le han cobrado los días extra.</p>
   	</c:if>
-  	<br/>
   	<blockquote>
-	  	<h2>Detalles de la estancia:</h2>
+	  	<h2 style="color:#113660">Detalles de la estancia:</h2>
 	  	<br/>
 	  	<div>
 	  	<h3>Datos personales:</h3>

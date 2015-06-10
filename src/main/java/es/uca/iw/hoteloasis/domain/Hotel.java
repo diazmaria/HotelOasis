@@ -1,15 +1,13 @@
 package es.uca.iw.hoteloasis.domain;
+import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
 import org.springframework.roo.addon.tostring.RooToString;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.CascadeType;
-import javax.persistence.OneToMany;
-import javax.persistence.ManyToOne;
 
 @RooJavaBean
 @RooToString
@@ -76,24 +74,13 @@ public class Hotel {
      */
     @NotNull
     private int dias_antelacion;
-
-    /**
-     */
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "hotel")
-    private Set<Habitacion> habitaciones = new HashSet<Habitacion>();
-
-    /**
-     */
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "hotel")
-    private Set<Reserva> reservas = new HashSet<Reserva>();
-
-    /**
-     */
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "hotel")
-    private Set<Categoria> categorias = new HashSet<Categoria>();
-
+    
     /**
      */
     @ManyToOne
-    private Tarifa tarifa;
+    private Tarifa tarifa; 
+    
+    /**
+     */
+
 }

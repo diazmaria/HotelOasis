@@ -9,6 +9,7 @@
             <table:column id="c_es_uca_iw_hoteloasis_domain_Estancia_reserva" property="reserva" z="4QPqv+Iyvxa3cUAjNe8huAF5A3w="/>
             <table:column id="c_es_uca_iw_hoteloasis_domain_Estancia_habitacion" property="habitacion" z="E5lqeoAmmi6baXuljjPupzAEBE4="/>
             <table:column id="c_es_uca_iw_hoteloasis_domain_Estancia_usuario" property="usuario" z="YH7JFRmHOYhdCZ8yEVoKHDJUDN8="/>
+            <table:column id="c_es_uca_iw_hoteloasis_domain_Estancia_bebida_consumo" property="bebida_consumo" z="6F7oAuOfsdvBRuIjSHru1DIK+U4="/>
         </table:table>
     </page:list>
 </div>

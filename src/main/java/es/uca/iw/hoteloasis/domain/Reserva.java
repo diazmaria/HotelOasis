@@ -123,7 +123,7 @@ public class Reserva {
     //BUSCAR RESERVAS ACTUALES REALIZADAS POR UN USUARIO (RESERVAS NO CANCELADAS)
     public static TypedQuery<Reserva> findReservasByUsuario(Usuario usuario){
         EntityManager em = Reserva.entityManager();
-        String query = "SELECT o FROM Reserva AS o WHERE o.usuario = :usuario " + "AND o.fecha_cancelacion IS NULL" + " AND o.fecha_salida >= :hoy "+ "AND o not in (SELECT e.reserva from Estancia AS e WHERE e.reserva = o)";
+        String query = "SELECT o FROM Reserva AS o WHERE o.usuario = :usuario " + "AND o.fecha_cancelacion IS NULL" + " AND o.fecha_salida >= :hoy ";
         TypedQuery<Reserva> q = em.createQuery(query, Reserva.class);
         q.setParameter("usuario", usuario);
         q.setParameter("hoy", new Date());

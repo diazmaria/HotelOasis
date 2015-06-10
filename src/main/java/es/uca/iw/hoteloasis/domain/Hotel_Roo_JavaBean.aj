@@ -3,12 +3,8 @@
 
 package es.uca.iw.hoteloasis.domain;
 
-import es.uca.iw.hoteloasis.domain.Categoria;
-import es.uca.iw.hoteloasis.domain.Habitacion;
 import es.uca.iw.hoteloasis.domain.Hotel;
-import es.uca.iw.hoteloasis.domain.Reserva;
 import es.uca.iw.hoteloasis.domain.Tarifa;
-import java.util.Set;
 
 privileged aspect Hotel_Roo_JavaBean {
     
@@ -98,30 +94,6 @@ privileged aspect Hotel_Roo_JavaBean {
     
     public void Hotel.setDias_antelacion(int dias_antelacion) {
         this.dias_antelacion = dias_antelacion;
-    }
-    
-    public Set<Habitacion> Hotel.getHabitaciones() {
-        return this.habitaciones;
-    }
-    
-    public void Hotel.setHabitaciones(Set<Habitacion> habitaciones) {
-        this.habitaciones = habitaciones;
-    }
-    
-    public Set<Reserva> Hotel.getReservas() {
-        return this.reservas;
-    }
-    
-    public void Hotel.setReservas(Set<Reserva> reservas) {
-        this.reservas = reservas;
-    }
-    
-    public Set<Categoria> Hotel.getCategorias() {
-        return this.categorias;
-    }
-    
-    public void Hotel.setCategorias(Set<Categoria> categorias) {
-        this.categorias = categorias;
     }
     
     public Tarifa Hotel.getTarifa() {
