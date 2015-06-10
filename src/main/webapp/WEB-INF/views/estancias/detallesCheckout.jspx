@@ -49,7 +49,7 @@
 	  		<blockquote>
 			  	<strong>Hotel: </strong>${hotel} <br/>
 			  	<strong>Habitación: </strong>${habitacion.numero}<br/>
-			  	<strong>Categoría: </strong>${categoria.nombre}
+			  	<strong>Categoría: </strong>${categoria.nombre}<br/>
 			  	<strong>Tipo: </strong>${tipo}<br/>
 			  	<strong>Fecha check-in: </strong>
 			  		<fmt:formatDate type ="date" value="${estancia.fecha_check_in}" ></fmt:formatDate><br/>
@@ -57,7 +57,18 @@
 			  		<fmt:formatDate type ="date" value="${estancia.fecha_check_out}" ></fmt:formatDate><br/>
 		  	</blockquote>
 		 </div>
-		 <br/>  
+		 <br/> 
+		 <div>
+	  	<h3>Datos de servicios:</h3>
+	  		<blockquote>
+			  	<strong>Llamadas nacionales: </strong>${total_nac} €<br/>
+			  	<strong>Llamadas internacionales: </strong>${total_inter} €<br/>
+			  	<strong>Internet: </strong>${total_internet} €<br/>
+			  	<strong>Minibar: </strong>${total_bar} €<br/>
+			  	<strong>Total servicios: </strong>${total_servicios} €<br/>
+		  	</blockquote>
+		 </div>
+		 <br/> 
 		 <div>	
 		 <hr alingn="center" noshade="noshade" size="3" width="100%" /><br/>
 		 <h3>Datos de facturación:</h3>
@@ -70,6 +81,7 @@
 			  	<c:if test="${reserva.cama_supletoria==true}">
 			  		<strong>Cama supletoria: </strong>${cama}<br/>
 			  	</c:if>
+			  	<strong>Total servicios: </strong>${total_servicios}<br/>
 			  	<strong>Total estancia: </strong>${total} €
 			</blockquote>
 		</div>
@@ -82,6 +94,13 @@
 			<input type="hidden" name="aux" value="${aux}"/>
 			<input type="hidden" name="origen" value="${origen}"/>
 			<input type="hidden" name="hotel" value="${hotel}"/>
+			
+			<input type="hidden" name="total_nac" value="${total_nac}"/>
+			<input type="hidden" name="total_inter" value="${total_inter}"/>
+			<input type="hidden" name="total_internet" value="${total_internet}"/>
+			<input type="hidden" name="total_bar" value="${total_bar}"/>
+			<input type="hidden" name="total_servicios" value="${total_servicios}"/>
+			
 			<h3 style="display:inline-block; margin-right:43px; margin-left:5px; color:#CB001D">Obtener en formato PDF</h3> 
 	  		<input type="submit" class ="enviar" name="action" value="Continuar"/>
 		</form>	

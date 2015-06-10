@@ -46,5 +46,9 @@
 <definition extends="default" name="estancias/consumoComunicacion">
         <put-attribute name="body" value="/WEB-INF/views/estancias/consumoComunicacion.jspx"/>
 </definition>
+<definition extends="default" name="estancias/finServicio">
+        <put-attribute name="body" value="/WEB-INF/views/estancias/finServicio.jspx"/>
+</definition>
+
 
 </tiles-definitions>

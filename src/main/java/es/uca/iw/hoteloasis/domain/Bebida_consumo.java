@@ -20,4 +20,12 @@ public class Bebida_consumo {
     @ManyToOne
     @NotNull
     private Bebida bebida;
+    
+    
+    public Bebida_consumo() {}
+	
+	public Bebida_consumo(Bebida bebida, int cantidad) {
+		this.bebida = bebida;
+		this.cantidad = cantidad;
+	}
 }
