@@ -3,7 +3,13 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
 	
-  	<h2>Check-out realizado con exito</h2>
+  	<c:if test="${origen == 'checkout'}">
+		<h2>Check-out realizado con exito</h2>
+	</c:if>
+	<c:if test="${origen == 'factura'}">
+		<h2 style="color:#113660">Factura</h2>
+	</c:if>
+  	<hr alingn="center" noshade="noshade" size="3" width="100%" /><br/>
   	<c:if test="${aux==1}">
   		<p style="margin-left:5px">Al realizar el check-out antes de la fecha prevista, se le ha cobrado el importe completo de su reserva.</p>
   	</c:if>
@@ -11,7 +17,7 @@
   		<p style="margin-left:5px">Al realizar el check-out después de la fecha prevista, se le han cobrado los días extra.</p>
   	</c:if>
   	<blockquote>
-	  	<h2 style="color:#113660">Detalles de la estancia:</h2>
+	  	<h2>Detalles de la estancia:</h2>
 	  	<br/>
 	  	<div>
 	  	<h3>Datos personales:</h3>
@@ -53,7 +59,7 @@
 		 </div>
 		 <br/>  
 		 <div>	
-		 <hr alingn="center" noshade="noshade" size="3" width="80%" />
+		 <hr alingn="center" noshade="noshade" size="3" width="100%" /><br/>
 		 <h3>Datos de facturación:</h3>
 			 <blockquote>
 			  	<strong>Días: </strong>${dias} días.<br/>
@@ -67,6 +73,17 @@
 			  	<strong>Total estancia: </strong>${total} €
 			</blockquote>
 		</div>
-	  	<br/><br/> 	
+	  	<br/>
+	  	<form action="/HotelOasis/estancias?formpdf" method="post">
+			<input type="hidden" name="id" value="${reserva.id}"/>
+			<input type="hidden" name="total" value="${total}"/>
+			<input type="hidden" name="dias" value="${dias}"/>
+			<input type="hidden" name="precio_hab" value="${precio_hab}"/>
+			<input type="hidden" name="aux" value="${aux}"/>
+			<input type="hidden" name="origen" value="${origen}"/>
+			<input type="hidden" name="hotel" value="${hotel}"/>
+			<h3 style="display:inline-block; margin-right:43px; margin-left:5px; color:#CB001D">Obtener en formato PDF</h3> 
+	  		<input type="submit" class ="enviar" name="action" value="Continuar"/>
+		</form>	
   	</blockquote>
 </div>
