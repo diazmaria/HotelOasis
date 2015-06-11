@@ -251,12 +251,21 @@ public class EstanciaController {
 		Tarifa t = Tarifa.findTarifasByHotel(h).getSingleResult();
 		
 		
-		double total_nac = est.getLlamadas().getMinutos_nacionales();
-				total_nac *= t.getLlamada_nacional();
-		double total_inter = est.getLlamadas().getMinutos_internacionales()
-				* t.getLlamada_internacional();
-		double total_internet = est.getLlamadas().getMinutos_internet()
-				* t.getInternet();
+		double total_nac = 0;
+		double total_inter = 0;
+		double total_internet = 0;
+		if (est.getLlamadas() != null) {
+
+			if (est.getLlamadas().getMinutos_nacionales() != 0)
+				total_nac = est.getLlamadas().getMinutos_nacionales()
+						* t.getLlamada_nacional();
+			if (est.getLlamadas().getMinutos_internacionales() != 0)
+				total_inter = est.getLlamadas().getMinutos_internacionales()
+						* t.getLlamada_internacional();
+			if (est.getLlamadas().getMinutos_internet() != 0)
+				total_internet = est.getLlamadas().getMinutos_internet()
+						* t.getInternet();
+		}
 
 		total_servicios = total_nac + total_inter + total_internet;
 		double total_bar = 0;
@@ -481,7 +490,7 @@ public class EstanciaController {
 		
 
 		// ------CU5 ------ CONSUMIR MINIBAR
-		@RequestMapping(method = RequestMethod.POST, params = {"estancia", "cantidad", "comprar"}, produces = "text/html")
+		@RequestMapping(method = RequestMethod.POST, params = {"estancia", "cantidad"}, produces = "text/html")
 		public String consumirMinibar(Principal p, Model uiModel, @RequestParam("cantidad") int cantidad, @RequestParam("estancia") Estancia estancia, HttpServletRequest httpservletrequest){
 			
 			if (httpservletrequest.getParameter("comprar") != null){
@@ -551,7 +560,8 @@ public class EstanciaController {
 				return "estancias/servicioMinibar";
 			   
 			 }else{
-				return "estancias/consumoBebidaExito";
+				return "estancias/exitoMinibar";
+				// return "index";
 			}
 		}
 		
