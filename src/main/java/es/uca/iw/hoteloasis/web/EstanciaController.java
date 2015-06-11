@@ -254,17 +254,26 @@ public class EstanciaController {
 		double total_nac = 0;
 		double total_inter = 0;
 		double total_internet = 0;
+		double min_nac=0;
+		double min_inter=0;
+		double min_internet=0;
+		double pre_nac=0;
+		double pre_inter=0;
+		double pre_internet=0;
 		if (est.getLlamadas() != null) {
 
 			if (est.getLlamadas().getMinutos_nacionales() != 0)
-				total_nac = est.getLlamadas().getMinutos_nacionales()
-						* t.getLlamada_nacional();
+				min_nac=est.getLlamadas().getMinutos_nacionales();
+				pre_nac=t.getLlamada_nacional();
+				total_nac = min_nac * pre_nac;
 			if (est.getLlamadas().getMinutos_internacionales() != 0)
-				total_inter = est.getLlamadas().getMinutos_internacionales()
-						* t.getLlamada_internacional();
+				min_inter=est.getLlamadas().getMinutos_internacionales();
+				pre_inter=t.getLlamada_internacional();
+				total_inter = min_inter	* pre_inter;
 			if (est.getLlamadas().getMinutos_internet() != 0)
-				total_internet = est.getLlamadas().getMinutos_internet()
-						* t.getInternet();
+				min_internet=est.getLlamadas().getMinutos_internet();
+				pre_internet=t.getInternet();
+				total_internet = min_internet * pre_internet;
 		}
 
 		total_servicios = total_nac + total_inter + total_internet;
@@ -311,6 +320,13 @@ public class EstanciaController {
 		uiModel.addAttribute("total_internet", total_internet);
 		uiModel.addAttribute("total_bar", total_bar);
 		uiModel.addAttribute("total_servicios", total_servicios);
+		
+		uiModel.addAttribute("min_nac", min_nac);
+		uiModel.addAttribute("min_inter", min_inter);
+		uiModel.addAttribute("min_internet", min_internet);
+		uiModel.addAttribute("pre_nac", pre_nac);
+		uiModel.addAttribute("pre_inter", pre_inter);
+		uiModel.addAttribute("pre_internet", pre_internet);
 
 		return "estancias/detallesCheckout";
 	}
@@ -672,7 +688,15 @@ public class EstanciaController {
 			@RequestParam("total_inter") double total_inter,
 			@RequestParam("total_internet") double total_internet,
 			@RequestParam("total_bar") double total_bar,
-			@RequestParam("total_servicios") double total_servicios) {
+			@RequestParam("total_servicios") double total_servicios,
+			@RequestParam("min_nac") double min_nac,
+			@RequestParam("min_inter") double min_inter,
+			@RequestParam("min_internet") double min_internet,
+			@RequestParam("pre_nac") double pre_nac,
+			@RequestParam("pre_inter") double pre_inter,
+			@RequestParam("pre_internet") double pre_internet) {
+		
+		
 
 		Reserva reserva = Reserva.findReserva(id);
 		List<Estancia> estancia = Estancia.findEstanciasByReserva(reserva)
@@ -767,17 +791,17 @@ public class EstanciaController {
 							Font.BOLD, BaseColor.BLACK)));
 
 			
-			documento.add(new Paragraph("\n\t\tHotel: "
+			documento.add(new Paragraph("\n\t\t "
 					+ reserva.getHotel().getNombre()
-					+ "\n\t\tLlamadas nacionales: " + total_nac
-					+ "\n\t\tLlamadas internacionales: " + total_inter
-					+ "\n\t\tInternet: " + total_internet
-					+ "\n\t\tTotal minibar: " + total_bar
-					+ "\n\t\tTotal servicios: " + total_servicios, FontFactory
+					+ "\n\t\tLlamadas nacionales: "+min_nac+" * "+pre_nac+" = " + total_nac
+					+ " €\n\t\tLlamadas internacionales: "+min_inter+" * "+pre_inter+" = " + total_inter
+					+ " €\n\t\tInternet: " +min_internet+" * "+pre_internet+" = "+ total_internet
+					+ " €\n\t\tTotal minibar: " + total_bar
+					+ " €\n\t\tTotal servicios: " + total_servicios+" €", FontFactory
 					.getFont("Expressway", // fuente
 							10, // tamaño
 							BaseColor.BLACK)));
-
+			
 			Paragraph par;
 			documento
 					.add(new Paragraph(
@@ -793,11 +817,11 @@ public class EstanciaController {
 
 			par = (new Paragraph("\n\t\tDías: " + dias
 					+ "\n\t\tPrecio habitación: " + precio_hab
-					+ "\n\t\tSuplemento por categoría: "
+					+ " €\n\t\tSuplemento por categoría: "
 					+ reserva.getCategoria().getPrecio_categoria()
 					+ "\n\t\tCama supletoria: " + cama
-					+ "\n\t\tTotal servicios: " + total_servicios
-					+ "\n\t\tTotal estancia: " + total,
+					+ " €\n\t\tTotal servicios: " + total_servicios
+					+ " €\n\t\tTotal estancia: " + total +" €",
 					FontFactory.getFont("Expressway", // fuente
 							10, // tamaño
 							BaseColor.BLACK)));
