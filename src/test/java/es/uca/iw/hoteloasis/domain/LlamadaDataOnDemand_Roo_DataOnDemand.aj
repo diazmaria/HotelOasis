@@ -3,7 +3,7 @@
 
 package es.uca.iw.hoteloasis.domain;
 
-import es.uca.iw.hoteloasis.domain.Estancia;
+import es.uca.iw.hoteloasis.domain.EstanciaDataOnDemand;
 import es.uca.iw.hoteloasis.domain.Llamada;
 import es.uca.iw.hoteloasis.domain.LlamadaDataOnDemand;
 import java.security.SecureRandom;
@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Random;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 privileged aspect LlamadaDataOnDemand_Roo_DataOnDemand {
@@ -23,18 +24,15 @@ privileged aspect LlamadaDataOnDemand_Roo_DataOnDemand {
     
     private List<Llamada> LlamadaDataOnDemand.data;
     
+    @Autowired
+    EstanciaDataOnDemand LlamadaDataOnDemand.estanciaDataOnDemand;
+    
     public Llamada LlamadaDataOnDemand.getNewTransientLlamada(int index) {
         Llamada obj = new Llamada();
-        setEstancia(obj, index);
         setMinutos_internacionales(obj, index);
         setMinutos_internet(obj, index);
         setMinutos_nacionales(obj, index);
         return obj;
-    }
-    
-    public void LlamadaDataOnDemand.setEstancia(Llamada obj, int index) {
-        Estancia estancia = null;
-        obj.setEstancia(estancia);
     }
     
     public void LlamadaDataOnDemand.setMinutos_internacionales(Llamada obj, int index) {

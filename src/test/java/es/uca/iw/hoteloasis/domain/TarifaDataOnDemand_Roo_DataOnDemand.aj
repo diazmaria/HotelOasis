@@ -3,7 +3,7 @@
 
 package es.uca.iw.hoteloasis.domain;
 
-import es.uca.iw.hoteloasis.domain.Hotel;
+import es.uca.iw.hoteloasis.domain.HotelDataOnDemand;
 import es.uca.iw.hoteloasis.domain.Tarifa;
 import es.uca.iw.hoteloasis.domain.TarifaDataOnDemand;
 import java.security.SecureRandom;
@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Random;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 privileged aspect TarifaDataOnDemand_Roo_DataOnDemand {
@@ -23,13 +24,15 @@ privileged aspect TarifaDataOnDemand_Roo_DataOnDemand {
     
     private List<Tarifa> TarifaDataOnDemand.data;
     
+    @Autowired
+    HotelDataOnDemand TarifaDataOnDemand.hotelDataOnDemand;
+    
     public Tarifa TarifaDataOnDemand.getNewTransientTarifa(int index) {
         Tarifa obj = new Tarifa();
         setCancel_dos_cinco_dias(obj, index);
         setCancel_mas_cinco_dias(obj, index);
         setCancel_mismo_dia(obj, index);
         setCancel_uno_dos_dias(obj, index);
-        setHotel(obj, index);
         setInternet(obj, index);
         setLlamada_internacional(obj, index);
         setLlamada_nacional(obj, index);
@@ -54,11 +57,6 @@ privileged aspect TarifaDataOnDemand_Roo_DataOnDemand {
     public void TarifaDataOnDemand.setCancel_uno_dos_dias(Tarifa obj, int index) {
         double cancel_uno_dos_dias = new Integer(index).doubleValue();
         obj.setCancel_uno_dos_dias(cancel_uno_dos_dias);
-    }
-    
-    public void TarifaDataOnDemand.setHotel(Tarifa obj, int index) {
-        Hotel hotel = null;
-        obj.setHotel(hotel);
     }
     
     public void TarifaDataOnDemand.setInternet(Tarifa obj, int index) {
