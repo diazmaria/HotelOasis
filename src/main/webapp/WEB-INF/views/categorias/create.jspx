@@ -7,7 +7,6 @@
         <field:input field="descripcion" id="c_es_uca_iw_hoteloasis_domain_Categoria_descripcion" z="z3RH7TCc48Ghvxrgh2tMJ5X7HAs="/>
         <field:input field="precio_categoria" id="c_es_uca_iw_hoteloasis_domain_Categoria_precio_categoria" required="true" z="qXCpDm6ADVvzfCt30txMy1Sof7o="/>
         <field:select field="hotel" id="c_es_uca_iw_hoteloasis_domain_Categoria_hotel" itemValue="id" items="${hotels}" path="/hotels" required="true" z="HisQRXqhzhzFpulSbifNU27+bDs="/>
-        <field:select field="minibar" id="c_es_uca_iw_hoteloasis_domain_Categoria_minibar" itemValue="id" items="${minibars}" path="/minibars" required="true" z="ovFgjjmz0j05dBeZmbleeLNzytw="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_es_uca_iw_hoteloasis_domain_Categoria" render="${not empty dependencies}" z="gbnfH3gLGHeZVOF0CDpBHh68M9g="/>
 </div>

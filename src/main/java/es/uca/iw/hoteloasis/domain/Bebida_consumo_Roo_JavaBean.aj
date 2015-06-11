@@ -5,15 +5,16 @@ package es.uca.iw.hoteloasis.domain;
 
 import es.uca.iw.hoteloasis.domain.Bebida;
 import es.uca.iw.hoteloasis.domain.Bebida_consumo;
+import es.uca.iw.hoteloasis.domain.Estancia;
 
 privileged aspect Bebida_consumo_Roo_JavaBean {
     
-    public int Bebida_consumo.getCantidad() {
-        return this.cantidad;
+    public int Bebida_consumo.getCantidad_consumida() {
+        return this.cantidad_consumida;
     }
     
-    public void Bebida_consumo.setCantidad(int cantidad) {
-        this.cantidad = cantidad;
+    public void Bebida_consumo.setCantidad_consumida(int cantidad_consumida) {
+        this.cantidad_consumida = cantidad_consumida;
     }
     
     public Bebida Bebida_consumo.getBebida() {
@@ -22,6 +23,14 @@ privileged aspect Bebida_consumo_Roo_JavaBean {
     
     public void Bebida_consumo.setBebida(Bebida bebida) {
         this.bebida = bebida;
+    }
+    
+    public Estancia Bebida_consumo.getEstancia() {
+        return this.estancia;
+    }
+    
+    public void Bebida_consumo.setEstancia(Estancia estancia) {
+        this.estancia = estancia;
     }
     
 }

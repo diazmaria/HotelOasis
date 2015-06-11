@@ -1,7 +1,6 @@
 package es.uca.iw.hoteloasis.domain;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -79,8 +78,5 @@ public class Hotel {
      */
     @ManyToOne
     private Tarifa tarifa; 
-    
-    /**
-     */
 
 }

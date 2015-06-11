@@ -5,6 +5,7 @@ package es.uca.iw.hoteloasis.domain;
 
 import es.uca.iw.hoteloasis.domain.Bebida;
 import es.uca.iw.hoteloasis.domain.BebidaDataOnDemand;
+import es.uca.iw.hoteloasis.domain.CategoriaDataOnDemand;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.Random;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 privileged aspect BebidaDataOnDemand_Roo_DataOnDemand {
@@ -22,11 +24,20 @@ privileged aspect BebidaDataOnDemand_Roo_DataOnDemand {
     
     private List<Bebida> BebidaDataOnDemand.data;
     
+    @Autowired
+    CategoriaDataOnDemand BebidaDataOnDemand.categoriaDataOnDemand;
+    
     public Bebida BebidaDataOnDemand.getNewTransientBebida(int index) {
         Bebida obj = new Bebida();
+        setCantidad_minibar(obj, index);
         setCoste(obj, index);
         setNombre(obj, index);
         return obj;
+    }
+    
+    public void BebidaDataOnDemand.setCantidad_minibar(Bebida obj, int index) {
+        int cantidad_minibar = index;
+        obj.setCantidad_minibar(cantidad_minibar);
     }
     
     public void BebidaDataOnDemand.setCoste(Bebida obj, int index) {

@@ -3,7 +3,8 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:show id="ps_es_uca_iw_hoteloasis_domain_Bebida_consumo" object="${bebida_consumo}" path="/bebida_consumoes" z="2sekPijZAivB3Jclvnxo2bl+t9I=">
-        <field:display field="cantidad" id="s_es_uca_iw_hoteloasis_domain_Bebida_consumo_cantidad" object="${bebida_consumo}" z="gkt03xlhDU80aII50kiP3ktwDds="/>
         <field:display field="bebida" id="s_es_uca_iw_hoteloasis_domain_Bebida_consumo_bebida" object="${bebida_consumo}" z="9N0iXmrDIcf3VQWPZLnw6SD8AoY="/>
+        <field:display field="cantidad_consumida" id="s_es_uca_iw_hoteloasis_domain_Bebida_consumo_cantidad_consumida" object="${bebida_consumo}" z="R2FgalGcgaJEs9C50g6f/DZcYaw="/>
+        <field:display field="estancia" id="s_es_uca_iw_hoteloasis_domain_Bebida_consumo_estancia" object="${bebida_consumo}" z="YuNzvb72aYeLucWcK2yhxTlN2pQ="/>
     </page:show>
 </div>

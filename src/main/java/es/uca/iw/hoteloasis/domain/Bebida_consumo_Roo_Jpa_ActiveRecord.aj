@@ -14,7 +14,7 @@ privileged aspect Bebida_consumo_Roo_Jpa_ActiveRecord {
     @PersistenceContext
     transient EntityManager Bebida_consumo.entityManager;
     
-    public static final List<String> Bebida_consumo.fieldNames4OrderClauseFilter = java.util.Arrays.asList("cantidad", "bebida");
+    public static final List<String> Bebida_consumo.fieldNames4OrderClauseFilter = java.util.Arrays.asList("cantidad_consumida", "bebida", "estancia");
     
     public static final EntityManager Bebida_consumo.entityManager() {
         EntityManager em = new Bebida_consumo().entityManager;

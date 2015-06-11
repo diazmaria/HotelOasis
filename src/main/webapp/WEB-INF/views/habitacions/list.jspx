@@ -7,8 +7,8 @@
             <table:column id="c_es_uca_iw_hoteloasis_domain_Habitacion_numero" property="numero" z="jRSblcNUZuD0IFlXsB42mwcZcsQ="/>
             <table:column id="c_es_uca_iw_hoteloasis_domain_Habitacion_tipo" property="tipo" z="+oJspDj7HNoZzxXrSNSE23W3mTE="/>
             <table:column id="c_es_uca_iw_hoteloasis_domain_Habitacion_estado" property="estado" z="NKNQgesZ7da23Jfdb7iiL8f5FEY="/>
-            <table:column id="c_es_uca_iw_hoteloasis_domain_Habitacion_hotel" property="hotel" z="AYmh0e4cYH5CIJ5PkDFLwgUy1FU="/>
             <table:column id="c_es_uca_iw_hoteloasis_domain_Habitacion_categoria" property="categoria" z="noUTQg7t2Rwh+Y3S/DZgNyjDE14="/>
+            <table:column id="c_es_uca_iw_hoteloasis_domain_Habitacion_hotel" property="hotel" z="AYmh0e4cYH5CIJ5PkDFLwgUy1FU="/>
         </table:table>
     </page:list>
 </div>

@@ -4,46 +4,49 @@
 	    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
 	    <jsp:output omit-xml-declaration="yes"/>
 	    
-	    <h2 style="color:#113660">Bebidas minibar</h2>
+	    <h2 style="color:#113660">Bebidas disponibles en su minibar</h2>
 	    
-	    <c:if test="${not empty exito}">
-	    	<span class="success"><c:out value="${exito}"/></span><br/><br/>
+	    <c:if test="${not empty compra}">
+	    	<h2>${compra}</h2><br/><br/>
 	    </c:if>
-	    
 	    <c:if test="${not empty error}">
-	    	<span class="errors"><c:out value="${error}"/></span><br/><br/>
+	    	<span class="errores">${error}</span><br/><br/>
 	    </c:if>
-	    
-	    <table>
+	    <table >
 	    	<tr>
-		    	<th>Bebida</th>
-		    	<th>Cantidad en minibar</th>
+		    	<th style="width: 140px">Bebida</th>
+		    	<th>Cantidad</th>
+		    	<th>Coste</th>
 		   	</tr>
 	    	<c:forEach items="${bebidas}" var="bebida">
 	    		<tr>
 		    		<td>${bebida.key.nombre}</td>
 		    		<td>${bebida.value}</td>
+		    		<td style="width:60px">${bebida.key.coste}€</td>
 		    	</tr>
 	    	</c:forEach>
 	    </table>
-	    
+	    <div style="margin-left:5px">
 	    <form action="/HotelOasis/estancias" method="post">
-	    	<strong>Bebida</strong><br/>
-	    	<select style="margin:10px 0 15px 0;padding:3px;border-radius:5px" name="bebida">
+	   <br/>Seleccione la bebida y la cantidad de la misma que desea consumir. <br/> <br/>
+	    	<b>Bebida: </b>
+	    	<select style="border-radius:5px; margin-left:15px; height:25px" name="bebida">
 		    	<c:forEach items="${bebidas}" var="bebida">
 		    		<option value="${bebida.key.id}">${bebida.key.nombre}</option>
+		    		
 		    	</c:forEach>
 	    	</select>
-	    	<br/>
-	    	<strong>Cantidad</strong><br/>
-	    	<input style="width:50px;margin:10px 0 15px 0" type="text" name="cantidad" value="1"/>
+	    	<br/><br/>
+	    	<b>Cantidad:</b><br/>
+	    	<input style="width:43px; text-align:center; margin-top:10px" type="number" name="cantidad" value="1" required="true"/>
+	    	
 	    	<input type="hidden" name="estancia" value="${estancia.id}"/>
-	    	<input type="hidden" name="minibar" value="${minibar}"/>
-	    	<br/>
-	    	<input style="margin-top:10px" type="submit" name="consumo" value="Consumir"/>
-	    	<br/>
-	    	<input style="margin-top:10px" type="submit" name="terminar" value="Finalizar"/>
+	    	<br/><br/><br/>
+	    	
+	    	<input type="submit" style="background-color:#2D9918; border-color:#2D9918; margin-right:20px" class="enviar" name="comprar" value="Comprar bebidas"/>
+	  
+	    	<input type="submit" class="enviar" name="finalizar" value="Finzalizar"/><br/><br/>
 	    </form>
-	   
+	   </div>
 	</div>
 </jsp:root>

@@ -4,8 +4,9 @@
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_es_uca_iw_hoteloasis_domain_Bebida_consumo" items="${bebida_consumoes}" z="s4yVbubjxYlDnPOuhIi8F3Rm6XI=">
         <table:table data="${bebida_consumoes}" id="l_es_uca_iw_hoteloasis_domain_Bebida_consumo" path="/bebida_consumoes" z="tK/DZukjrkLak2NStL4scpkkm5I=">
-            <table:column id="c_es_uca_iw_hoteloasis_domain_Bebida_consumo_cantidad" property="cantidad" z="NQiNHr1q/ca5WeBPzNTIdNBJJug="/>
             <table:column id="c_es_uca_iw_hoteloasis_domain_Bebida_consumo_bebida" property="bebida" z="dLDpaZWvKoNhSCW06fS0OfYdn5A="/>
+            <table:column id="c_es_uca_iw_hoteloasis_domain_Bebida_consumo_cantidad_consumida" property="cantidad_consumida" z="QzVei+sBPoJfaEYcjQqqGgIcgr0="/>
+            <table:column id="c_es_uca_iw_hoteloasis_domain_Bebida_consumo_estancia" property="estancia" z="JBziq/UyUZ1FScJIBcaaiCGIAZs="/>
         </table:table>
     </page:list>
 </div>

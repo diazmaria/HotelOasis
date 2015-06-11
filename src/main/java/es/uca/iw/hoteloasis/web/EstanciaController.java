@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.Principal;
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -17,7 +16,6 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang3.StringUtils;
 import org.joda.time.Days;
 import org.joda.time.LocalDate;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
@@ -46,8 +44,6 @@ import es.uca.iw.hoteloasis.domain.Habitacion_estado;
 import es.uca.iw.hoteloasis.domain.Habitacion_tipo;
 import es.uca.iw.hoteloasis.domain.Hotel;
 import es.uca.iw.hoteloasis.domain.Llamada;
-import es.uca.iw.hoteloasis.domain.Minibar;
-import es.uca.iw.hoteloasis.domain.Minibar_bebida;
 import es.uca.iw.hoteloasis.domain.Reserva;
 import es.uca.iw.hoteloasis.domain.Rol;
 import es.uca.iw.hoteloasis.domain.Tarifa;
@@ -231,8 +227,7 @@ public class EstanciaController {
 		} else {
 			precio_hab = reserva.getHotel().getPrecio_hab_doble();
 		}
-		total = dias
-				* (reserva.getCategoria().getPrecio_categoria() * precio_hab);
+		total = dias * (reserva.getCategoria().getPrecio_categoria() * precio_hab);
 		if (reserva.getCama_supletoria() != null) {
 			cama = (reserva.getHotel().getPrecio_cama_sup() * dias);
 			total = total + cama;
@@ -256,8 +251,8 @@ public class EstanciaController {
 		Tarifa t = Tarifa.findTarifasByHotel(h).getSingleResult();
 		
 		
-		double total_nac = est.getLlamadas().getMinutos_nacionales()
-				* t.getLlamada_nacional();
+		double total_nac = est.getLlamadas().getMinutos_nacionales();
+				total_nac *= t.getLlamada_nacional();
 		double total_inter = est.getLlamadas().getMinutos_internacionales()
 				* t.getLlamada_internacional();
 		double total_internet = est.getLlamadas().getMinutos_internet()
@@ -272,7 +267,7 @@ public class EstanciaController {
 
 			for (Bebida_consumo consumo : bebidas) {
 				Bebida bebida = consumo.getBebida();
-				int cantidad = consumo.getCantidad();
+				int cantidad = consumo.getCantidad_consumida();
 				total_bar += bebida.getCoste() * cantidad;
 				bar.put(bebida, cantidad);
 			}
@@ -376,148 +371,266 @@ public class EstanciaController {
 	}
 
 	// ------CU5 ------ ELEGIR HABITACIÓN PARA CONSUMO DE SERVICIO
-	@RequestMapping(method = RequestMethod.GET, params = "servicios", produces = "text/html")
-	public String servicios(Principal p, Model uiModel) {
-		List<Estancia> estancias = Estancia.findEstanciasByUsuario(
-				Usuario.findUsuariosByNombreUsuarioEquals(p.getName()))
-				.getResultList();
+	@RequestMapping(method = RequestMethod.GET, params = "servicios", produces = "text/html") 
+	public String servicios(Principal p, Model uiModel){
+		
+		//Obtener estancias del usuario y almacenar en una lista de estancias
+		List<Estancia> estancias = Estancia.findEstanciasByUsuario(Usuario.findUsuariosByNombreUsuarioEquals(p.getName())).getResultList();
 		List<Habitacion> habitaciones = null;
-		if (!estancias.isEmpty()) {
+		
+		//Si la lista no está vacía creamos un ArrayList de habitaciones y recorremos la lista para obtener las habitaciones
+		if (!estancias.isEmpty()){
 			habitaciones = new ArrayList<Habitacion>(estancias.size());
-			for (Estancia estancia : estancias)
-				habitaciones.add(estancia.getHabitacion());
+			for (Estancia e : estancias)
+				habitaciones.add(e.getHabitacion());
 		}
 		uiModel.addAttribute("habitaciones", habitaciones);
 		return "estancias/elegirHabitacionServicios";
 	}
 
 	// ------CU5 ------ ELEGIR SERVICIO
-	@RequestMapping(method = RequestMethod.GET, params = { "servicios",
-			"habitacion" }, produces = "text/html")
-	public String elegirServicio(Principal p, Model uiModel,
-			@RequestParam("habitacion") Habitacion habitacion) {
-		List<Estancia> estancias = Estancia
-				.findEstanciasByUsuarioAndHabitacion(
-						Usuario.findUsuariosByNombreUsuarioEquals(p.getName()),
-						habitacion).getResultList();
+	@RequestMapping(method = RequestMethod.GET, params = {"servicios", "habitacion"}, produces = "text/html")
+	public String elegirServicio(Principal p, @RequestParam("habitacion") Habitacion habitacion, Model uiModel){
+		
+		//Buscar la estancias de un usuario según Nº de habitación
+		List<Estancia> estancias = Estancia.findEstanciasByUsuarioAndHabitacion(Usuario.findUsuariosByNombreUsuarioEquals(p.getName()), habitacion).getResultList();
+		
+		//Coger la estancia más reciente
 		Estancia estancia = estancias.get(0);
-		uiModel.addAttribute("habitacion", habitacion);
+		
 		uiModel.addAttribute("estancia", estancia);
 		return "estancias/elegirServicio";
 	}
 
 	// ------CU5 ------ MOSTRAR FORMULARIO DE INCIAR EL CONSUMO
-	@RequestMapping(method = RequestMethod.GET, params = { "servicios",
-			"estancia" }, produces = "text/html")
-	public String iniciarServicio(Principal p,
-			HttpServletRequest httpservletrequest, Model uiModel,
-			@RequestParam("estancia") Estancia estancia) {
+	@RequestMapping(method = RequestMethod.GET, params = {"servicios", "estancia"}, produces = "text/html")
+	public String iniciarServicio(Principal p, HttpServletRequest httpservletrequest, Model uiModel, @RequestParam("estancia") Estancia estancia){
+		
+		//Mostrar formulario bebidas, llamadas o internet
 		Hotel hotel = estancia.getReserva().getHotel();
 		Tarifa tarifa = Tarifa.findTarifasByHotel(hotel).getSingleResult();
 		uiModel.addAttribute("estancia", estancia);
-		uiModel.addAttribute("estancia", estancia);
-		if (httpservletrequest.getParameter("llamada_nacional") != null) {
+		
+		if (httpservletrequest.getParameter("llamada_nacional") != null){
 			uiModel.addAttribute("servicio", "llamada_nacional");
 			uiModel.addAttribute("tarifa", tarifa.getLlamada_nacional());
 			return "estancias/servicioLlamada";
-		} else if (httpservletrequest.getParameter("llamada_internacional") != null) {
+			
+		} else if (httpservletrequest.getParameter("llamada_internacional") != null){
 			uiModel.addAttribute("servicio", "llamada_internacional");
 			uiModel.addAttribute("tarifa", tarifa.getLlamada_internacional());
 			return "estancias/servicioLlamada";
-		} else if (httpservletrequest.getParameter("internet") != null) {
+			
+		} else if (httpservletrequest.getParameter("internet") != null){
 			uiModel.addAttribute("servicio", "internet");
 			uiModel.addAttribute("tarifa", tarifa.getInternet());
 			return "estancias/servicioInternet";
-		} else {
-			rellenar(uiModel, estancia);
+			
+		} else{
+			
+			popularBebidas(uiModel, estancia);
 			return "estancias/servicioMinibar";
-		}
 	}
+	}
+	
+	
+		// --- FUNCION MOSTRAR BEBIDAS DISPONIBLES EN MINIBAR ---
+		void popularBebidas(Model uiModel, Estancia estancia) {
+	
+		Categoria c = estancia.getHabitacion().getCategoria();
+		
+		//Bebidas en el minibar de la categoría c (minibar inicial)
+		List<Bebida> bebidas = Bebida.findBebidasByCategoria(c).getResultList();
+		
+		////Bebidas consumidas hasta ahora
+		List<Bebida_consumo> bebida_consumida = null;
+		
+		Set<Bebida_consumo> consumo = estancia.getBebida_consumo();
+		
+		
+		Map<Bebida, Integer> minibar_actual = new HashMap<Bebida, Integer>();
+		
+		int cantidad_actual;
+	
+		for(int i=0; i<bebidas.size(); i++){
+			//Buscas si la primera bebida del minibar ya había sido consumida antes y devuelve la bebida y la cantidad
+			bebida_consumida = Bebida_consumo.findBebida_consumoesByBebidaAndEstancia((bebidas.get(i)), estancia).getResultList();
+			
+			if(!bebida_consumida.isEmpty()){
+				cantidad_actual = bebidas.get(i).getCantidad_minibar() - bebida_consumida.get(0).getCantidad_consumida();
+			minibar_actual.put(bebidas.get(i), cantidad_actual);
+			}
+			else{
+				minibar_actual.put(bebidas.get(i), bebidas.get(i).getCantidad_minibar());
+			}
+		}
 
-	// Iniciar llamada
-	@RequestMapping(method = RequestMethod.POST, params = { "servicio",
-			"estancia" }, produces = "text/html")
-	public String realizarLlamada(@RequestParam("servicio") String servicio,
-			@RequestParam("estancia") long estancia,
-			HttpServletRequest hhtpservletrequest, Model uiModel) {
+		uiModel.addAttribute("bebidas", minibar_actual);
+	
+		}
+		
+		//CONSUMO DE BEBIDA ANTERIOR
+		
+		Bebida_consumo bebidaYaConsumida(Set<Bebida_consumo> consumos, Bebida bebida){
+			for (Bebida_consumo consumo : consumos)
+				if (consumo.getBebida().getId() == bebida.getId())
+					return consumo;
+				
+					return null;
+		}
+		
+
+		// ------CU5 ------ CONSUMIR MINIBAR
+		@RequestMapping(method = RequestMethod.POST, params = {"estancia", "cantidad", "comprar"}, produces = "text/html")
+		public String consumirMinibar(Principal p, Model uiModel, @RequestParam("cantidad") int cantidad, @RequestParam("estancia") Estancia estancia, HttpServletRequest httpservletrequest){
+			
+			if (httpservletrequest.getParameter("comprar") != null){
+				uiModel.addAttribute("estancia", estancia);
+				
+				Bebida bebida = Bebida.findBebida(Long.parseLong(httpservletrequest.getParameter("bebida")));
+
+				
+				//Cantidad tiene que ser mayor que uno
+				if (cantidad < 1){
+					uiModel.addAttribute("error", "Error: Cantidad errónea.");
+					popularBebidas(uiModel, estancia);
+					return "estancias/servicioMinibar";
+				}
+				
+				Set<Bebida_consumo> consumos = estancia.getBebida_consumo();
+				Categoria c = estancia.getHabitacion().getCategoria();
+				
+				
+				//Si ya ha consumido antes
+				if (!consumos.isEmpty()){
+					Bebida_consumo consumo = bebidaYaConsumida(consumos, bebida);
+					
+					if (consumo != null){
+						int cantidad_actual = consumo.getCantidad_consumida() + cantidad;
+						
+						int total = bebida.getCantidad_minibar() - cantidad - consumo.getCantidad_consumida();
+						if ( total >= 0){
+							consumo.setCantidad_consumida(cantidad_actual);
+							consumo.merge();
+						}
+						else{
+							uiModel.addAttribute("error", "Error: No puede consumir más bebidas de las disponibles.");
+							popularBebidas(uiModel, estancia);
+							return "estancias/servicioMinibar";
+						}
+					 }else {
+						//Consumir más de las que hay
+						int cantidad_minibar = bebida.getCantidad_minibar() ;
+						if ((cantidad_minibar - cantidad) < 0){
+							uiModel.addAttribute("error", "Error: No puede consumir más bebidas de las disponibles.");
+							popularBebidas(uiModel, estancia);
+							return "estancias/servicioMinibar";
+						}
+						else {
+							consumo = new Bebida_consumo(bebida, cantidad, estancia);
+							consumos.add(consumo);
+							consumo.persist();
+						}
+					}
+				}else{
+					
+					if (bebida.getCantidad_minibar() - cantidad < 0){
+						uiModel.addAttribute("error", "Error: No puede consumir más bebidas de las disponibles.");
+						popularBebidas(uiModel, estancia);
+						return "estancias/servicioMinibar";
+					}
+					else{
+						Bebida_consumo consumo = new Bebida_consumo(bebida, cantidad, estancia);
+						consumos.add(consumo);
+						consumo.persist();
+					}
+				}
+				
+				uiModel.addAttribute("compra", "Compra realizada con éxito.");
+				popularBebidas(uiModel, estancia);
+				return "estancias/servicioMinibar";
+			   
+			 }else{
+				return "estancias/consumoBebidaExito";
+			}
+		}
+		
+		
+	
+	// ------CU5 ------ INICIAR LLAMADA
+	@RequestMapping(method = RequestMethod.POST, params = {"servicio", "estancia"}, produces = "text/html")
+	public String realizarLlamada(@RequestParam("servicio") String servicio, @RequestParam("estancia") long estancia,
+			HttpServletRequest hhtpservletrequest, Model uiModel){
+		
 		long inicio = System.currentTimeMillis();
+		
 		uiModel.addAttribute("inicio", inicio);
 		uiModel.addAttribute("estancia", estancia);
 		uiModel.addAttribute("servicio", servicio);
 		return "llamadas/colgarLlamada";
 	}
 
-	// Colgar
-	@RequestMapping(method = RequestMethod.POST, params = { "servicio",
-			"estancia", "inicio" }, produces = "text/html")
-	public String colgarLlamada(@RequestParam("servicio") String servicio,
-			@RequestParam("estancia") long estancia_id,
-			HttpServletRequest httpservletrequest,
-			@RequestParam("inicio") long inicio, Model uiModel) {
+	//------CU5 ------ COLGAR LLAMADA
+	@RequestMapping(method = RequestMethod.POST, params = {"servicio", "estancia", "inicio"}, produces = "text/html")
+	public String colgarLlamada(@RequestParam("servicio") String servicio, @RequestParam("estancia") long estancia_id, HttpServletRequest httpservletrequest,
+	@RequestParam("inicio") long inicio, Model uiModel){
 
 		long fin = System.currentTimeMillis();
 		Estancia estancia = Estancia.findEstancia(estancia_id);
 		double coste = 0;
+
 		double duracion = 1 + ((fin - inicio) / (1000 * 60));
 
 		Hotel hotel = estancia.getReserva().getHotel();
 		Tarifa tarifa = Tarifa.findTarifasByHotel(hotel).getSingleResult();
-
-		List<Llamada> llamadas = Llamada.findLlamadasByEstancia(estancia)
-				.getResultList();
-
-		if (servicio.equals("llamada_nacional")) {
-
+		
+		//Comprobamos si el usuario hizo llamadas antes
+		List<Llamada> llamadas = Llamada.findLlamadasByEstancia(estancia).getResultList();
+		
+		//Almacenamos en la BD la duración de la llamada o acceso a internet
+		if(servicio.equals("llamada_nacional")){
 			coste = duracion * tarifa.getLlamada_nacional();
 
-			if (llamadas.isEmpty()) {
+			if(llamadas.isEmpty()){
 				Llamada llam = new Llamada();
 				llam.setMinutos_nacionales(duracion);
 				llam.persist();
 				estancia.setLlamadas(llam);
 				llam.setEstancia(estancia);
 				estancia.merge();
-			} else {
+			} else{
 				Llamada llam = llamadas.get(0);
 
-				llam.setMinutos_nacionales(llam.getMinutos_nacionales()
-						+ duracion);
+				llam.setMinutos_nacionales(llam.getMinutos_nacionales() + duracion);
 				llam.merge();
 			}
-		}
-
-		else if (servicio.equals("llamada_internacional")) {
-
+		}else if(servicio.equals("llamada_internacional")){
 			coste = duracion * tarifa.getLlamada_internacional();
 
-			if (llamadas.isEmpty()) {
+			if(llamadas.isEmpty()){
 				Llamada llam = new Llamada();
 				llam.setMinutos_internacionales(duracion);
 				llam.persist();
 				estancia.setLlamadas(llam);
 				llam.setEstancia(estancia);
 				estancia.merge();
-			} else {
+			 }else{
 				Llamada llam = llamadas.get(0);
 
-				llam.setMinutos_nacionales(llam.getMinutos_internacionales()
-						+ duracion);
+				llam.setMinutos_internacionales(llam.getMinutos_internacionales() + duracion);
 				llam.merge();
 			}
-		}
-
-		else if (servicio.equals("internet")) {
-
+		}else if (servicio.equals("internet")){
 			coste = duracion * tarifa.getInternet();
-
-			if (llamadas.isEmpty()) {
+			
+			if(llamadas.isEmpty()){
 				Llamada llam = new Llamada();
 				llam.setMinutos_internet(duracion);
 				llam.persist();
 				estancia.setLlamadas(llam);
 				llam.setEstancia(estancia);
 				estancia.merge();
-			} else {
+			}else{
 				Llamada llam = llamadas.get(0);
 
 				llam.setMinutos_internet(llam.getMinutos_internet() + duracion);
@@ -530,146 +643,10 @@ public class EstanciaController {
 		uiModel.addAttribute("servicio", servicio);
 		return "estancias/consumoComunicacion";
 	}
+	
+	
 
-	/******************************* minibar **************************************/
-
-	@RequestMapping(method = RequestMethod.POST, params = { "estancia",
-			"minibar" }, produces = "text/html")
-	public String consumirMinibar(Principal p, Model uiModel,
-			@RequestParam("estancia") Estancia estancia,
-			HttpServletRequest request) {
-		if (request.getParameter("consumo") != null) {
-
-			uiModel.addAttribute("estancia", estancia);
-			Bebida bebida = Bebida.findBebida(Long.parseLong(request
-					.getParameter("bebida")));
-			int cantidad = 0;
-			if (request.getParameter("cantidad") != ""
-					&& StringUtils.isNumeric(request.getParameter("cantidad")))
-				cantidad = Integer.parseInt(request.getParameter("cantidad"));
-			// no se puede introducir una cantidad inferior a 1
-			if (cantidad < 1) {
-				uiModel.addAttribute("error", "Cantidad inválida");
-				rellenar(uiModel, estancia);
-				return "estancias/consumoMinibar";
-			}
-			Set<Bebida_consumo> consumos = estancia.getBebida_consumo();
-			// si ya hay consumos
-			if (!consumos.isEmpty()) {
-				Bebida_consumo consumo = contieneBebida(consumos, bebida);
-				Minibar minibar = estancia.getHabitacion().getCategoria()
-						.getMinibar();
-				Minibar_bebida mb = Minibar_bebida
-						.findMinibar_bebidasByMinibarAndBebida(minibar, bebida)
-						.getResultList().get(0);
-				// si ya hay un consumo para la bebida pedida
-				if (consumo != null) {
-					int nueva_cantidad = consumo.getCantidad() + cantidad;
-					// no se pueden consumir un número de bebidas mayor de las
-					// que hay disponibles
-					if (mb.getCantidad() - cantidad - consumo.getCantidad() >= 0
-							&& nueva_cantidad > 0) {
-						consumo.setCantidad(nueva_cantidad);
-						consumo.merge();
-					} else {
-						uiModel.addAttribute("error",
-								"No hay tanta cantidad de ese producto");
-						rellenar(uiModel, estancia);
-						return "estancias/servicioMinibar";
-					}
-				} else {
-					// no se pueden consumir un número de bebidas mayor de las
-					// que hay disponibles
-					if (mb.getCantidad() - cantidad < 0) {
-						uiModel.addAttribute("error",
-								"No hay tanta cantidad de ese producto");
-						rellenar(uiModel, estancia);
-						return "estancias/servicioMinibar";
-					} else {
-						consumo = new Bebida_consumo(bebida, cantidad);
-						consumos.add(consumo);
-						consumo.persist();
-					}
-				}
-			} else {
-				Minibar minibar = estancia.getHabitacion().getCategoria()
-						.getMinibar();
-				Minibar_bebida mb = Minibar_bebida
-						.findMinibar_bebidasByMinibarAndBebida(minibar, bebida)
-						.getResultList().get(0);
-				// no se pueden consumir un número de bebidas mayor de las que
-				// hay disponibles
-				if (mb.getCantidad() - cantidad < 0) {
-					uiModel.addAttribute("error",
-							"No hay tanta cantidad de ese producto");
-					rellenar(uiModel, estancia);
-					return "estancias/servicioMinibar";
-				} else {
-					Bebida_consumo consumo = new Bebida_consumo(bebida,
-							cantidad);
-					consumos.add(consumo);
-					consumo.persist();
-				}
-			}
-			String uds = cantidad == 1 ? "unidad" : "unidades";
-			uiModel.addAttribute("exito", "Se ha registrado un consumo de "
-					+ bebida.getNombre() + " (" + cantidad + " " + uds + ")");
-			rellenar(uiModel, estancia);
-			return "estancias/servicioMinibar";
-		} else {
-			return "estancias/finServicio";
-		}
-	}
-
-	// TODO:
-	/*************************** extras minibar ***************************/
-
-	// rellenar con las bebidas
-	void rellenar(Model uiModel, Estancia estancia) {
-		// Minibar de la habitación
-		Minibar minibar = estancia.getHabitacion().getCategoria().getMinibar();
-		// Listado con las bebidas consumidas y el número.
-		Set<Bebida_consumo> bebida_consumo_actual = estancia
-				.getBebida_consumo();
-		// Listado con las bebidas iniciales del minibar
-		List<Bebida> bebidas = Minibar_bebida.findBebidasByMinibar(minibar)
-				.getResultList();
-		// Map para calcular la bebidas actuales de las que dispone el
-		// minibar
-		Map<Bebida, Integer> bebida_cantidad_actual = new HashMap<Bebida, Integer>();
-		for (int i = 0; i < bebidas.size(); i++) {
-			int cantidad_minibar = Minibar_bebida
-					.findMinibar_bebidasByMinibarAndBebida(minibar,
-							bebidas.get(i)).getSingleResult().getCantidad();
-			List<Bebida_consumo> bebida_consumo = Bebida_consumo
-					.findBebida_consumoesByBebida(bebidas.get(i))
-					.getResultList();
-			if (!bebida_consumo.isEmpty())
-				cantidad_minibar -= bebida_consumo.get(0).getCantidad();
-			bebida_cantidad_actual.put(bebidas.get(i), cantidad_minibar);
-		}
-		uiModel.addAttribute("bebidas", bebida_cantidad_actual);
-	}
-
-	// busca una bebida en un set de consumos y si la encuentra devuelve el
-	// consumo
-	Bebida_consumo contieneBebida(Set<Bebida_consumo> consumos, Bebida bebida) {
-		for (Bebida_consumo consumo : consumos)
-			if (consumo.getBebida().getId() == bebida.getId())
-				return consumo;
-		return null;
-	}
-
-	// busca en un setde consumos si existe un consumo en concreto contenido en
-	// otra lista
-	Boolean existeConsumo(Set<Bebida_consumo> consumos1,
-			List<Bebida_consumo> consumos2) {
-		for (Bebida_consumo consumo : consumos2)
-			if (consumos1.contains(consumo))
-				return true;
-		return false;
-	}
-
+	
 	/******************************** PDF *******************************/
 
 	@RequestMapping(params = { "formpdf", "id", "total", "dias","precio_hab","aux","origen","hotel","total_nac","total_inter","total_internet","total_bar","total_servicios"}, method = RequestMethod.POST, produces = "text/html")
@@ -856,3 +833,4 @@ public class EstanciaController {
 		return "estancias/detallesCheckout";
 	}
 }
+

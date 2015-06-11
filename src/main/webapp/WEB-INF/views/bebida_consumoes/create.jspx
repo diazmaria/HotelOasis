@@ -3,8 +3,9 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <form:create id="fc_es_uca_iw_hoteloasis_domain_Bebida_consumo" modelAttribute="bebida_consumo" path="/bebida_consumoes" render="${empty dependencies}" z="7PvwP+JyfuxZ7eokRn9W+CzCNeM=">
-        <field:input field="cantidad" id="c_es_uca_iw_hoteloasis_domain_Bebida_consumo_cantidad" required="true" z="H020UMjLda1jVSPMiZD4RLZsWCo="/>
         <field:select field="bebida" id="c_es_uca_iw_hoteloasis_domain_Bebida_consumo_bebida" itemValue="id" items="${bebidas}" path="/bebidas" required="true" z="Tb8fXQH0xXuTfjZozwWN3KsB4/E="/>
+        <field:input field="cantidad_consumida" id="c_es_uca_iw_hoteloasis_domain_Bebida_consumo_cantidad_consumida" required="true" z="yCb+y4iGEqPLoxUGqij2MWDITYI="/>
+        <field:select field="estancia" id="c_es_uca_iw_hoteloasis_domain_Bebida_consumo_estancia" itemValue="id" items="${estancias}" path="/estancias" z="F5QefwLqKSGs+gc2BnFVeSTCKR4="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_es_uca_iw_hoteloasis_domain_Bebida_consumo" render="${not empty dependencies}" z="wEFbzd+N1bx6S/Eipv1o2Rl518I="/>
 </div>

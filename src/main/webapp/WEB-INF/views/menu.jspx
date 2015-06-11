@@ -72,13 +72,6 @@
                 <menu:item id="i_tarifa_list" messageCode="global_menu_list" url="/tarifas?page=1&amp;size=${empty param.size ? 10 : param.size}" z="utMO8Z9Fs2VT7OtHEF9FKbmuhkQ="/>
             </menu:category>
         </sec:authorize>
-        <!-- MINIBAR -->
-        <sec:authorize access="hasAnyRole('Administrador', 'Recepcionista')">
-            <menu:category id="c_minibar" z="8Gc7S6ICTE++CVqTxd+jZVBz/w8=">
-                <menu:item id="i_minibar_new" messageCode="global_menu_new" url="/minibars?form" z="SmuYEAPxviii9vmFBf+0C/712rQ="/>
-                <menu:item id="i_minibar_list" messageCode="global_menu_list" url="/minibars?page=1&amp;size=${empty param.size ? 10 : param.size}" z="9I1rmoLU8oYAJrVvATrtfwCxrrA="/>
-            </menu:category>
-        </sec:authorize>
         <!-- BEBIDA -->
         <sec:authorize access="hasAnyRole('Administrador', 'Recepcionista')">
             <menu:category id="c_bebida" z="/1h4cuuphnvz1CJs87EusrLQvFc=">
@@ -86,13 +79,7 @@
                 <menu:item id="i_bebida_list" messageCode="global_menu_list" url="/bebidas?page=1&amp;size=${empty param.size ? 10 : param.size}" z="wxnFLBgcHZTA3Dll5jKpLsw/m8I="/>
             </menu:category>
         </sec:authorize>
-        <!-- MINIBAR_BEBIDA -->
-        <sec:authorize access="hasAnyRole('Administrador', 'Recepcionista')">
-            <menu:category id="c_minibar_bebida" z="cvuvd/Jmi6sNEHx8lFPp4l8fXoQ=">
-                <menu:item id="i_minibar_bebida_new" messageCode="global_menu_new" url="/minibar_bebidas?form" z="t8G/3PQR/ybv5e+vgnCXJ7v7xX4="/>
-                <menu:item id="i_minibar_bebida_list" messageCode="global_menu_list" url="/minibar_bebidas?page=1&amp;size=${empty param.size ? 10 : param.size}" z="APRIq3enXTZxfTlGat5f4vxA1RI="/>
-            </menu:category>
-        </sec:authorize>
+      
         <!-- BEBIDA_CONSUMO -->
         <sec:authorize access="hasAnyRole('Administrador', 'Recepcionista')">
             <menu:category id="c_bebida_consumo" z="SVNGfqbiJXHadOmkP/ZCE1KZiTw=">

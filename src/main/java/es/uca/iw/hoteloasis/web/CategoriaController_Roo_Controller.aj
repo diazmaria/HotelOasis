@@ -5,7 +5,6 @@ package es.uca.iw.hoteloasis.web;
 
 import es.uca.iw.hoteloasis.domain.Categoria;
 import es.uca.iw.hoteloasis.domain.Hotel;
-import es.uca.iw.hoteloasis.domain.Minibar;
 import es.uca.iw.hoteloasis.web.CategoriaController;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -40,9 +39,6 @@ privileged aspect CategoriaController_Roo_Controller {
         List<String[]> dependencies = new ArrayList<String[]>();
         if (Hotel.countHotels() == 0) {
             dependencies.add(new String[] { "hotel", "hotels" });
-        }
-        if (Minibar.countMinibars() == 0) {
-            dependencies.add(new String[] { "minibar", "minibars" });
         }
         uiModel.addAttribute("dependencies", dependencies);
         return "categorias/create";
@@ -99,7 +95,6 @@ privileged aspect CategoriaController_Roo_Controller {
     void CategoriaController.populateEditForm(Model uiModel, Categoria categoria) {
         uiModel.addAttribute("categoria", categoria);
         uiModel.addAttribute("hotels", Hotel.findAllHotels());
-        uiModel.addAttribute("minibars", Minibar.findAllMinibars());
     }
     
     String CategoriaController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

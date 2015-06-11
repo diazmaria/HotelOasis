@@ -5,5 +5,7 @@
     <page:show id="ps_es_uca_iw_hoteloasis_domain_Bebida" object="${bebida}" path="/bebidas" z="4J6QhzP2bexSQfAQ2zoDBqyj9Q0=">
         <field:display field="nombre" id="s_es_uca_iw_hoteloasis_domain_Bebida_nombre" object="${bebida}" z="1EgGWag1wpPGLVsOT3QRnIhUk+I="/>
         <field:display field="coste" id="s_es_uca_iw_hoteloasis_domain_Bebida_coste" object="${bebida}" z="ppbz/p6hDZwCF9VDNKlYTvp9dvI="/>
+        <field:display field="cantidad_minibar" id="s_es_uca_iw_hoteloasis_domain_Bebida_cantidad_minibar" object="${bebida}" z="lKbi8PYD9emJn6s+LZS77e4kYow="/>
+        <field:display field="categoria" id="s_es_uca_iw_hoteloasis_domain_Bebida_categoria" object="${bebida}" z="DreKZjRzqLOeZJOE+jEg+vxXchs="/>
     </page:show>
 </div>

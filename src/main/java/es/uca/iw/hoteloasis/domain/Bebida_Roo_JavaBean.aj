@@ -4,6 +4,7 @@
 package es.uca.iw.hoteloasis.domain;
 
 import es.uca.iw.hoteloasis.domain.Bebida;
+import es.uca.iw.hoteloasis.domain.Categoria;
 
 privileged aspect Bebida_Roo_JavaBean {
     
@@ -21,6 +22,22 @@ privileged aspect Bebida_Roo_JavaBean {
     
     public void Bebida.setCoste(double coste) {
         this.coste = coste;
+    }
+    
+    public int Bebida.getCantidad_minibar() {
+        return this.cantidad_minibar;
+    }
+    
+    public void Bebida.setCantidad_minibar(int cantidad_minibar) {
+        this.cantidad_minibar = cantidad_minibar;
+    }
+    
+    public Categoria Bebida.getCategoria() {
+        return this.categoria;
+    }
+    
+    public void Bebida.setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
     
 }

@@ -5,7 +5,6 @@ package es.uca.iw.hoteloasis.domain;
 
 import es.uca.iw.hoteloasis.domain.Categoria;
 import es.uca.iw.hoteloasis.domain.Hotel;
-import es.uca.iw.hoteloasis.domain.Minibar;
 
 privileged aspect Categoria_Roo_JavaBean {
     
@@ -39,14 +38,6 @@ privileged aspect Categoria_Roo_JavaBean {
     
     public void Categoria.setHotel(Hotel hotel) {
         this.hotel = hotel;
-    }
-    
-    public Minibar Categoria.getMinibar() {
-        return this.minibar;
-    }
-    
-    public void Categoria.setMinibar(Minibar minibar) {
-        this.minibar = minibar;
     }
     
 }

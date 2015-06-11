@@ -7,25 +7,31 @@ import org.springframework.roo.addon.tostring.RooToString;
 
 @RooJavaBean
 @RooToString
-@RooJpaActiveRecord(finders = {"findBebida_consumoesByBebida"})
+@RooJpaActiveRecord(finders = { "findBebida_consumoesByBebida", "findBebida_consumoesByBebidaAndEstancia" })
 public class Bebida_consumo {
 
     /**
      */
     @NotNull
-    private int cantidad;
+    private int cantidad_consumida;
 
     /**
      */
     @ManyToOne
     @NotNull
     private Bebida bebida;
-    
-    
-    public Bebida_consumo() {}
-	
-	public Bebida_consumo(Bebida bebida, int cantidad) {
-		this.bebida = bebida;
-		this.cantidad = cantidad;
-	}
+
+    public Bebida_consumo() {
+    }
+
+    public Bebida_consumo(Bebida bebida, int cantidad_consumida, Estancia estancia) {
+        this.bebida = bebida;
+        this.cantidad_consumida = cantidad_consumida;
+        this.estancia = estancia;
+    }
+
+    /**
+     */
+    @ManyToOne
+    private Estancia estancia;
 }

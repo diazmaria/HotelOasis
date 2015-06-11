@@ -5,6 +5,7 @@ package es.uca.iw.hoteloasis.web;
 
 import es.uca.iw.hoteloasis.domain.Bebida;
 import es.uca.iw.hoteloasis.domain.Bebida_consumo;
+import es.uca.iw.hoteloasis.domain.Estancia;
 import es.uca.iw.hoteloasis.web.Bebida_consumoController;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -95,6 +96,7 @@ privileged aspect Bebida_consumoController_Roo_Controller {
     void Bebida_consumoController.populateEditForm(Model uiModel, Bebida_consumo bebida_consumo) {
         uiModel.addAttribute("bebida_consumo", bebida_consumo);
         uiModel.addAttribute("bebidas", Bebida.findAllBebidas());
+        uiModel.addAttribute("estancias", Estancia.findAllEstancias());
     }
     
     String Bebida_consumoController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

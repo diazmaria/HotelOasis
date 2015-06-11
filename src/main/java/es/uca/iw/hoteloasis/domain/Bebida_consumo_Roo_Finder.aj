@@ -5,6 +5,7 @@ package es.uca.iw.hoteloasis.domain;
 
 import es.uca.iw.hoteloasis.domain.Bebida;
 import es.uca.iw.hoteloasis.domain.Bebida_consumo;
+import es.uca.iw.hoteloasis.domain.Estancia;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
@@ -15,6 +16,16 @@ privileged aspect Bebida_consumo_Roo_Finder {
         EntityManager em = Bebida_consumo.entityManager();
         TypedQuery q = em.createQuery("SELECT COUNT(o) FROM Bebida_consumo AS o WHERE o.bebida = :bebida", Long.class);
         q.setParameter("bebida", bebida);
+        return ((Long) q.getSingleResult());
+    }
+    
+    public static Long Bebida_consumo.countFindBebida_consumoesByBebidaAndEstancia(Bebida bebida, Estancia estancia) {
+        if (bebida == null) throw new IllegalArgumentException("The bebida argument is required");
+        if (estancia == null) throw new IllegalArgumentException("The estancia argument is required");
+        EntityManager em = Bebida_consumo.entityManager();
+        TypedQuery q = em.createQuery("SELECT COUNT(o) FROM Bebida_consumo AS o WHERE o.bebida = :bebida AND o.estancia = :estancia", Long.class);
+        q.setParameter("bebida", bebida);
+        q.setParameter("estancia", estancia);
         return ((Long) q.getSingleResult());
     }
     
@@ -38,6 +49,33 @@ privileged aspect Bebida_consumo_Roo_Finder {
         }
         TypedQuery<Bebida_consumo> q = em.createQuery(jpaQuery, Bebida_consumo.class);
         q.setParameter("bebida", bebida);
+        return q;
+    }
+    
+    public static TypedQuery<Bebida_consumo> Bebida_consumo.findBebida_consumoesByBebidaAndEstancia(Bebida bebida, Estancia estancia) {
+        if (bebida == null) throw new IllegalArgumentException("The bebida argument is required");
+        if (estancia == null) throw new IllegalArgumentException("The estancia argument is required");
+        EntityManager em = Bebida_consumo.entityManager();
+        TypedQuery<Bebida_consumo> q = em.createQuery("SELECT o FROM Bebida_consumo AS o WHERE o.bebida = :bebida AND o.estancia = :estancia", Bebida_consumo.class);
+        q.setParameter("bebida", bebida);
+        q.setParameter("estancia", estancia);
+        return q;
+    }
+    
+    public static TypedQuery<Bebida_consumo> Bebida_consumo.findBebida_consumoesByBebidaAndEstancia(Bebida bebida, Estancia estancia, String sortFieldName, String sortOrder) {
+        if (bebida == null) throw new IllegalArgumentException("The bebida argument is required");
+        if (estancia == null) throw new IllegalArgumentException("The estancia argument is required");
+        EntityManager em = Bebida_consumo.entityManager();
+        String jpaQuery = "SELECT o FROM Bebida_consumo AS o WHERE o.bebida = :bebida AND o.estancia = :estancia";
+        if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
+            jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
+            if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {
+                jpaQuery = jpaQuery + " " + sortOrder;
+            }
+        }
+        TypedQuery<Bebida_consumo> q = em.createQuery(jpaQuery, Bebida_consumo.class);
+        q.setParameter("bebida", bebida);
+        q.setParameter("estancia", estancia);
         return q;
     }
     

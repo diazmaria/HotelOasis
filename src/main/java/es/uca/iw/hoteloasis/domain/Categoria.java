@@ -31,9 +31,4 @@ public class Categoria {
     @ManyToOne
     private Hotel hotel;
 
-    /**
-     */
-    @NotNull
-    @ManyToOne
-    private Minibar minibar;
 }

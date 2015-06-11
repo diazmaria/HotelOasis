@@ -7,6 +7,7 @@ import es.uca.iw.hoteloasis.domain.Bebida;
 import es.uca.iw.hoteloasis.domain.BebidaDataOnDemand;
 import es.uca.iw.hoteloasis.domain.Bebida_consumo;
 import es.uca.iw.hoteloasis.domain.Bebida_consumoDataOnDemand;
+import es.uca.iw.hoteloasis.domain.EstanciaDataOnDemand;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -28,10 +29,13 @@ privileged aspect Bebida_consumoDataOnDemand_Roo_DataOnDemand {
     @Autowired
     BebidaDataOnDemand Bebida_consumoDataOnDemand.bebidaDataOnDemand;
     
+    @Autowired
+    EstanciaDataOnDemand Bebida_consumoDataOnDemand.estanciaDataOnDemand;
+    
     public Bebida_consumo Bebida_consumoDataOnDemand.getNewTransientBebida_consumo(int index) {
         Bebida_consumo obj = new Bebida_consumo();
         setBebida(obj, index);
-        setCantidad(obj, index);
+        setCantidad_consumida(obj, index);
         return obj;
     }
     
@@ -40,9 +44,9 @@ privileged aspect Bebida_consumoDataOnDemand_Roo_DataOnDemand {
         obj.setBebida(bebida);
     }
     
-    public void Bebida_consumoDataOnDemand.setCantidad(Bebida_consumo obj, int index) {
-        int cantidad = index;
-        obj.setCantidad(cantidad);
+    public void Bebida_consumoDataOnDemand.setCantidad_consumida(Bebida_consumo obj, int index) {
+        int cantidad_consumida = index;
+        obj.setCantidad_consumida(cantidad_consumida);
     }
     
     public Bebida_consumo Bebida_consumoDataOnDemand.getSpecificBebida_consumo(int index) {

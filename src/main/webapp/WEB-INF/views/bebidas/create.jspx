@@ -5,6 +5,8 @@
     <form:create id="fc_es_uca_iw_hoteloasis_domain_Bebida" modelAttribute="bebida" path="/bebidas" render="${empty dependencies}" z="fcIhfMHM7wSZ77qOSkdalJvysJM=">
         <field:input field="nombre" id="c_es_uca_iw_hoteloasis_domain_Bebida_nombre" required="true" z="7DMQIAg8FaeDDbYK9FyxqVSCp7g="/>
         <field:input field="coste" id="c_es_uca_iw_hoteloasis_domain_Bebida_coste" required="true" z="qTZWwqQVl2/zPbpBQQSFTw+Hzas="/>
+        <field:input field="cantidad_minibar" id="c_es_uca_iw_hoteloasis_domain_Bebida_cantidad_minibar" z="KeBn1NZX9ksvLR6zKo4DcSq6eJo="/>
+        <field:select field="categoria" id="c_es_uca_iw_hoteloasis_domain_Bebida_categoria" itemValue="id" items="${categorias}" path="/categorias" z="XVSCzZXnnq7IwjJntyKr21un+Ak="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_es_uca_iw_hoteloasis_domain_Bebida" render="${not empty dependencies}" z="ovvA+JGYf8Kw/VioB5BYCXF9pAY="/>
 </div>

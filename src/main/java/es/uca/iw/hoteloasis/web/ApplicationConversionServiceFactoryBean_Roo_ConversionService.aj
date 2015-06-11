@@ -10,8 +10,6 @@ import es.uca.iw.hoteloasis.domain.Estancia;
 import es.uca.iw.hoteloasis.domain.Habitacion;
 import es.uca.iw.hoteloasis.domain.Hotel;
 import es.uca.iw.hoteloasis.domain.Llamada;
-import es.uca.iw.hoteloasis.domain.Minibar;
-import es.uca.iw.hoteloasis.domain.Minibar_bebida;
 import es.uca.iw.hoteloasis.domain.Reserva;
 import es.uca.iw.hoteloasis.domain.Rol;
 import es.uca.iw.hoteloasis.domain.Tarifa;
@@ -28,7 +26,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<Bebida, String> ApplicationConversionServiceFactoryBean.getBebidaToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<es.uca.iw.hoteloasis.domain.Bebida, java.lang.String>() {
             public String convert(Bebida bebida) {
-                return new StringBuilder().append(bebida.getNombre()).append(' ').append(bebida.getCoste()).toString();
+                return new StringBuilder().append(bebida.getNombre()).append(' ').append(bebida.getCoste()).append(' ').append(bebida.getCantidad_minibar()).toString();
             }
         };
     }
@@ -52,7 +50,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<Bebida_consumo, String> ApplicationConversionServiceFactoryBean.getBebida_consumoToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<es.uca.iw.hoteloasis.domain.Bebida_consumo, java.lang.String>() {
             public String convert(Bebida_consumo bebida_consumo) {
-                return new StringBuilder().append(bebida_consumo.getCantidad()).toString();
+                return new StringBuilder().append(bebida_consumo.getCantidad_consumida()).toString();
             }
         };
     }
@@ -193,54 +191,6 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         };
     }
     
-    public Converter<Minibar, String> ApplicationConversionServiceFactoryBean.getMinibarToStringConverter() {
-        return new org.springframework.core.convert.converter.Converter<es.uca.iw.hoteloasis.domain.Minibar, java.lang.String>() {
-            public String convert(Minibar minibar) {
-                return new StringBuilder().append(minibar.getNombre()).toString();
-            }
-        };
-    }
-    
-    public Converter<Long, Minibar> ApplicationConversionServiceFactoryBean.getIdToMinibarConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.Long, es.uca.iw.hoteloasis.domain.Minibar>() {
-            public es.uca.iw.hoteloasis.domain.Minibar convert(java.lang.Long id) {
-                return Minibar.findMinibar(id);
-            }
-        };
-    }
-    
-    public Converter<String, Minibar> ApplicationConversionServiceFactoryBean.getStringToMinibarConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.String, es.uca.iw.hoteloasis.domain.Minibar>() {
-            public es.uca.iw.hoteloasis.domain.Minibar convert(String id) {
-                return getObject().convert(getObject().convert(id, Long.class), Minibar.class);
-            }
-        };
-    }
-    
-    public Converter<Minibar_bebida, String> ApplicationConversionServiceFactoryBean.getMinibar_bebidaToStringConverter() {
-        return new org.springframework.core.convert.converter.Converter<es.uca.iw.hoteloasis.domain.Minibar_bebida, java.lang.String>() {
-            public String convert(Minibar_bebida minibar_bebida) {
-                return new StringBuilder().append(minibar_bebida.getCantidad()).toString();
-            }
-        };
-    }
-    
-    public Converter<Long, Minibar_bebida> ApplicationConversionServiceFactoryBean.getIdToMinibar_bebidaConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.Long, es.uca.iw.hoteloasis.domain.Minibar_bebida>() {
-            public es.uca.iw.hoteloasis.domain.Minibar_bebida convert(java.lang.Long id) {
-                return Minibar_bebida.findMinibar_bebida(id);
-            }
-        };
-    }
-    
-    public Converter<String, Minibar_bebida> ApplicationConversionServiceFactoryBean.getStringToMinibar_bebidaConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.String, es.uca.iw.hoteloasis.domain.Minibar_bebida>() {
-            public es.uca.iw.hoteloasis.domain.Minibar_bebida convert(String id) {
-                return getObject().convert(getObject().convert(id, Long.class), Minibar_bebida.class);
-            }
-        };
-    }
-    
     public Converter<Reserva, String> ApplicationConversionServiceFactoryBean.getReservaToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<es.uca.iw.hoteloasis.domain.Reserva, java.lang.String>() {
             public String convert(Reserva reserva) {
@@ -359,12 +309,6 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         registry.addConverter(getLlamadaToStringConverter());
         registry.addConverter(getIdToLlamadaConverter());
         registry.addConverter(getStringToLlamadaConverter());
-        registry.addConverter(getMinibarToStringConverter());
-        registry.addConverter(getIdToMinibarConverter());
-        registry.addConverter(getStringToMinibarConverter());
-        registry.addConverter(getMinibar_bebidaToStringConverter());
-        registry.addConverter(getIdToMinibar_bebidaConverter());
-        registry.addConverter(getStringToMinibar_bebidaConverter());
         registry.addConverter(getReservaToStringConverter());
         registry.addConverter(getIdToReservaConverter());
         registry.addConverter(getStringToReservaConverter());
