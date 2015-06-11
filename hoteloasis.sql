@@ -372,7 +372,8 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 INSERT INTO `usuario` (`id`, `nombre`, `primer_apellido`, `segundo_apellido`, `email`, `nombre_usuario`, `clave`, `rol`, `enabled`, `version`) VALUES
 (1, 'Administrador', 'Hotel Oasis', 'Hotel Oasis', 'admin@hoteloasis.com', 'admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 1, 1, 0),
 (2, 'María', 'Díaz', 'Prueba', 'maria-df@hotmail.es', 'maria', '94aec9fbed989ece189a7e172c9cf41669050495152bc4c1dbf2a38d7fd85627', 3, 1, 0),
-(3, 'Pepe', 'Fuentes', 'Pérez', 'pepe@yahoo.es', 'pepe', '7c9e7c1494b2684ab7c19d6aff737e460fa9e98d5a234da1310c97ddf5691834', 3, 1, 0);
+(3, 'Pepe', 'Fuentes', 'Pérez', 'pepe@yahoo.es', 'pepe', '7c9e7c1494b2684ab7c19d6aff737e460fa9e98d5a234da1310c97ddf5691834', 3, 1, 0),
+(4, 'Recepcionista', 'Hotel Oasis', 'Hotel Oasis', 'admin@hoteloasis.com', 'recep', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 2, 1, 0);
 
 --
 -- Restricciones para tablas volcadas
