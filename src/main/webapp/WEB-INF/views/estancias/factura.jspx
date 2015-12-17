@@ -5,20 +5,45 @@
 	    <jsp:output omit-xml-declaration="yes"/>
 	    
 	    <util:panel id="ff_es_uca_iw_domain_Estancia" title="Factura">
-	    <h2 style="color:#113660">Factura</h2>
-	    	<c:if test="${not empty error}">
-	    		<span class="errors"><c:out value="${error}"/></span><br/><br/>
+	    <h2 style="color:#113660"><spring:message code="menu_item_estancia_factura_label" /></h2>
+			<c:if test="${not empty error}">
+	    		<c:choose>
+			<c:when test="${error == 'reserva_erroneo'}">
+				<h3 style="color: #CB001D">
+				      <spring:message code="reserva_erroneo" />
+				</h3>
+			</c:when>
+			<c:when test="${error == 'reserva_no_checkin'}">
+				<h3 style="color: #CB001D">
+				      <spring:message code="reserva_no_checkin" />
+				</h3>
+			</c:when>	
+			
+			<c:when test="${error == 'reserva_no_checkout'}">
+				<h3 style="color: #CB001D">
+				      <spring:message code="reserva_no_checkout" />
+				</h3>
+			</c:when>		
+				
+			<c:when test="${error == 'reserva_no_pertenece'}">
+				<h3 style="color: #CB001D">
+				      <spring:message code="reserva_no_pertenece" />
+				</h3>
+			</c:when>	
+			
+		</c:choose>
 	    	</c:if>
 		    <form action="/HotelOasis/estancias?factura" method="post">
 		    	
 		    	<div>
-		        	<strong><label>Código de la reserva:  </label></strong>
+		        	<strong><label><spring:message code="label_es_uca_iw_hoteloasis_domain_reserva_codigo" />: </label></strong>
 		        	<div class="box">
 		        		<input type="text" name="id" required="true"/>
 		        	</div>
 		        </div>
-		        <br/><p style="display:inline-block; margin-right:43px; margin-left:5px">¿Revisar factura?</p>
-		    	<input type="submit" class ="enviar" name="action" value="factura"/>
+		        <br/>
+		          <spring:message code="continuar" var="continuar"/>	
+				<input type="submit" class ="enviar search" name="action" value="${continuar}"/>
 		    </form>
 	    </util:panel>
 	</div>

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+<div xmlns:spring="http://www.springframework.org/tags" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:show id="ps_es_uca_iw_hoteloasis_domain_Rol" object="${rol}" path="/rols" z="7vomOtl6VML0gmbLA9Eoy4+rm/U=">
+            <h1 style="color:#113660; text-transform: uppercase; text-decoration:underline"><spring:message code="label_es_uca_iw_hoteloasis_domain_usuario_rol" /></h1>
         <field:display field="nombre" id="s_es_uca_iw_hoteloasis_domain_Rol_nombre" object="${rol}" z="2pb3RVFnZB/BjLu+QG6DMRcJo/0="/>
     </page:show>
 </div>

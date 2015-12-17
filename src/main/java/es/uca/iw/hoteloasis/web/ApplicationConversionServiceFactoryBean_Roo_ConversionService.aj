@@ -74,7 +74,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<Categoria, String> ApplicationConversionServiceFactoryBean.getCategoriaToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<es.uca.iw.hoteloasis.domain.Categoria, java.lang.String>() {
             public String convert(Categoria categoria) {
-                return new StringBuilder().append(categoria.getNombre()).append(' ').append(categoria.getDescripcion()).append(' ').append(categoria.getPrecio_categoria()).toString();
+                return new StringBuilder().append(categoria.getNombre()).toString();
             }
         };
     }
@@ -146,7 +146,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<Hotel, String> ApplicationConversionServiceFactoryBean.getHotelToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<es.uca.iw.hoteloasis.domain.Hotel, java.lang.String>() {
             public String convert(Hotel hotel) {
-                return new StringBuilder().append(hotel.getNombre()).append(' ').append(hotel.getProvincia()).append(' ').append(hotel.getPoblacion()).append(' ').append(hotel.getDireccion()).toString();
+                return new StringBuilder().append(hotel.getNombre()).append(' ').append('(').append(hotel.getProvincia()).append(' ').append(hotel.getPoblacion()).append(')').toString();
             }
         };
     }
@@ -194,7 +194,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<Reserva, String> ApplicationConversionServiceFactoryBean.getReservaToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<es.uca.iw.hoteloasis.domain.Reserva, java.lang.String>() {
             public String convert(Reserva reserva) {
-                return new StringBuilder().append(reserva.getFecha_reserva()).append(' ').append(reserva.getFecha_entrada()).append(' ').append(reserva.getFecha_salida()).append(' ').append(reserva.getFecha_cancelacion()).toString();
+                return new StringBuilder().append(reserva.getId()).toString();
             }
         };
     }
@@ -266,7 +266,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<Usuario, String> ApplicationConversionServiceFactoryBean.getUsuarioToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<es.uca.iw.hoteloasis.domain.Usuario, java.lang.String>() {
             public String convert(Usuario usuario) {
-                return new StringBuilder().append(usuario.getNombre()).append(' ').append(usuario.getPrimer_apellido()).append(' ').append(usuario.getSegundo_apellido()).append(' ').append(usuario.getNombre_usuario()).toString();
+                return new StringBuilder().append(usuario.getNombre()).append(' ').append(usuario.getPrimer_apellido()).append(' ').append(usuario.getSegundo_apellido()).append(' ').append('(').append(usuario.getNombre_usuario()).append(')').toString();
             }
         };
     }

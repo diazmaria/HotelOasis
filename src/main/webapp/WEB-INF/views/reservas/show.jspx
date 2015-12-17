@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+<div xmlns:spring="http://www.springframework.org/tags" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:show id="ps_es_uca_iw_hoteloasis_domain_Reserva" object="${reserva}" path="/reservas" z="jmuaJBKZ7CqUXub+ihTZvPkISQ0=">
+        <h1 style="color:#113660; text-transform: uppercase; text-decoration:underline"><spring:message code="menu_item_reserva_new_label" /></h1>
         <field:display date="true" dateTimePattern="${reserva_fecha_reserva_date_format}" field="fecha_reserva" id="s_es_uca_iw_hoteloasis_domain_Reserva_fecha_reserva" object="${reserva}" z="fdS9A2QEMpwF2qslvakd7/Ts8+Y="/>
         <field:display date="true" dateTimePattern="${reserva_fecha_entrada_date_format}" field="fecha_entrada" id="s_es_uca_iw_hoteloasis_domain_Reserva_fecha_entrada" object="${reserva}" z="NFAu2rjszOdAnPLNn6D2OGsv9xU="/>
         <field:display date="true" dateTimePattern="${reserva_fecha_salida_date_format}" field="fecha_salida" id="s_es_uca_iw_hoteloasis_domain_Reserva_fecha_salida" object="${reserva}" z="jjPABdOUDx2NnQsW0ahImjwtfXs="/>

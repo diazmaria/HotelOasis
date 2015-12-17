@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+<div xmlns:spring="http://www.springframework.org/tags" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:show id="ps_es_uca_iw_hoteloasis_domain_Estancia" object="${estancia}" path="/estancias" z="cGbWsSUJQImmvzltnr7/00kKlis=">
+        <h1 style="color:#113660; text-transform: uppercase; text-decoration:underline"><spring:message code="label_es_uca_iw_hoteloasis_domain_bebida_consumo_estancia" /></h1>
         <field:display date="true" dateTimePattern="${estancia_fecha_check_in_date_format}" field="fecha_check_in" id="s_es_uca_iw_hoteloasis_domain_Estancia_fecha_check_in" object="${estancia}" z="ixXTyNCNoFETpgsHJW28j4qcbTs="/>
         <field:display date="true" dateTimePattern="${estancia_fecha_check_out_date_format}" field="fecha_check_out" id="s_es_uca_iw_hoteloasis_domain_Estancia_fecha_check_out" object="${estancia}" z="F7es6YJv1dO/n8H3SouZcZy8Zkc="/>
         <field:display field="reserva" id="s_es_uca_iw_hoteloasis_domain_Estancia_reserva" object="${estancia}" z="YRwS5VPfy4AIUl/5tztXeo0zzQs="/>

@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+<div xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:sec="http://www.springframework.org/security/tags" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields"  xmlns:spring="http://www.springframework.org/tags"  version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
+    
+    <sec:authorize access="hasAnyRole('Administrador', 'Recepcionista')" var="AdminRecep" />
+	<c:choose>
+	   <c:when test="${AdminRecep}">
     <page:list id="pl_es_uca_iw_hoteloasis_domain_Llamada" items="${llamadas}" z="zxeHYFyQ45j709K9kY8N57geHfw=">
+    <h1 style="color:#113660; text-align: center; text-transform: uppercase; text-decoration:underline"><spring:message code="label_es_uca_iw_hoteloasis_domain_estancia_llamadas" /></h1>
+       
         <table:table data="${llamadas}" id="l_es_uca_iw_hoteloasis_domain_Llamada" path="/llamadas" z="V1TITFDrpksLJmqxonVO9y/PG6c=">
             <table:column id="c_es_uca_iw_hoteloasis_domain_Llamada_minutos_nacionales" property="minutos_nacionales" z="qV7IJR5BY6hwaE4GfDc76O1tUl0="/>
             <table:column id="c_es_uca_iw_hoteloasis_domain_Llamada_minutos_internacionales" property="minutos_internacionales" z="8yozC/CmLJ2iEjigRKJj6k3c1NM="/>
@@ -10,4 +16,64 @@
             <table:column id="c_es_uca_iw_hoteloasis_domain_Llamada_minutos_internet" property="minutos_internet" z="8Gm6syj4APxHC0xSWV8W0Jf8dhI="/>
         </table:table>
     </page:list>
+ </c:when>
+	   <c:otherwise>
+		<spring:message code="security_login_title" var="title" htmlEscape="false" />
+  <util:panel id="title" title="${title}">
+    <c:if test="${not empty param.login_error}">
+      <div class="errores">
+          <spring:message code="security_login_unsuccessful" />
+          <c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}"/>
+      </div>
+      <p></p>
+
+    </c:if>
+   
+    <spring:url value="/resources/j_spring_security_check" var="form_url" />
+    
+    <h3 style="color:#113660">
+    	<spring:message code="security_login_title" />
+    </h3>
+    
+    
+    <form name="f" action="${fn:escapeXml(form_url)}" method="POST">
+      <div>
+        <label for="j_username">
+          <spring:message code="security_login_form_name" />
+        </label>
+        <input id="j_username" type='text' name='j_username' style="width:150px" />
+        <spring:message code="security_login_form_name_message" var="name_msg" htmlEscape="false" />
+        <script type="text/javascript">
+          <c:set var="sec_name_msg">
+            <spring:escapeBody javaScriptEscape="true">${name_msg}</spring:escapeBody>
+          </c:set>
+          Spring.addDecoration(new Spring.ElementDecoration({elementId : "j_username", widgetType : "dijit.form.ValidationTextBox", widgetAttrs : {promptMessage: "${sec_name_msg}", required : true}})); 
+        </script>
+      </div>
+      <br />
+      <div>
+        <label for="j_password">
+          <spring:message code="security_login_form_password" />
+        </label>
+        <input id="j_password" type='password' name='j_password' style="width:150px" />
+        <spring:message code="security_login_form_password_message" var="pwd_msg" htmlEscape="false" />
+        <script type="text/javascript">
+          <c:set var="sec_pwd_msg">
+            <spring:escapeBody javaScriptEscape="true">${pwd_msg}</spring:escapeBody>
+          </c:set>
+          Spring.addDecoration(new Spring.ElementDecoration({elementId : "j_password", widgetType : "dijit.form.ValidationTextBox", widgetAttrs : {promptMessage: "${sec_pwd_msg}", required : true}})); 
+        </script>
+      </div>
+      <br />
+      <div class="submit">
+        <script type="text/javascript">Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'proceed', event:'onclick'}));</script>
+        <spring:message code="button_submit" var="submit_label" htmlEscape="false" />
+        <input id="proceed" type="submit" value="${fn:escapeXml(submit_label)}" />
+        <spring:message code="button_reset" var="reset_label" htmlEscape="false" />
+        <input id="reset" type="reset" value="${fn:escapeXml(reset_label)}" />
+      </div>
+    </form>
+  </util:panel>
+	   </c:otherwise>
+	</c:choose>
 </div>

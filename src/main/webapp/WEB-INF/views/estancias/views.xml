@@ -49,8 +49,5 @@
 <definition extends="default" name="estancias/finServicio">
         <put-attribute name="body" value="/WEB-INF/views/estancias/finServicio.jspx"/>
 </definition>
-<definition extends="default" name="estancias/exitoMinibar">
-        <put-attribute name="body" value="/WEB-INF/views/estancias/exitoMinibar.jspx"/>
-</definition>
 
 </tiles-definitions>

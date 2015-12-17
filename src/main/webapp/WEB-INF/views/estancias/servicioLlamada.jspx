@@ -3,26 +3,36 @@
 	<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
 	    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
 	    <jsp:output omit-xml-declaration="yes"/>
-	   
+	    <util:panel id="ff_es_uca_iw_domain_Estancia" title="Consumir minibar">   
 	    <div style="margin-left:5px">
 	    <form action="/HotelOasis/estancias" method="post">
 	    
 			<c:if test="${servicio == 'llamada_nacional'}">
-				<h2 style="color:#113660">Llamada nacional</h2>
-				<div style="margin-left:5px">La tarifa para las llamadas nacionales es de: ${tarifa} €/min</div><br/>
-				<b><label>Número de teléfono: </label></b><input type="number" name="telefono" required="true" style="margin-left:5px"/><br/>
-				<br/><p style="display:inline-block; margin-right:54px; margin-left:5px">¿Realizar llamada?</p> <input type="submit" class ="enviar" name="action" value="llamar"/>  
+				<h2 style="color:#113660"><spring:message code="label_es_uca_iw_hoteloasis_domain_tarifa_llamada_nacional"/></h2>	
+				<img src="/HotelOasis/resources/images/phone_calls.png" style="margin-left: 29px; margin-top: -18px"/>
+				<div class="coste_servicio" style="margin-left:5px"><spring:message code="tarifa_servicio" arguments="${tarifa}"/></div><br/>
+				<b><label><spring:message code="telefono"/>: </label></b><input type="number" name="telefono" required="true" style="margin-left:5px"/><br/><br/>
+
 		    </c:if>
 		    <c:if test="${servicio == 'llamada_internacional'}">
-		    	<h2 style="color:#113660">Llamada internacional</h2>	
-		    	<div style="margin-left:5px">La tarifa para las llamadas internacionales es de: ${tarifa} cents/min</div><br/>
-				<b><label>Número de teléfono: </label></b><input type="number" name="telefono" required="true" style="margin-left:5px"/><br/>
-				<br/><p style="display:inline-block; margin-right:54px; margin-left:5px">¿Realizar llamada?</p> <input type="submit" class ="enviar" name="action" value="llamar"/>  
+		    	<h2 style="color:#113660"><spring:message code="label_es_uca_iw_hoteloasis_domain_tarifa_llamada_internacional"/></h2>		
+		    	<img src="/HotelOasis/resources/images/phone_calls.png" style="margin-left: 29px; margin-top: -18px"/>
+		    	<div class="coste_servicio" style="margin-left:5px"><spring:message code="tarifa_servicio" arguments="${tarifa}"/></div><br/>
+				<b><label><spring:message code="telefono"/>: </label></b><input type="number" name="telefono" required="true" style="margin-left:5px"/><br/><br/>
+	
+		  
 		    </c:if>
+		    <spring:message code="comenzar" var="comenzar"/>	
+		       <input class="enviar" type="submit" name="internet" value="${comenzar}" style="padding-right:40px"/>
+		     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Play_groen.png/600px-Play_groen.png" style="margin-left: -40px;
+			margin-top: 5px; position:absolute; width:23px"/>
 		    	
 		    <input type="hidden" name="estancia" value="${estancia.id}"/>
 		    <input type="hidden" name="servicio" value="${servicio}"/>
+		    <input type="hidden" name="tarifa" value="${tarifa}"/>
 	    </form>
 	</div>
+	</util:panel>
 	</div>
+
 </jsp:root>

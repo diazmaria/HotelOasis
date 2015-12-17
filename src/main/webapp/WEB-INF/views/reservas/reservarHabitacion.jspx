@@ -3,15 +3,16 @@
 	<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
 	    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
 	    <jsp:output omit-xml-declaration="yes"/>
-	    	
-	    	<h3 style="color:#113660">Confirmar la reserva</h3><hr/>
+		<util:panel id="title" title="Hotel Oasis">
+
+	    	<h1 style="color:#113660"><spring:message code="confirmar_reserva" /></h1><hr/>
 	    	<div style="margin-left:5px">
 		    <form action="/HotelOasis/reservas?confirmar" method="post">
 				<c:if test="${not empty usuario}">
 					<input type="hidden" name="usuario" value="${usuario.id}"/>
 				</c:if>
 				<c:if test="${not empty staff}">
-					<p>Realizar en nombre de:</p>
+					<p><spring:message code="nombre_de" /></p>
 					<select name="usuario">
 						<option value="">-</option>
 						<c:forEach items="${usuarios}" var="item">
@@ -21,39 +22,74 @@
 					<br/><br/>
 				</c:if>
 				<c:if test="${not empty visitante}">
-					
-					<p>Rellene el siguiente formulario para confirmar la reserva.</p>
-					<p>El <u>nombre de usuario</u> y la <u>contraseña</u> proporcionados le servirán para gestionar sus reservas y acceder a los servicios del hotel.
-					</p>
+				
+					<spring:message code="mensaje_registro" />
 					<div style="margin-top:25px"></div>
+					
 					<c:if test="${not empty errores}">
-			    		<c:forEach items="${errores}" var="error">
-			    			<span class="errors">${error}</span><br/><br/>
-			    		</c:forEach>
+					<c:forEach items="${errores}" var="error">
+						<c:choose>
+							<c:when test="${error == 'username_uso'}">
+								<h3 style="color: #CB001D">
+								      <spring:message code="username_uso" />
+								</h3>
+							</c:when>
+							<c:when test="${error == 'tamano_nombre'}">
+								<h3 style="color: #CB001D">
+								      <spring:message code="tamano_nombre" />
+								</h3>
+							</c:when>			
+							<c:when test="${error == 'tamano_primer_apell'}">
+								<h3 style="color: #CB001D">
+								      <spring:message code="tamano_primer_apell" />
+								</h3>
+							</c:when>
+							<c:when test="${error == 'tamano_seg_apell'}">
+								<h3 style="color: #CB001D">
+								      <spring:message code="tamano_seg_apell" />
+								</h3>
+							</c:when>
+							<c:when test="${error == 'tamano_clave'}">
+								<h3 style="color: #CB001D">
+								      <spring:message code="tamano_clave" />
+								</h3>
+							</c:when>
+							<c:when test="${error == 'email_valido'}">
+								<h3 style="color: #CB001D">
+								      <spring:message code="email_valido" />
+								</h3>
+							</c:when>
+							<c:when test="${error == 'tamano_username'}">
+								<h3 style="color: #CB001D">
+								      <spring:message code="tamano_username" />
+								</h3>
+							</c:when>
+						</c:choose>
+			    	</c:forEach>
 			    	</c:if>
 			
 					<p>
-						<b><label>Nombre: </label></b>
+						<b><label><spring:message code="label_es_uca_iw_hoteloasis_domain_usuario_nombre"/> </label></b>
 						<input type="text" name="nombre" required="true" value="${nombre}"></input>
 					</p>
 					<p>
-						<b><label>Primer apellido: </label></b>
+						<b><label><spring:message code="label_es_uca_iw_hoteloasis_domain_usuario_primer_apellido"/>: </label></b>
 						<input type="text" name="primer_apellido" required="true" value="${primer_apellido}"></input>
 					</p>
 					<p>
-						<b><label>Segundo apellido: </label></b>
-						<input type="text" name="segundo_apellido" required="true" value="${segundo_apellido}"></input>
+						<b><label><spring:message code="label_es_uca_iw_hoteloasis_domain_usuario_segundo_apellido"/>: </label></b>
+						<input type="text" name="segundo_apellido" value="${segundo_apellido}"></input>
 					</p>
 					<p>
-						<b><label>E-mail</label></b>
+						<b><label><spring:message code="label_es_uca_iw_hoteloasis_domain_usuario_email"/>: </label></b>
 						<input type="text" name="email" required="true" value="${email}"></input>
 					</p>
 					<p>
-						<b><label>Nombre de usuario: </label></b>
+						<b><label><spring:message code="label_es_uca_iw_hoteloasis_domain_usuario_nombre_usuario"/>: </label></b>
 						<input type="text" name="nombre_usuario" required="true" value="${nombre_usuario}"></input>
 					</p>
 					<p>
-						<b><label>Contraseña: </label></b>
+						<b><label><spring:message code="label_es_uca_iw_hoteloasis_domain_usuario_clave"/>: </label></b>
 						<input type="password" name="clave" required="true"></input>
 					</p>
 				</c:if>
@@ -66,8 +102,10 @@
 				<input type="hidden" name="fecha_salida" value="${fecha_salida}"/>
 				<input type="hidden" name="cama_supletoria" value="${cama_supletoria}"/>	
 				<input type="hidden" name="coste_reserva" value="${coste_reserva}"/>
-				<input type="submit" class ="enviar" name="action" value="reservar"></input>
+				<spring:message code="reservar" var="reservar"/>
+				<input type="submit" class ="enviar" name="action" value="${reservar}"/>
 			</form>
 	</div>
+	</util:panel>
 	</div>
 </jsp:root>

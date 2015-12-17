@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+<div xmlns:spring="http://www.springframework.org/tags"  xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <form:update id="fu_es_uca_iw_hoteloasis_domain_Hotel" modelAttribute="hotel" path="/hotels" versionField="Version" z="7rvUF+3YRmPcB/MQUtJ4dwRFjTI=">
+        <spring:message code="menu_item_hotel_new_label" var="val"/>	
+        <h1 style="color:#113660; text-transform: uppercase; text-decoration:underline"><spring:message code="editar" arguments="${val}"/></h1> 
         <field:input field="nombre" id="c_es_uca_iw_hoteloasis_domain_Hotel_nombre" max="30" required="true" z="Voh4PBYNhfv7q9h+zF5dJR/clXc="/>
         <field:input field="provincia" id="c_es_uca_iw_hoteloasis_domain_Hotel_provincia" max="30" min="4" required="true" z="C2AXKcX5ZBA2UHM4FyHpGKpdYG0="/>
         <field:input field="poblacion" id="c_es_uca_iw_hoteloasis_domain_Hotel_poblacion" max="30" min="4" required="true" z="4fkQCgas9NcTmq4ncozpHszWjDA="/>

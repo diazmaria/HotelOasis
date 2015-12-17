@@ -5,12 +5,16 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.lang3.LocaleUtils;
 import org.joda.time.Days;
 import org.joda.time.LocalDate;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -44,7 +48,7 @@ public class ReservaController {
 
     //------CU1 ------ BUSCAR HABITACIONES DISPONIBLES Y MOSTRAR LOS DETALLES
     @RequestMapping(params = "find=HabitacionesDisponibles", method = RequestMethod.GET)
-    public String findHabitacionesDisponibles(@RequestParam("hotel") Hotel hotel, @RequestParam("categoria") Categoria categoria, @RequestParam("tipo") Habitacion_tipo tipo, @RequestParam("fecha_entrada") @DateTimeFormat(style = "M-") Date fecha_entrada, @RequestParam("fecha_salida") @DateTimeFormat(style = "M-") Date fecha_salida, @RequestParam(value = "cama_supletoria", required = false) Boolean cama_supletoria, Model uiModel) {
+    public String findHabitacionesDisponibles(@RequestParam("hotel") Hotel hotel, @RequestParam("categoria") Categoria categoria, @RequestParam("tipo") Habitacion_tipo tipo, @DateTimeFormat(pattern="dd-MMM-yyyy") @RequestParam("fecha_entrada") Date fecha_entrada, @DateTimeFormat(pattern="dd-MMM-yyyy") @RequestParam("fecha_salida") Date fecha_salida, @RequestParam(value = "cama_supletoria", required = false) Boolean cama_supletoria, Model uiModel) {
         uiModel.addAttribute("hotels", Hotel.findAllHotels());
         uiModel.addAttribute("categorias", Categoria.findAllCategorias());
         uiModel.addAttribute("tipos", java.util.Arrays.asList(Habitacion_tipo.class.getEnumConstants()));
@@ -67,10 +71,12 @@ public class ReservaController {
             uiModel.addAttribute("error", "Error: La fecha de entrada no puede ser posterior a la de salida.");
             return "reservas/findHabitacionesDisponibles";
         } else if (Days.daysBetween(new LocalDate(fecha_entrada), new LocalDate(fecha_salida)).getDays() > hotel.getDias_maximos()) {
-            uiModel.addAttribute("error", "Error: No está permitido hacer reservas de más de " + hotel.getDias_maximos() + " días.");
+            uiModel.addAttribute("error", "Error: No está permitido hacer reservas de mas de");
+            uiModel.addAttribute("dias_maximos", hotel.getDias_maximos());
             return "reservas/findHabitacionesDisponibles";
         } else if (Days.daysBetween(new LocalDate(hoy), new LocalDate(fecha_entrada)).getDays() > hotel.getDias_antelacion()) {
-            uiModel.addAttribute("error", "Error: No se puede realizar una reserva con una antelación superior a " + hotel.getDias_antelacion() + " días.");
+            uiModel.addAttribute("error", "Error: No se puede realizar una reserva con una antelacion superior");
+            uiModel.addAttribute("dias_antelacion", hotel.getDias_antelacion());
             return "reservas/findHabitacionesDisponibles";
         }
         //Llamada al finder de habitaciones disponibles
@@ -78,24 +84,27 @@ public class ReservaController {
         String mensaje;
         Boolean precioSimpleporDoble = false;
         if (habitacionesDisponibles <= 0) {
-            if (tipo.name().equals("SIMPLE")) {
-                tipo = Habitacion_tipo.DOBLE;
+            if (tipo.name().equals("SINGLE")) {
+                tipo = Habitacion_tipo.DOUBLE;
                 habitacionesDisponibles = Reserva.findHabitacionesDisponibles(hotel, categoria, tipo, fecha_entrada, fecha_salida);
                 if (habitacionesDisponibles <= 0) {
-                    mensaje = "No hay habitaciones SIMPLES (ni DOBLES) disponibles con las siguientes características:";
-                    tipo = Habitacion_tipo.SIMPLE;
+                    mensaje = "no_hay_ninguna";
+                    tipo = Habitacion_tipo.SINGLE;
                 } else {
                     precioSimpleporDoble = true;
-                    if (habitacionesDisponibles == 1) mensaje = "No hay habitaciones SIMPLES disponibles pero hay " + habitacionesDisponibles + " habitación DOBLE disponible con las siguientes características:  <p>  (Se le cobrará el precio de una SIMPLE) </p>"; else mensaje = "No hay habitaciones SIMPLES disponibles pero hay " + habitacionesDisponibles + " habitaciones DOBLES disponibles con las siguientes características: <p>   (Se le cobrará el precio de una SIMPLE) </p>";
+                    if (habitacionesDisponibles == 1) mensaje = "hay_doble"; else mensaje = "hay_dobles";
                 }
-            } else mensaje = "No hay habitaciones disponibles con las siguientes características:";
-        } else {
-            if (habitacionesDisponibles == 1) mensaje = "Hay " + habitacionesDisponibles + " habitación disponible con las siguientes características:"; else mensaje = "Hay " + habitacionesDisponibles + " habitaciones disponibles con las siguientes características:";
+            } 
+
+            else mensaje = "no_hay";
+        } 
+        else {
+            if (habitacionesDisponibles == 1) mensaje = "hay_habitacion"; else mensaje = "hay_habitaciones";
         }
         //Cálculo del coste de alojamiento
         int dias = Days.daysBetween(new LocalDate(fecha_entrada), new LocalDate(fecha_salida)).getDays();
         double coste_habitacion = 0, coste_cama_supletoria = 0, coste_reserva = 0;
-        if (tipo.name().equals("SIMPLE") || precioSimpleporDoble) {
+        if (tipo.name().equals("SINGLE") || precioSimpleporDoble) {
             coste_habitacion = hotel.getPrecio_hab_simple();
         } else {
             coste_habitacion = hotel.getPrecio_hab_doble();
@@ -111,8 +120,8 @@ public class ReservaController {
         uiModel.addAttribute("hotel", hotel);
         uiModel.addAttribute("categoria", categoria);
         uiModel.addAttribute("tipo", tipo);
-        uiModel.addAttribute("fecha_entrada", new SimpleDateFormat("dd-MMM-yyyy").format(fecha_entrada));
-        uiModel.addAttribute("fecha_salida", new SimpleDateFormat("dd-MMM-yyyy").format(fecha_salida));
+        uiModel.addAttribute("fecha_entrada", new SimpleDateFormat("dd-MMM-yyyy", LocaleContextHolder.getLocale()).format(fecha_entrada));
+        uiModel.addAttribute("fecha_salida", new SimpleDateFormat("dd-MMM-yyyy", LocaleContextHolder.getLocale()).format(fecha_salida));
         uiModel.addAttribute("cama_supletoria", cama_supletoria);
         uiModel.addAttribute("coste_habitacion", coste_habitacion);
         uiModel.addAttribute("coste_cama_supletoria", coste_cama_supletoria);
@@ -126,14 +135,14 @@ public class ReservaController {
 
     //------CU2 ------ RESERVAR HABITACIÓN (COMPROBAR AUTENTICACIÓN USUARIO, MOSTRAR FORMULARIO REGISGTRO SI NO AUTENTICADO)
     @RequestMapping(params = { "completar" }, method = RequestMethod.POST, produces = "text/html")
-    public String reservarHabitacion(@RequestParam("hotel") Hotel hotel, @RequestParam("categoria") Categoria categoria, @RequestParam("tipo") Habitacion_tipo tipo, @RequestParam("fecha_entrada") @DateTimeFormat(style = "M-") Date fecha_entrada, @RequestParam("fecha_salida") @DateTimeFormat(style = "M-") Date fecha_salida, @RequestParam(value = "cama_supletoria", required = false) Boolean cama_supletoria, @RequestParam("coste_reserva") double coste_reserva, HttpServletRequest httpServletRequest, Model uiModel) {
-        uiModel.addAttribute("hotel", hotel);
+    public String reservarHabitacion(@RequestParam("hotel") Hotel hotel, @RequestParam("categoria") Categoria categoria, @RequestParam("tipo") Habitacion_tipo tipo, @RequestParam(value = "cama_supletoria", required = false) Boolean cama_supletoria, @DateTimeFormat(pattern="dd-MMM-yyyy") @RequestParam("fecha_entrada") Date fecha_entrada, @DateTimeFormat(pattern="dd-MMM-yyyy") @RequestParam("fecha_salida") Date fecha_salida, @RequestParam("coste_reserva") double coste_reserva, HttpServletRequest httpServletRequest, Model uiModel) {
+    	uiModel.addAttribute("hotel", hotel);
         uiModel.addAttribute("categoria", categoria);
         uiModel.addAttribute("tipo", tipo);
         uiModel.addAttribute("coste_reserva", coste_reserva);
         uiModel.addAttribute("cama_supletoria", cama_supletoria);
-        uiModel.addAttribute("fecha_entrada", new SimpleDateFormat("dd-MMM-yyyy").format(fecha_entrada));
-        uiModel.addAttribute("fecha_salida", new SimpleDateFormat("dd-MMM-yyyy").format(fecha_salida));
+        uiModel.addAttribute("fecha_entrada", new SimpleDateFormat("dd-MMM-yyyy", LocaleContextHolder.getLocale()).format(fecha_entrada));
+        uiModel.addAttribute("fecha_salida", new SimpleDateFormat("dd-MMM-yyyy", LocaleContextHolder.getLocale()).format(fecha_salida));
         //Comprobar usuario autenticado
         Principal usuario = SecurityContextHolder.getContext().getAuthentication();
         Usuario u = Usuario.findUsuariosByNombreUsuarioEquals(usuario.getName());
@@ -153,7 +162,7 @@ public class ReservaController {
 
     //------CU2 ------ RESERVAR HABITACIÓN (COMPLETAR RESERVA, CREAR USUARIO SI EL USUARIO NO ESTABA AUTENTICADO Y MOSTRAR CÓDIGO)
     @RequestMapping(params = { "confirmar" }, method = RequestMethod.POST, produces = "text/html")
-    public String confirmarReserva(@RequestParam("hotel") Hotel hotel, @RequestParam("categoria") Categoria categoria, @RequestParam("tipo") Habitacion_tipo tipo, @RequestParam("fecha_entrada") @DateTimeFormat(style = "M-") Date fecha_entrada, @RequestParam("fecha_salida") @DateTimeFormat(style = "M-") Date fecha_salida, @RequestParam(value = "cama_supletoria", required = false) Boolean cama_supletoria, @RequestParam("coste_reserva") double coste_reserva, HttpServletRequest httpServletRequest, Model uiModel) throws NoSuchAlgorithmException {
+    public String confirmarReserva(@RequestParam("hotel") Hotel hotel, @RequestParam("categoria") Categoria categoria, @RequestParam("tipo") Habitacion_tipo tipo, @DateTimeFormat(pattern="dd-MMM-yyyy") @RequestParam("fecha_entrada") Date fecha_entrada, @DateTimeFormat(pattern="dd-MMM-yyyy") @RequestParam("fecha_salida") Date fecha_salida, @RequestParam(value = "cama_supletoria", required = false) Boolean cama_supletoria, @RequestParam("coste_reserva") double coste_reserva, HttpServletRequest httpServletRequest, Model uiModel) throws NoSuchAlgorithmException {
         String id_usuario = httpServletRequest.getParameter("usuario");
         //Usuario visitante realiza la reserva
         if (id_usuario.equals("visitante")) {
@@ -168,13 +177,12 @@ public class ReservaController {
             Pattern p = Pattern.compile("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$");
             Matcher m = p.matcher(email);
             //Validación del formulario de registro
-            if (Usuario.findUsuariosByNombreUsuarioEquals(nombre_usuario) != null) errores.add("El nombre de usuario " + nombre_usuario + " está ya en uso.");
-            if (nombre.length() < 2 || nombre.length() > 30 || nombre.trim().length() == 0) errores.add("El tamaño del nombre debe estar entre 2 y 30.");
-            if (primer_apellido.length() < 2 || primer_apellido.length() > 30 || primer_apellido.trim().length() == 0) errores.add("El tamaño del primer apellido debe estar entre 2 y 30.");
-            if (segundo_apellido.length() < 2 || segundo_apellido.length() > 30 || segundo_apellido.trim().length() == 0) errores.add("El tamaño de segundo apellido debe estar entre 2 y 30.");
-            if (nombre_usuario.length() < 2 || nombre_usuario.length() > 30 || nombre_usuario.trim().length() == 0) errores.add("El tamaño del nombre de usuario debe estar entre 2 y 30.");
-            if (clave.length() < 2 || clave.length() > 20 || clave.trim().length() == 0) errores.add("El tamaño de la clave debe estar entre 2 y 20.");
-            if (!m.matches()) errores.add("Introduzca un e-mail válido.");
+            if (Usuario.findUsuariosByNombreUsuarioEquals(nombre_usuario) != null) errores.add("username_uso");
+            if (nombre.length() < 2 || nombre.length() > 30 || nombre.trim().length() == 0) errores.add("tamano_nombre");
+            if (primer_apellido.length() < 2 || primer_apellido.length() > 30 || primer_apellido.trim().length() == 0) errores.add("tamano_primer_apell");
+            if (nombre_usuario.length() < 2 || nombre_usuario.length() > 30 || nombre_usuario.trim().length() == 0) errores.add("tamano_username");
+            if (clave.length() < 2 || clave.length() > 20 || clave.trim().length() == 0) errores.add("tamano_clave");
+            if (!m.matches()) errores.add("email_valido");
             if (!errores.isEmpty()) {
                 uiModel.addAttribute("errores", errores);
                 uiModel.addAttribute("usuario", null);
@@ -184,8 +192,8 @@ public class ReservaController {
                 uiModel.addAttribute("tipo", tipo);
                 uiModel.addAttribute("coste_reserva", coste_reserva);
                 uiModel.addAttribute("cama_supletoria", cama_supletoria);
-                uiModel.addAttribute("fecha_entrada", new SimpleDateFormat("dd-MMM-yyyy").format(fecha_entrada));
-                uiModel.addAttribute("fecha_salida", new SimpleDateFormat("dd-MMM-yyyy").format(fecha_salida));
+                uiModel.addAttribute("fecha_entrada", new SimpleDateFormat("dd-MMM-yyyy", LocaleContextHolder.getLocale()).format(fecha_entrada));
+                uiModel.addAttribute("fecha_salida", new SimpleDateFormat("dd-MMM-yyyy", LocaleContextHolder.getLocale()).format(fecha_salida));
                 uiModel.addAttribute("nombre", nombre);
                 uiModel.addAttribute("primer_apellido", primer_apellido);
                 uiModel.addAttribute("segundo_apellido", segundo_apellido);
@@ -217,33 +225,38 @@ public class ReservaController {
     public String cancelarform(HttpServletRequest httpServletRequest, Model uiModel) {
         return "reservas/cancelarReserva";
     }
-
+    
     //------CU3 ------ CANCELAR RESERVA Y MOSTRAR ÉXITO/FRACASO CANCELACIÓN
-    @RequestMapping(params = { "cancelar" }, method = RequestMethod.POST, produces = "text/html")
-    public String cancelarReserva(@RequestParam("id") long id, Principal principal, HttpServletRequest httpServletRequest, Model uiModel) {
-        long id_reserva = Long.parseLong(httpServletRequest.getParameter("id"));
+    @RequestMapping(params = { "cancelar" }, method = { RequestMethod.GET, RequestMethod.POST }, produces = "text/html")
+    public String cancelarReserva(@RequestParam(value = "id", required = false) Long id, Principal principal, HttpServletRequest httpServletRequest, Model uiModel) {
+    	
+    	if(httpServletRequest.getParameter("id") == null)
+    		return "reservas/cancelarReserva";
+    		
+    	long id_reserva = Long.parseLong(httpServletRequest.getParameter("id"));
+    	
         Usuario usuario = Usuario.findUsuariosByNombreUsuarioEquals(principal.getName());
         Rol rol = usuario.getRol();
         if (Reserva.findReserva(id_reserva) == null) {
-            uiModel.addAttribute("error", "El número de reserva es erróneo.");
+            uiModel.addAttribute("error", "reserva_erroneo");
             return "reservas/cancelarReserva";
         }
         Usuario usuario_reserva = Reserva.findReserva(id_reserva).getUsuario();
         if (Reserva.findReserva(id).getFecha_cancelacion() != null) {
-            uiModel.addAttribute("error", "Error: No es posible cancelar esta reserva, ya ha sido cancelada.");
+            uiModel.addAttribute("error", "reserva_cancelada");
             return "reservas/cancelarReserva";
         }
         if (!usuario_reserva.equals(usuario) && rol.equals(Rol.findRolsByNombreEquals("Usuario").getSingleResult())) {
-            uiModel.addAttribute("error", "Error: Este código de reserva no le pertenece.");
+            uiModel.addAttribute("error", "reserva_no_pertenece");
             return "reservas/cancelarReserva";
         }
         if (!Estancia.findEstanciasByReserva(Reserva.findReserva(id)).getResultList().isEmpty()) {
-            uiModel.addAttribute("error", "Error: No es posible cancelar esta reserva, ya se hizo el check-in.");
+            uiModel.addAttribute("error", "reserva_hizo_checkin");
             return "reservas/cancelarReserva";
         }
         int dias = Days.daysBetween(new LocalDate(new Date()), new LocalDate(Reserva.findReserva(Long.parseLong(httpServletRequest.getParameter("id"))).getFecha_entrada())).getDays();
         if (dias < 0) {
-            uiModel.addAttribute("error", "Error: No es posible cancelar esta reserva porque la fecha de entrada ya ha pasado.");
+            uiModel.addAttribute("error", "reserva_fecha_pasada");
             return "reservas/cancelarReserva";
         }
         Reserva r = Reserva.findReserva(Long.parseLong(httpServletRequest.getParameter("id")));
@@ -255,9 +268,11 @@ public class ReservaController {
         String cama;
         if (r.getCama_supletoria() == null) cama = "No"; else cama = "Si";
         uiModel.addAttribute("cama_supletoria", cama);
-        uiModel.addAttribute("fecha_entrada", new SimpleDateFormat("dd-MMM-yyyy").format(r.getFecha_entrada()));
-        uiModel.addAttribute("fecha_salida", new SimpleDateFormat("dd-MMM-yyyy").format(r.getFecha_salida()));
-        uiModel.addAttribute("fecha_reserva", new SimpleDateFormat("dd-MMM-yyyy").format(r.getFecha_reserva()));
+        
+        uiModel.addAttribute("fecha_entrada", new SimpleDateFormat("dd-MMM-yyyy", LocaleContextHolder.getLocale()).format(r.getFecha_entrada()));
+        uiModel.addAttribute("fecha_salida", new SimpleDateFormat("dd-MMM-yyyy", LocaleContextHolder.getLocale()).format(r.getFecha_salida()));
+        uiModel.addAttribute("fecha_reserva", new SimpleDateFormat("dd-MMM-yyyy", LocaleContextHolder.getLocale()).format(r.getFecha_reserva()));
+        
         int compensacion;
         if (dias >= 5) compensacion = 0; else if (dias >= 2 && dias < 5) compensacion = 10; else if (dias >= 1 && dias < 2) compensacion = 30; else compensacion = 100;
         uiModel.addAttribute("id", id);

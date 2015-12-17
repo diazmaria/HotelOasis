@@ -4,20 +4,34 @@
 	    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
 	    <jsp:output omit-xml-declaration="yes"/>
 	    
-	    <h2 style="color:#113660; margin-bottom:25px">Elegir Servicio</h2>
+		<util:panel id="ff_es_uca_iw_domain_Estancia" title="Consumir servicios">   
+	    <h2 style="color:#113660; margin-bottom:25px"><spring:message code="elegir" /></h2>
 	    
 	    <form action="/HotelOasis/estancias" id="servicios">
 	    	<input type="hidden" name="servicios"/>
 	    	<input type="hidden" name="estancia" value="${estancia.id}"/>
 			
-			<img src="/HotelOasis/resources/images/bebida.png"/>
-			<input style="margin-left:10px;margin-right:20px" class="enviar" type="submit" name="minibar" value="Bebidas Minibar"/>
-			<img src="/HotelOasis/resources/images/llamada_nacional.png"/>
-			<input style="margin-left:10px;margin-right:20px; margin-top:-10px" class="enviar" type="submit" name="llamada_nacional" value="Llamada nacional"/>
-			<img src="/HotelOasis/resources/images/llamada_internacional.png"/>
-			<input style="margin-left:10px;margin-right:20px" class="enviar" type="submit" name="llamada_internacional" value="Llamada internacional"/>
-			<img src="/HotelOasis/resources/images/internet.png"/>
-			<input style="margin-left:10px;margin-right:20px" class="enviar" type="submit" name="internet" value="Acceso a internet"/>
+			 <table style="width: auto">
+			  <tr>
+			    <td><img src="/HotelOasis/resources/images/drinks.png"/></td>
+			    <td><img src="/HotelOasis/resources/images/internet.png"/></td>
+			    <td><img src="/HotelOasis/resources/images/phone_calls.png"/></td>
+			  </tr>
+			  <tr>
+			  
+			    <spring:message code="label_es_uca_iw_hoteloasis_domain_minibar_bebida_plural" var="bebidas"/>	
+			    <spring:message code="acceso_internet" var="internet"/>	
+			    <spring:message code="label_es_uca_iw_hoteloasis_domain_tarifa_llamada_nacional" var="nacional"/>	
+			    <spring:message code="label_es_uca_iw_hoteloasis_domain_tarifa_llamada_internacional" var="internacional"/>	
+			    
+			    <td><input style="margin-left:10px;margin-right:20px" class="enviar" type="submit" name="minibar" value="${bebidas}"/></td>
+			    <td><input style="margin-left:10px;margin-right:20px" class="enviar" type="submit" name="internet" value="${internet}"/></td>
+			    <td><input style="margin-left:10px;margin-right:20px; margin-top:-10px" class="enviar" type="submit" name="llamada_nacional" value="${nacional}"/>
+					<input style="margin-left:10px;margin-right:20px" class="enviar" type="submit" name="llamada_internacional" value="${internacional}"/>
+				</td>
+			  </tr>
+			</table> 
 	    </form><br/>
+	    </util:panel>
 	</div>
 </jsp:root>

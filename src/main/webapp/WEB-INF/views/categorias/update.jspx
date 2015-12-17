@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:spring="http://www.springframework.org/tags" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <form:update id="fu_es_uca_iw_hoteloasis_domain_Categoria" modelAttribute="categoria" path="/categorias" versionField="Version" z="QwX6+2XSGw/efD0ahy/96lH1XzE=">
+        <spring:message code="label_es_uca_iw_hoteloasis_domain_bebida_categoria" var="val"/>	
+        <h1 style="color:#113660; text-transform: uppercase; text-decoration:underline"><spring:message code="editar" arguments="${val}"/></h1>
         <field:input field="nombre" id="c_es_uca_iw_hoteloasis_domain_Categoria_nombre" required="true" z="R3z3GXLnAT6MM0uadYgQBnpSzZs="/>
         <field:input field="descripcion" id="c_es_uca_iw_hoteloasis_domain_Categoria_descripcion" z="z3RH7TCc48Ghvxrgh2tMJ5X7HAs="/>
         <field:input field="precio_categoria" id="c_es_uca_iw_hoteloasis_domain_Categoria_precio_categoria" required="true" z="qXCpDm6ADVvzfCt30txMy1Sof7o="/>

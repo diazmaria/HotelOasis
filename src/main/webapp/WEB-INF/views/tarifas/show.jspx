@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+<div xmlns:spring="http://www.springframework.org/tags" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:show id="ps_es_uca_iw_hoteloasis_domain_Tarifa" object="${tarifa}" path="/tarifas" z="FU48uTfbf4YRGyTpr4w4Dt2bh7Y=">
+        <h1 style="color:#113660; text-transform: uppercase; text-decoration:underline"><spring:message code="menu_item_tarifa_new_label" /></h1>
         <field:display field="llamada_nacional" id="s_es_uca_iw_hoteloasis_domain_Tarifa_llamada_nacional" object="${tarifa}" z="R9N4XtM5/qizaaXuFCDc8HZn+Hw="/>
         <field:display field="llamada_internacional" id="s_es_uca_iw_hoteloasis_domain_Tarifa_llamada_internacional" object="${tarifa}" z="QV9rTaGc3sKmZ5p7VMyvf6SEj6Q="/>
         <field:display field="internet" id="s_es_uca_iw_hoteloasis_domain_Tarifa_internet" object="${tarifa}" z="Fb4E294w93cBj6EP5SPt8koXvOA="/>

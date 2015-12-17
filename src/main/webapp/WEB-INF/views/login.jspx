@@ -11,15 +11,17 @@
       <p></p>
 
     </c:if>
-    <c:if test="${empty param.login_error}">
-        <spring:message code="security_login_message" />
-        <p></p>
-    </c:if>
+   
     <spring:url value="/resources/j_spring_security_check" var="form_url" />
     
+    <h3 style="color:#113660">
+    	<spring:message code="security_login_title" />
+    </h3>
+    
+
     <form name="f" action="${fn:escapeXml(form_url)}" method="POST">
       <div>
-        <label for="j_username">
+        <label class="label_login" for="j_username">
           <spring:message code="security_login_form_name" />
         </label>
         <input id="j_username" type='text' name='j_username' style="width:150px" />
@@ -33,7 +35,7 @@
       </div>
       <br />
       <div>
-        <label for="j_password">
+        <label class="label_login" for="j_password">
           <spring:message code="security_login_form_password" />
         </label>
         <input id="j_password" type='password' name='j_password' style="width:150px" />

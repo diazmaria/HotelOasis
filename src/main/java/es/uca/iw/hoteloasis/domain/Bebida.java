@@ -8,7 +8,7 @@ import javax.persistence.ManyToOne;
 @RooJavaBean
 @RooToString
 @RooJpaActiveRecord(finders = { "findBebidasByCategoria" })
-public class Bebida {
+public class Bebida implements Comparable<Bebida>{
 
     /**
      */
@@ -28,4 +28,10 @@ public class Bebida {
      */
     @ManyToOne
     private Categoria categoria;
+
+	@Override
+	public int compareTo(Bebida other) {
+		int last = this.nombre.compareTo(other.nombre);
+		return last == 0 ? this.nombre.compareTo(other.nombre) : last;
+	}
 }

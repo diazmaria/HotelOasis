@@ -1,15 +1,26 @@
-<div xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" >
   <jsp:directive.page contentType="text/html;charset=UTF-8" />
   <jsp:output omit-xml-declaration="yes" />
+    <span id="language">
+    <spring:message code="global_language"/>
+    <c:out value=": "/>
+    <util:language label="English" locale="en"/>
+    <util:language label="Espanol" locale="es"/>
+    </span>
+    
   <spring:message var="app_name" code="application_name" htmlEscape="false" />
   <spring:message var="title" code="welcome_titlepane" arguments="${app_name}" htmlEscape="false" />
+  <br/><br/>
   <util:panel id="title" title="Hotel Oasis">
+
     <h3 style="color:#113660">
-      <spring:message code="welcome_h3" arguments="la cadena hotelera Hotel Oasis" />
+      <spring:message code="welcome_h3" arguments="${app_name}" />
     </h3>
     <p style="margin-left:5px">
-      <spring:message code="welcome_text" />
+      <spring:message code="welcome_text" /><br/><br/>
 <div id="comslider_in_point_674748" style="text-align:center"></div><script type="text/javascript">var oCOMScript674748=document.createElement('script');oCOMScript674748.src="http://commondatastorage.googleapis.com/comslider/target/users/1433880428x5356a15d66dcaa6cac36f326815aaccd/comslider.js?timestamp=1433880674";oCOMScript674748.type='text/javascript';document.getElementsByTagName("head").item(0).appendChild(oCOMScript674748);</script> 
 </p>
-  </util:panel></div>
+  </util:panel><br/>
+  
+  </div>
   

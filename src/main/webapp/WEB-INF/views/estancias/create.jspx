@@ -3,6 +3,8 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <form:create id="fc_es_uca_iw_hoteloasis_domain_Estancia" modelAttribute="estancia" path="/estancias" render="${empty dependencies}" z="EnjCmgYjoeMdj7CGmJWgOogsokg=">
+        <spring:message code="menu_item_estancia_new_label" var="val"/>	
+        <h1 style="color:#113660; text-transform: uppercase; text-decoration:underline"><spring:message code="crear" arguments="${val}"/></h1>
         <field:datetime dateTimePattern="${estancia_fecha_check_in_date_format}" field="fecha_check_in" id="c_es_uca_iw_hoteloasis_domain_Estancia_fecha_check_in" z="JVzPXt0J12QLxcMqLMhTgwePmLY="/>
         <field:datetime dateTimePattern="${estancia_fecha_check_out_date_format}" field="fecha_check_out" id="c_es_uca_iw_hoteloasis_domain_Estancia_fecha_check_out" z="k/HLt/4fG8rXEGOGIFKE2GX6pzI="/>
         <field:select field="reserva" id="c_es_uca_iw_hoteloasis_domain_Estancia_reserva" itemValue="id" items="${reservas}" path="/reservas" z="2Hr1bIQhw1bd8e9NvC3iXs+xs4c="/>

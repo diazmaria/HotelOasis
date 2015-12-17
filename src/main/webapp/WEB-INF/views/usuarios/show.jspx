@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+<div xmlns:spring="http://www.springframework.org/tags" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:show id="ps_es_uca_iw_hoteloasis_domain_Usuario" object="${usuario}" path="/usuarios" z="60eDBwSLZIM+5sOeDEROt1GxqPI=">
+        <h1 style="color:#113660; text-transform: uppercase; text-decoration:underline"><spring:message code="label_es_uca_iw_hoteloasis_domain_estancia_usuario" /></h1>
         <field:display field="nombre" id="s_es_uca_iw_hoteloasis_domain_Usuario_nombre" object="${usuario}" z="NQEUwDYSwRy6KhMkgq8fdBWsTes="/>
         <field:display field="primer_apellido" id="s_es_uca_iw_hoteloasis_domain_Usuario_primer_apellido" object="${usuario}" z="g6m9oRdh0ON+N73lEp0gYUvPz64="/>
         <field:display field="segundo_apellido" id="s_es_uca_iw_hoteloasis_domain_Usuario_segundo_apellido" object="${usuario}" z="YV4MVS7/EOEl/aDk7g74MASspHU="/>

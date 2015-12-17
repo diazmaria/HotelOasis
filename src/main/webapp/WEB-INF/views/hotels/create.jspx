@@ -3,6 +3,8 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <form:create id="fc_es_uca_iw_hoteloasis_domain_Hotel" modelAttribute="hotel" path="/hotels" render="${empty dependencies}" z="CRII3GxAcvbfvw1QOOAqnMxgx4E=">
+        <spring:message code="menu_item_hotel_new_label" var="val"/>	
+        <h1 style="color:#113660; text-transform: uppercase; text-decoration:underline"><spring:message code="crear" arguments="${val}"/></h1>
         <field:input field="nombre" id="c_es_uca_iw_hoteloasis_domain_Hotel_nombre" max="30" required="true" z="Voh4PBYNhfv7q9h+zF5dJR/clXc="/>
         <field:input field="provincia" id="c_es_uca_iw_hoteloasis_domain_Hotel_provincia" max="30" min="4" required="true" z="C2AXKcX5ZBA2UHM4FyHpGKpdYG0="/>
         <field:input field="poblacion" id="c_es_uca_iw_hoteloasis_domain_Hotel_poblacion" max="30" min="4" required="true" z="4fkQCgas9NcTmq4ncozpHszWjDA="/>

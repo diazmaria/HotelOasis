@@ -22,22 +22,22 @@ public class Reserva {
     /**
      */
     @NotNull
-    @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "M-")
+    
+    @DateTimeFormat(style="M-")
     private Date fecha_reserva;
 
     /**
      */
     @NotNull
-    @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "M-")
+
+    @DateTimeFormat(style="M-")
     private Date fecha_entrada;
 
     /**
      */
     @NotNull
-    @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "M-")
+
+    @DateTimeFormat(style="M-")
     private Date fecha_salida;
 
     /**
@@ -52,8 +52,8 @@ public class Reserva {
 
     /**
      */
-    @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "M-")
+
+    @DateTimeFormat(style="M-")
     private Date fecha_cancelacion;
 
     /**
@@ -129,4 +129,5 @@ public class Reserva {
         q.setParameter("hoy", new Date());
         return q;
     }
+    
 }

@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+<div xmlns:spring="http://www.springframework.org/tags" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <form:update id="fu_es_uca_iw_hoteloasis_domain_Usuario" modelAttribute="usuario" path="/usuarios" versionField="Version" z="9fueX+P3HZggw2Pmnv6RdNJ/DRs=">
+        <spring:message code="menu_item_usuario_new_label" var="val"/>	
+        <h1 style="color:#113660; text-transform: uppercase; text-decoration:underline"><spring:message code="editar" arguments="${val}"/></h1> 
         <field:input field="nombre" id="c_es_uca_iw_hoteloasis_domain_Usuario_nombre" max="30" min="2" required="true" z="Xf2DQth6H6AdlCVL4T0gIYH4R9Y="/>
         <field:input field="primer_apellido" id="c_es_uca_iw_hoteloasis_domain_Usuario_primer_apellido" max="30" min="2" required="true" z="+8JkNL7h7ZCA3+C/YVdMNv5116c="/>
         <field:input field="segundo_apellido" id="c_es_uca_iw_hoteloasis_domain_Usuario_segundo_apellido" max="30" min="2" required="true" z="SQh/j3WJJj0fxdZbn8Tg86pnm48="/>

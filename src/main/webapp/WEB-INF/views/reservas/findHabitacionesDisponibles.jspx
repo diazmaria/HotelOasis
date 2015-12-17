@@ -5,22 +5,56 @@
   
     <jsp:output omit-xml-declaration="yes"/>
 			    
-		<c:if test="${not empty errores}">
-	    	<c:forEach items="${errores}" var="error">
-	    		<span class="errores">${error}</span><br/><br/>
-	    	</c:forEach>
-	  	</c:if>
 	    <c:if test="${not empty error}">
-	    	<span class="errores">${error}</span><br/><br/>
+		<c:choose>
+			<c:when test="${error == 'Error: La fechas de entrada y salida no pueden ser las mismas.'}">
+				<h3 style="color: #CB001D">
+				      <spring:message code="fechas_iguales" />
+				</h3>
+			</c:when>
+			<c:when test="${error == 'Error: La fecha de entrada no puede ser anterior a la fecha actual.'}">
+				<h3 style="color: #CB001D">
+				      <spring:message code="entrada_anterior" />
+				</h3>
+			</c:when>			
+			<c:when test="${error == 'Error: La fecha de salida no puede ser anterior a la fecha actual.'}">
+				<h3 style="color: #CB001D">
+				      <spring:message code="salida_anterior" />
+				</h3>
+			</c:when>
+			
+			<c:when test="${error == 'Error: La fecha de entrada no puede ser posterior a la de salida.'}">
+				<h3 style="color: #CB001D">
+				      <spring:message code="entrada_posterior_salida" />
+				</h3>
+			</c:when>
+			<c:when test="${error == 'Error: No está permitido hacer reservas de mas de'}">
+				<h3 style="color: #CB001D">
+				      <spring:message code="dias_maximos" arguments="${dias_maximos}" />
+				</h3>
+			</c:when>
+				<c:when test="${error == 'Error: No se puede realizar una reserva con una antelacion superior'}">
+				<h3 style="color: #CB001D">
+				      <spring:message code="dias_antelacion" arguments="${dias_antelacion}" />
+				</h3>
+			</c:when>
+			<c:when test="${error == 'Error: No disponible'}">
+				<h3 style="color: #CB001D">
+				      <spring:message code="no_disponible" arguments="${no_disponible}" />
+				</h3>
+			</c:when>
+		</c:choose>
 	    </c:if>
 	    
     <form:find finderName="HabitacionesDisponibles" id="ff_es_uca_iw_hoteloasis_domain_Habitacion" path="/reservas" z="?">
-        <h2 style="color:#113660; margin-bottom:27px">Buscar habitaciones disponibles</h2>
+        <h2 style="color:#113660; margin-bottom:27px">
+         <spring:message code="Buscar_habitaciones_disponibles" />
+        </h2>
         <field:select disableFormBinding="true" field="hotel" id="f_es_uca_iw_hoteloasis_domain_Reserva_hotel" itemLabel="nombre" itemValue="id" items="${hotels}" path="/hotels" required="true" z="user-managed"/>
         <field:select disableFormBinding="true" field="categoria" id="f_es_uca_iw_hoteloasis_domain_Reserva_categoria" itemLabel="nombre" itemValue="id" items="${categorias}" path="/categorias" required="true" z="user-managed"/>
         <field:select disableFormBinding="true" field="tipo" id="f_es_uca_iw_hoteloasis_domain_Reserva_tipo" items="${tipos}" path="/habitacion_tipos" required="true" z="?"/>
-        <field:datetime dateTimePattern="${formato_fecha}" disableFormBinding="true" field="fecha_entrada" id="f_es_uca_iw_hoteloasis_domain_Reserva_fecha_entrada" required="true" z="?"/>
-        <field:datetime dateTimePattern="${formato_fecha}" disableFormBinding="true" field="fecha_salida" id="f_es_uca_iw_hoteloasis_domain_Reserva_fecha_salida" required="true" z="?"/>
+        <field:datetime dateTimePattern="dd-MMM-yyyy" disableFormBinding="true" field="fecha_entrada" id="f_es_uca_iw_hoteloasis_domain_Reserva_fecha_entrada" required="true" z="?"/>
+        <field:datetime dateTimePattern="dd-MMM-yyyy" disableFormBinding="true" field="fecha_salida" id="f_es_uca_iw_hoteloasis_domain_Reserva_fecha_salida" required="true" z="?"/>
         <field:checkbox disableFormBinding="true" field="cama_supletoria" id="c_es_uca_iw_hoteloasis_domain_Reserva_cama_supletoria" z="?"/>
     </form:find>
   

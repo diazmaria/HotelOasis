@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <form:update id="fu_es_uca_iw_hoteloasis_domain_Reserva" modelAttribute="reserva" path="/reservas" versionField="Version" z="rkgjuUmmQpdu9YNRWheQ3dNP0ns=">
-        <field:datetime dateTimePattern="${reserva_fecha_reserva_date_format}" field="fecha_reserva" id="c_es_uca_iw_hoteloasis_domain_Reserva_fecha_reserva" required="true" z="zVj1Ysw+oqCB9iCZXL1dekHNuBo="/>
+    <form:update id="fu_es_uca_iw_hoteloasis_domain_Reserva" modelAttribute="reserva" path="/reservas" render="${empty dependencies}" z="JlC/e6+ZRu7b8hisg7d2bzuERRM=">
+        <spring:message code="menu_item_reserva_new_label" var="val"/>	
+        <h1 style="color:#113660; text-transform: uppercase; text-decoration:underline"><spring:message code="crear" arguments="${val}"/></h1>        <field:datetime dateTimePattern="${reserva_fecha_reserva_date_format}" field="fecha_reserva" id="c_es_uca_iw_hoteloasis_domain_Reserva_fecha_reserva" required="true" z="zVj1Ysw+oqCB9iCZXL1dekHNuBo="/>
         <field:datetime dateTimePattern="${reserva_fecha_entrada_date_format}" field="fecha_entrada" id="c_es_uca_iw_hoteloasis_domain_Reserva_fecha_entrada" required="true" z="Pt4qJ7t74MvX4TmZDkCgKaC8UEY="/>
         <field:datetime dateTimePattern="${reserva_fecha_salida_date_format}" field="fecha_salida" id="c_es_uca_iw_hoteloasis_domain_Reserva_fecha_salida" required="true" z="c1YZB+M2AaWV+rK1hNj54jgU8dg="/>
         <field:checkbox field="cama_supletoria" id="c_es_uca_iw_hoteloasis_domain_Reserva_cama_supletoria" z="Iw4Pgl8K5HpLMOeLjuNe99NkYNA="/>
-        <field:datetime dateTimePattern="${reserva_fecha_cancelacion_date_format}" field="fecha_cancelacion" id="c_es_uca_iw_hoteloasis_domain_Reserva_fecha_cancelacion" z="0N2nXy2gYHI8PtRr0imJQb8Jj34="/>
+        <field:datetime dateTimePattern="${reserva_fecha_cancelacion_date_format}" field="fecha_cancelacion" id="c_es_uca_iw_hoteloasis_domain_Reserva_fecha_cancelacion" z="0N2nXy2gYHI8PtRr0imJQb8Jj34="/><br/>
         <field:select field="hotel" id="c_es_uca_iw_hoteloasis_domain_Reserva_hotel" itemValue="id" items="${hotels}" path="/hotels" required="true" z="2zD4BCYSkDV0Bwnvppds8EJWfbs="/>
         <field:select field="categoria" id="c_es_uca_iw_hoteloasis_domain_Reserva_categoria" itemValue="id" items="${categorias}" path="/categorias" required="true" z="P7JS31KytNvy5DXyMSu7070Cb4U="/>
         <field:select field="tipo" id="c_es_uca_iw_hoteloasis_domain_Reserva_tipo" items="${habitacion_tipoes}" path="habitacion_tipoes" required="true" z="+kaCtM5yFv0eZtU4LBPHM659K4k="/>
         <field:select field="usuario" id="c_es_uca_iw_hoteloasis_domain_Reserva_usuario" itemValue="id" items="${usuarios}" path="/usuarios" z="iTTWiO3XBcua9DR0apQeaYyamHw="/>
         <field:input field="coste_reserva" id="c_es_uca_iw_hoteloasis_domain_Reserva_coste_reserva" z="/QTyluo/WA5t0x8segGt0HAX/zM="/>
     </form:update>
+    <form:dependency dependencies="${dependencies}" id="d_es_uca_iw_hoteloasis_domain_Reserva" render="${not empty dependencies}" z="jbwULwBPi7WzOVUVXMTqQOsX66M="/>
 </div>

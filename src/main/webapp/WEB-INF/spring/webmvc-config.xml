@@ -73,5 +73,20 @@
       </list>
     </property>
   </bean>
+  
+<bean id="localeChangeInterceptor"
+class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+    <property name="paramName" value="siteLanguage"/>
+</bean>
+
+	
+	<bean id="dataSource" 
+		 class="org.springframework.jdbc.datasource.DriverManagerDataSource">  
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/hoteloasis" />
+		<property name="username" value="hoteloasis" />
+	</bean>
+  
+  
 <bean class="es.uca.iw.hoteloasis.web.ApplicationConversionServiceFactoryBean" id="applicationConversionService"/>
 </beans>

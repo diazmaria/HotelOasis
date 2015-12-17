@@ -11,13 +11,16 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.joda.time.Days;
 import org.joda.time.LocalDate;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -53,7 +56,7 @@ import es.uca.iw.hoteloasis.domain.Usuario;
 @Controller
 @RooWebScaffold(path = "estancias", formBackingObject = Estancia.class)
 public class EstanciaController {
-
+	
 	/******************************** CHECK-IN ********************************/
 	@RequestMapping(params = { "find=checkin", "form" }, method = RequestMethod.GET)
 	public String findcheckin(Model uiModel, Principal principal) {
@@ -67,11 +70,13 @@ public class EstanciaController {
 		// Comprobamos que la reserva existe
 		if (reserva == null) {
 			uiModel.addAttribute("error",
-					"Error: El código de la reserva es erróneo.");
+					"reserva_erroneo");
 			return "estancias/checkin";
 		}
 		Categoria categoria = reserva.getCategoria();
-		Habitacion_estado estado = Habitacion_estado.LIBRE;
+		
+		Habitacion_estado estado = Habitacion_estado.FREE;
+
 		Habitacion_tipo tipo = reserva.getTipo();
 		Usuario usuario = Usuario.findUsuariosByNombreUsuarioEquals(principal
 				.getName());
@@ -83,20 +88,20 @@ public class EstanciaController {
 		if (usuario.getRol() == (Rol.findRol(3l))) {
 			if (!reserva.getUsuario().equals(usuario)) {
 				uiModel.addAttribute("error",
-						"Error: Este código de reserva no le pertenece.");
+						"reserva_no_pertenece");
 				return "estancias/checkin";
 			}
 		}
 		// Comprobamos que la reserva no haya sido cancelada
 		if (reserva.getFecha_cancelacion() != null) {
 			uiModel.addAttribute("error",
-					"Error: Esta reserva ha sido cancelada, no se puede hacer check-in.");
+					"reserva_cancelada");
 			return "estancias/checkin";
 		}
 		// Intentamos hacer el check-in de nuevo
 		if (Estancia.countFindEstanciasByReserva(reserva) != 0) {
 			uiModel.addAttribute("error",
-					"Error: El check-in de esta reserva ya ha sido realizado.");
+					"reserva_hizo_checkin2");
 			return "estancias/checkin";
 		}
 		// Comprobamos que se hace el check-in el día de la reserva
@@ -105,20 +110,23 @@ public class EstanciaController {
 		c.add(Calendar.DATE, -1);
 		if (reserva.getFecha_entrada().after(new Date())
 				|| reserva.getFecha_entrada().before(c.getTime())) {
-			uiModel.addAttribute("error", "Error: Su reserva no es para hoy.");
+			uiModel.addAttribute("error", "reserva_no_hoy");
 			return "estancias/checkin";
 		}
 		// Comprobamos que hay habitaciones disponibles
 		if (habitaciones.isEmpty()) {
 			uiModel.addAttribute("error",
-					"Error: No hay habitaciones disponibles.");
+					"no_habitaciones");
 			return "estancias/checkin";
 		}
 		Habitacion habitacion = habitaciones.get(0);
 		Estancia estancia = new Estancia(reserva, habitacion, usuario);
 		estancia.setFecha_check_in(new Date());
 		estancia.persist();
-		habitacion.setEstado(Habitacion_estado.OCUPADA);
+
+		habitacion.setEstado(Habitacion_estado.TAKEN);
+
+	
 		habitacion.merge();
 		uiModel.addAttribute("habitacion", habitacion);
 		return "estancias/exitoCheckin";
@@ -136,24 +144,54 @@ public class EstanciaController {
 	public String checkout(Model uiModel, Principal principal,
 			@RequestParam("id") Long id) {
 		Reserva reserva = Reserva.findReserva(id);
+		
+		if (reserva == null) {
+			uiModel.addAttribute("error",
+					"reserva_erroneo");
+			return "estancias/checkout";
+		}
+		
+		Usuario usuario = Usuario.findUsuariosByNombreUsuarioEquals(principal
+				.getName());
+		
+		if (usuario.getRol() == (Rol.findRol(3l))) {
+			if (!reserva.getUsuario().equals(usuario)) {
+				uiModel.addAttribute("error",
+						"reserva_no_pertenece");
+				return "estancias/checkin";
+			}
+		}
+		
 		List<Estancia> estancia = Estancia.findEstanciasByReserva(reserva)
 				.getResultList();
 		if (estancia.isEmpty()) {
 			uiModel.addAttribute("error",
-					"Error: El check-in aún no se ha realizado.");
+					"reserva_no_checkin");
 			return ("estancias/checkout");
 		}
 		// llamo a la función que comprueba que todo esta correcto
-		comprobaciones(uiModel, principal, id, "checkout");
+
 		Estancia est = estancia.get(0);
 		// Actualizo los datos
-		est.setFecha_check_out(new Date());
-		est.persist();
-		Habitacion habitacion = est.getHabitacion();
-		habitacion.setEstado(Habitacion_estado.LIBRE);
-		habitacion.merge();
-		// funcion que hace las gestiones de la factura
-		return facturaPrivado(uiModel, principal, id, "checkout");
+		
+		if (est.getFecha_check_out()  == null){
+		
+			est.setFecha_check_out(new Date());
+			est.persist();
+			Habitacion habitacion = est.getHabitacion();
+			
+			habitacion.setEstado(Habitacion_estado.FREE);
+
+			habitacion.merge();
+			
+			// funcion que hace las gestiones de la factura
+			return facturaPrivado(uiModel, principal, id, "checkout");
+		}
+		else{
+			uiModel.addAttribute("error",
+					"reserva_hizo_checkout");
+			return ("estancias/checkout");
+		}
 	}
 
 	/******************************** FACTURA *******************************/
@@ -167,8 +205,41 @@ public class EstanciaController {
 	@RequestMapping(params = { "factura" }, method = RequestMethod.POST, produces = "text/html")
 	public String factura(Model uiModel, Principal principal,
 			@RequestParam("id") Long id) {
-		// llamo a la función que comprueba que todo esta correcto
-		comprobaciones(uiModel, principal, id, "factura");
+		
+		Reserva reserva = Reserva.findReserva(id);
+		
+		if (reserva == null) {
+			uiModel.addAttribute("error",
+					"reserva_erroneo");
+			return "estancias/factura";
+		}
+		
+		Usuario usuario = Usuario.findUsuariosByNombreUsuarioEquals(principal
+				.getName());
+		
+		if (usuario.getRol() == (Rol.findRol(3l))) {
+			if (!reserva.getUsuario().equals(usuario)) {
+				uiModel.addAttribute("error",
+						"reserva_no_pertenece");
+				return "estancias/factura";
+			}
+		}
+		
+		List<Estancia> estancia = Estancia.findEstanciasByReserva(reserva)
+				.getResultList();
+		if (estancia.isEmpty()) {
+			uiModel.addAttribute("error",
+					"reserva_no_checkin");
+			return ("estancias/factura");
+		}
+		
+		if (estancia.get(0).getFecha_check_out() == null) {
+			uiModel.addAttribute("error",
+					"reserva_no_checkout");
+			return ("estancias/factura");
+		}
+		
+		
 		// funcion que hace las gestiones de la factura
 		return facturaPrivado(uiModel, principal, id, "factura");
 	}
@@ -186,16 +257,10 @@ public class EstanciaController {
 	private String facturaPrivado(Model uiModel, Principal principal, long id,
 			String origen) {
 		// llamo a la función que comprueba que todo esta correcto
-		comprobaciones(uiModel, principal, id, "factura");
+	
 		Reserva reserva = Reserva.findReserva(id);
 		List<Estancia> estancia = Estancia.findEstanciasByReserva(reserva)
 				.getResultList();
-
-		if (estancia.isEmpty()) {
-			uiModel.addAttribute("error",
-					"Error: No se ha hecho check-in aún de esta reserva.");
-			return ("estancias/factura");
-		}
 
 		Estancia est = estancia.get(0);
 		// Calculo coste de la estancia
@@ -222,7 +287,7 @@ public class EstanciaController {
 		double cama = 0;
 		Usuario usuario = Usuario.findUsuariosByNombreUsuarioEquals(principal
 				.getName());
-		if (tipo.equals(Habitacion_tipo.SIMPLE)) {
+		if (tipo.equals(Habitacion_tipo.SINGLE)) {
 			precio_hab = reserva.getHotel().getPrecio_hab_simple();
 		} else {
 			precio_hab = reserva.getHotel().getPrecio_hab_doble();
@@ -250,37 +315,39 @@ public class EstanciaController {
 		Hotel h = est.getReserva().getHotel();
 		Tarifa t = Tarifa.findTarifasByHotel(h).getSingleResult();
 		
-		
+		double coste_cama = reserva.getHotel().getPrecio_cama_sup();
+		double coste_noches = total;
 		double total_nac = 0;
 		double total_inter = 0;
 		double total_internet = 0;
-		double min_nac=0;
-		double min_inter=0;
-		double min_internet=0;
+		int min_nac=0;
+		int min_inter=0;
+		int min_internet=0;
 		double pre_nac=0;
 		double pre_inter=0;
 		double pre_internet=0;
 		if (est.getLlamadas() != null) {
 
 			if (est.getLlamadas().getMinutos_nacionales() != 0)
-				min_nac=est.getLlamadas().getMinutos_nacionales();
+				min_nac=(int)est.getLlamadas().getMinutos_nacionales();
 				pre_nac=t.getLlamada_nacional();
 				total_nac = min_nac * pre_nac;
 			if (est.getLlamadas().getMinutos_internacionales() != 0)
-				min_inter=est.getLlamadas().getMinutos_internacionales();
+				min_inter=(int) est.getLlamadas().getMinutos_internacionales();
 				pre_inter=t.getLlamada_internacional();
 				total_inter = min_inter	* pre_inter;
 			if (est.getLlamadas().getMinutos_internet() != 0)
-				min_internet=est.getLlamadas().getMinutos_internet();
+				min_internet=(int) est.getLlamadas().getMinutos_internet();
 				pre_internet=t.getInternet();
 				total_internet = min_internet * pre_internet;
 		}
-
+		Map<Bebida, Integer> bar = null;
+		
 		total_servicios = total_nac + total_inter + total_internet;
 		double total_bar = 0;
 		if (!est.getBebida_consumo().isEmpty()) {
 			Set<Bebida_consumo> bebidas = est.getBebida_consumo();
-			Map<Bebida, Integer> bar = new HashMap<Bebida, Integer>(
+			bar = new HashMap<Bebida, Integer>(
 					bebidas.size());
 
 			for (Bebida_consumo consumo : bebidas) {
@@ -320,13 +387,15 @@ public class EstanciaController {
 		uiModel.addAttribute("total_internet", total_internet);
 		uiModel.addAttribute("total_bar", total_bar);
 		uiModel.addAttribute("total_servicios", total_servicios);
-		
+		uiModel.addAttribute("bar", bar);
 		uiModel.addAttribute("min_nac", min_nac);
 		uiModel.addAttribute("min_inter", min_inter);
 		uiModel.addAttribute("min_internet", min_internet);
 		uiModel.addAttribute("pre_nac", pre_nac);
 		uiModel.addAttribute("pre_inter", pre_inter);
 		uiModel.addAttribute("pre_internet", pre_internet);
+		uiModel.addAttribute("coste_noches", coste_noches);
+		uiModel.addAttribute("coste_cama", coste_cama);
 
 		return "estancias/detallesCheckout";
 	}
@@ -406,8 +475,12 @@ public class EstanciaController {
 		//Si la lista no está vacía creamos un ArrayList de habitaciones y recorremos la lista para obtener las habitaciones
 		if (!estancias.isEmpty()){
 			habitaciones = new ArrayList<Habitacion>(estancias.size());
-			for (Estancia e : estancias)
-				habitaciones.add(e.getHabitacion());
+			for (Estancia e : estancias){
+				if(e.getFecha_check_out() == null && e.getReserva().getFecha_cancelacion() == null){
+					habitaciones.add(e.getHabitacion());
+					uiModel.addAttribute("reserva_id",  e.getReserva().getId());
+				}
+			}
 		}
 		uiModel.addAttribute("habitaciones", habitaciones);
 		return "estancias/elegirHabitacionServicios";
@@ -489,8 +562,10 @@ public class EstanciaController {
 				minibar_actual.put(bebidas.get(i), bebidas.get(i).getCantidad_minibar());
 			}
 		}
-
-		uiModel.addAttribute("bebidas", minibar_actual);
+		
+		Map<Bebida, Integer> treeMap = new TreeMap<Bebida, Integer>(minibar_actual);
+		
+		uiModel.addAttribute("bebidas", treeMap);
 	
 		}
 		
@@ -509,7 +584,6 @@ public class EstanciaController {
 		@RequestMapping(method = RequestMethod.POST, params = {"estancia", "cantidad"}, produces = "text/html")
 		public String consumirMinibar(Principal p, Model uiModel, @RequestParam("cantidad") int cantidad, @RequestParam("estancia") Estancia estancia, HttpServletRequest httpservletrequest){
 			
-			if (httpservletrequest.getParameter("comprar") != null){
 				uiModel.addAttribute("estancia", estancia);
 				
 				Bebida bebida = Bebida.findBebida(Long.parseLong(httpservletrequest.getParameter("bebida")));
@@ -574,24 +648,20 @@ public class EstanciaController {
 				uiModel.addAttribute("compra", "Compra realizada con éxito.");
 				popularBebidas(uiModel, estancia);
 				return "estancias/servicioMinibar";
-			   
-			 }else{
-				return "estancias/exitoMinibar";
-				// return "index";
-			}
 		}
 		
 		
 	
 	// ------CU5 ------ INICIAR LLAMADA
-	@RequestMapping(method = RequestMethod.POST, params = {"servicio", "estancia"}, produces = "text/html")
-	public String realizarLlamada(@RequestParam("servicio") String servicio, @RequestParam("estancia") long estancia,
+	@RequestMapping(method = RequestMethod.POST, params = {"servicio", "estancia", "tarifa"}, produces = "text/html")
+	public String realizarLlamada(@RequestParam("servicio") String servicio, @RequestParam("estancia") long estancia, @RequestParam("tarifa") double tarifa,
 			HttpServletRequest hhtpservletrequest, Model uiModel){
 		
 		long inicio = System.currentTimeMillis();
 		
 		uiModel.addAttribute("inicio", inicio);
 		uiModel.addAttribute("estancia", estancia);
+		uiModel.addAttribute("tarifa", tarifa);
 		uiModel.addAttribute("servicio", servicio);
 		return "llamadas/colgarLlamada";
 	}
@@ -664,7 +734,7 @@ public class EstanciaController {
 			}
 		}
 
-		uiModel.addAttribute("duracion", duracion);
+		uiModel.addAttribute("duracion", (int)duracion);
 		uiModel.addAttribute("coste", coste);
 		uiModel.addAttribute("servicio", servicio);
 		return "estancias/consumoComunicacion";
@@ -729,7 +799,9 @@ public class EstanciaController {
 		documento.open();
 
 		// Edición del documento
-
+		String locale = LocaleContextHolder.getLocale().getLanguage();
+		
+		if(locale.equals("es")){
 		try {
 
 			Image foto = Image
@@ -740,13 +812,13 @@ public class EstanciaController {
 			documento.add(foto);
 
 			documento.add(new Paragraph(
-					"Factura\n\n\tDetalles de la estancia:", FontFactory
-							.getFont("Expressway", // fuente
+					"\n\tFactura", FontFactory
+							.getFont("body-font", // fuente
 									16, // tamaño
-									Font.BOLD, BaseColor.BLACK)));
+									Font.BOLD,  new BaseColor(24,64,110))));
 
 			documento.add(new Paragraph("\n\tDatos personales:", FontFactory
-					.getFont("Expressway", // fuente
+					.getFont("body-font", // fuente
 							14, // tamaño
 							Font.BOLD, BaseColor.BLACK)));
 
@@ -759,34 +831,34 @@ public class EstanciaController {
 					BaseColor.BLACK)));
 
 			documento.add(new Paragraph("\n\n\tDatos de la estancia:",
-					FontFactory.getFont("Expressway", // fuente
+					FontFactory.getFont("body-font", // fuente
 							14, // tamaño
 							Font.BOLD, BaseColor.BLACK)));
 
 			String fout;
 			if (est.getFecha_check_out() != null) {
-				fout = new SimpleDateFormat("dd/MM/yyyy").format(est
+				fout = new SimpleDateFormat("dd/MM/yyyy", LocaleContextHolder.getLocale()).format(est
 						.getFecha_check_out());
 			} else {
 				fout = "No realizado";
 			}
 			documento.add(new Paragraph("\n\t\tHotel: "
 					+ reserva.getHotel().getNombre()
-					+ "\n\t\tHabitación: "
+					+ "\n\t\tNº Habitación: "
 					+ est.getHabitacion().getNumero()
 					+ "\n\t\tCategoría: "
 					+ reserva.getCategoria().getNombre()
 					+ "\n\t\tTipo: "
 					+ reserva.getTipo()
 					+ "\n\t\tFecha check-in: "
-					+ new SimpleDateFormat("dd/MM/yyyy").format(est
+					+ new SimpleDateFormat("dd/MM/yyyy", LocaleContextHolder.getLocale()).format(est
 							.getFecha_check_in()) + "\n\t\tFecha check-out: "
-					+ fout, FontFactory.getFont("Expressway", // fuente
+					+ fout, FontFactory.getFont("body-font", // fuente
 					10, // tamaño
 					BaseColor.BLACK)));
 
 			documento.add(new Paragraph("\n\n\tDatos de los servicios:",
-					FontFactory.getFont("Expressway", // fuente
+					FontFactory.getFont("body-font", // fuente
 							14, // tamaño
 							Font.BOLD, BaseColor.BLACK)));
 
@@ -798,7 +870,7 @@ public class EstanciaController {
 					+ " €\n\t\tInternet: " +min_internet+" * "+pre_internet+" = "+ total_internet
 					+ " €\n\t\tTotal minibar: " + total_bar
 					+ " €\n\t\tTotal servicios: " + total_servicios+" €", FontFactory
-					.getFont("Expressway", // fuente
+					.getFont("body-font", // fuente
 							10, // tamaño
 							BaseColor.BLACK)));
 			
@@ -806,14 +878,14 @@ public class EstanciaController {
 			documento
 					.add(new Paragraph(
 							"\t------------------------------------------------------------------------------------------------",
-							FontFactory.getFont("Expressway", // fuente
+							FontFactory.getFont("body-font", // fuente
 									14, // tamaño
 									Font.BOLD, BaseColor.DARK_GRAY)));
 
 			documento.add(new Paragraph("\tDatos de facturación:",
-					FontFactory.getFont("Expressway", // fuente
+					FontFactory.getFont("body-font", // fuente
 							16, // tamaño
-							Font.BOLD, BaseColor.BLUE)));
+							Font.BOLD, new BaseColor(24,64,110))));
 
 			par = (new Paragraph("\n\t\tDías: " + dias
 					+ "\n\t\tPrecio habitación: " + precio_hab
@@ -821,17 +893,137 @@ public class EstanciaController {
 					+ reserva.getCategoria().getPrecio_categoria()
 					+ "\n\t\tCama supletoria: " + cama
 					+ " €\n\t\tTotal servicios: " + total_servicios
-					+ " €\n\t\tTotal estancia: " + total +" €",
-					FontFactory.getFont("Expressway", // fuente
+					+ " €\n",
+					FontFactory.getFont("body-font", // fuente
 							10, // tamaño
 							BaseColor.BLACK)));
 
-			par.setAlignment(Element.ALIGN_RIGHT);
+		
+			par.add(new Paragraph("\n\t\tTotal: " + total +" €",
+					FontFactory.getFont("body-font", // fuente
+							16, // tamaño
+							Font.BOLD, new BaseColor(203, 0, 29))));
+
+			par.setAlignment(Element.ALIGN_LEFT);
+
 			documento.add(par);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+    else
+    {
+		try {
+
+			Image foto = Image
+					.getInstance("http://s1.postimg.org/f41c87ojz/Logo.png");
+
+			foto.setAlignment(Chunk.ALIGN_MIDDLE);
+			foto.scaleToFit(200, 200);
+			documento.add(foto);
+
+			documento.add(new Paragraph(
+					"\n\tBill", FontFactory
+							.getFont("body-font", // fuente
+									18, // tamaño
+									Font.BOLD, new BaseColor(24,64,110))));
+
+			documento.add(new Paragraph("\n\tPersonal details:", FontFactory
+					.getFont("body-font", // fuente
+							14, // tamaño
+							Font.BOLD, BaseColor.BLACK)));
+
+			documento.add(new Paragraph("\n\t\tName: " + usuario.getNombre()
+					+ "\n\t\tFirst surname: " + usuario.getPrimer_apellido()
+					+ "\n\t\tSecond surname: "
+					+ usuario.getSegundo_apellido(), FontFactory.getFont(
+					"arial", // fuente
+					10, // tamaño
+					BaseColor.BLACK)));
+
+			documento.add(new Paragraph("\n\tStay details:",
+					FontFactory.getFont("body-font", // fuente
+							14, // tamaño
+							Font.BOLD, BaseColor.BLACK)));
+
+			String fout;
+			if (est.getFecha_check_out() != null) {
+				fout = new SimpleDateFormat("dd/MM/yyyy", LocaleContextHolder.getLocale()).format(est
+						.getFecha_check_out());
+			} else {
+				fout = "No";
+			}
+			documento.add(new Paragraph("\n\t\tHotel: "
+					+ reserva.getHotel().getNombre()
+					+ "\n\t\tRoom Nº: "
+					+ est.getHabitacion().getNumero()
+					+ "\n\t\tCategory: "
+					+ reserva.getCategoria().getNombre()
+					+ "\n\t\tTipe: "
+					+ reserva.getTipo()
+					+ "\n\t\tCheck-in date: "
+					+ new SimpleDateFormat("dd/MM/yyyy", LocaleContextHolder.getLocale()).format(est
+							.getFecha_check_in()) + "\n\t\tCheck-out date: "
+					+ fout, FontFactory.getFont("body-font", // fuente
+					10, // tamaño
+					BaseColor.BLACK)));
+
+			documento.add(new Paragraph("\n\tServices details:",
+					FontFactory.getFont("body-font", // fuente
+							14, // tamaño
+							Font.BOLD, BaseColor.BLACK)));
+
+			
+			documento.add(new Paragraph("\n\t\t "
+					+ reserva.getHotel().getNombre()
+					+ "\n\t\tInternational phone calls: "+min_nac+" * "+pre_nac+" = " + total_nac
+					+ " €\n\t\tNational phone calls: "+min_inter+" * "+pre_inter+" = " + total_inter
+					+ " €\n\t\tInternet: " +min_internet+" * "+pre_internet+" = "+ total_internet
+					+ " €\n\t\tMinibar total: " + total_bar
+					+ " €\n\t\tServices total: " + total_servicios+" €", FontFactory
+					.getFont("body-font", // fuente
+							10, // tamaño
+							BaseColor.BLACK)));
+			
+			Paragraph par;
+			documento
+					.add(new Paragraph(
+							"\t------------------------------------------------------------------------------------------------",
+							FontFactory.getFont("body-font", // fuente
+									14, // tamaño
+									Font.BOLD, BaseColor.DARK_GRAY)));
+
+			documento.add(new Paragraph("\tBilling details:",
+					FontFactory.getFont("body-font", // fuente
+							16, // tamaño
+							Font.BOLD, new BaseColor(24,64,110))));
+
+			par = (new Paragraph("\n\t\tNights: " + dias
+					+ "\n\t\tRoom price: " + precio_hab
+					+ " €\n\t\tCategory rate: "
+					+ reserva.getCategoria().getPrecio_categoria()
+					+ "\n\t\tExtra bed: " + cama
+					+ " €\n\t\tTotal services: " + total_servicios + "€",
+					FontFactory.getFont("body-font", // fuente
+							10, // tamaño
+							BaseColor.BLACK)));
+			
+			
+			par.add(new Paragraph("\n\t\tTotal amount: " + total +" €",
+					FontFactory.getFont("body-font", // fuente
+							16, // tamaño
+							Font.BOLD, new BaseColor(203, 0, 29))));
+			
+			
+
+			par.setAlignment(Element.ALIGN_LEFT);
+			documento.add(par);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    }
 
 		// cierro el documento
 		documento.close();

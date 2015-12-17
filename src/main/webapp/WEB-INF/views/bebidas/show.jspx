@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" xmlns:spring="http://www.springframework.org/tags" encoding="UTF-8" standalone="no"?>
 <div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:show id="ps_es_uca_iw_hoteloasis_domain_Bebida" object="${bebida}" path="/bebidas" z="4J6QhzP2bexSQfAQ2zoDBqyj9Q0=">
+        <h1 style="color:#113660; text-transform: uppercase; text-decoration:underline"><spring:message code="menu_item_bebida_new_label" /></h1>
         <field:display field="nombre" id="s_es_uca_iw_hoteloasis_domain_Bebida_nombre" object="${bebida}" z="1EgGWag1wpPGLVsOT3QRnIhUk+I="/>
         <field:display field="coste" id="s_es_uca_iw_hoteloasis_domain_Bebida_coste" object="${bebida}" z="ppbz/p6hDZwCF9VDNKlYTvp9dvI="/>
         <field:display field="cantidad_minibar" id="s_es_uca_iw_hoteloasis_domain_Bebida_cantidad_minibar" object="${bebida}" z="lKbi8PYD9emJn6s+LZS77e4kYow="/>

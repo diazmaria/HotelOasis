@@ -1,92 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jsp:root xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:form="http://www.springframework.org/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
 <div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-	
+	<util:panel id="ff_es_uca_iw_domain_Reserva" title="Consumo de servicios">
   	<c:if test="${origen == 'checkout'}">
-		<h2>Check-out realizado con exito</h2>
-	</c:if>
-	<c:if test="${origen == 'factura'}">
-		<h2 style="color:#113660">Factura</h2>
-	</c:if>
-  	<hr alingn="center" noshade="noshade" size="3" width="100%" /><br/>
-  	<c:if test="${aux==1}">
-  		<p style="margin-left:5px">Al realizar el check-out antes de la fecha prevista, se le ha cobrado el importe completo de su reserva.</p>
-  	</c:if>
-  	<c:if test="${aux==2}">
-  		<p style="margin-left:5px">Al realizar el check-out después de la fecha prevista, se le han cobrado los días extra.</p>
-  	</c:if>
-  	<blockquote>
-	  	<h2>Detalles de la estancia:</h2>
-	  	<br/>
-	  	<div>
-	  	<h3>Datos personales:</h3>
-	  		<blockquote>
-			  	<strong>Nombre: </strong>${usuario.nombre} <br/>
-			  	<strong>Primer Apellido: </strong>${usuario.primer_apellido}<br/>
-			  	<strong>Segundo Apellido: </strong>${usuario.segundo_apellido}
-		  	</blockquote>
-		</div>
-	  	<br/>
-	  	<div>
-	  	<h3>Datos de la Reserva:</h3>
-	  		<blockquote>
-			  	<strong>Hotel: </strong>${hotel} <br/>
-			  	<strong>Fecha reserva: </strong> 
-			  		<fmt:formatDate type ="date" value="${reserva.fecha_reserva}" ></fmt:formatDate><br/>
-			  	<strong>Fecha entrada: </strong> 
-			  		<fmt:formatDate type ="date" value="${reserva.fecha_entrada}" ></fmt:formatDate><br/>
-			  	<strong>Fecha de salida: </strong>
-			  		<fmt:formatDate type ="date" value="${reserva.fecha_salida}" ></fmt:formatDate><br/>
-			  	<c:if test="${reserva.cama_supletoria==true}">
-			  		<strong>Cama supletoria: </strong>${reserva.cama_supletoria}
-			  	</c:if>
-		  	</blockquote>
-		</div>
-	  	<br/>
-	  	<div>
-	  	<h3>Datos de la Estancia:</h3>
-	  		<blockquote>
-			  	<strong>Hotel: </strong>${hotel} <br/>
-			  	<strong>Habitación: </strong>${habitacion.numero}<br/>
-			  	<strong>Categoría: </strong>${categoria.nombre}<br/>
-			  	<strong>Tipo: </strong>${tipo}<br/>
-			  	<strong>Fecha check-in: </strong>
-			  		<fmt:formatDate type ="date" value="${estancia.fecha_check_in}" ></fmt:formatDate><br/>
-			  	<strong>Fecha check-out: </strong>
-			  		<fmt:formatDate type ="date" value="${estancia.fecha_check_out}" ></fmt:formatDate><br/>
-		  	</blockquote>
-		 </div>
-		 <br/> 
-		 <div>
-	  	<h3>Datos de servicios:</h3>
-	  		<blockquote>
-			  	<strong>Llamadas nacionales: </strong>${min_nac} * ${pre_nac} = ${total_nac} €<br/>
-			  	<strong>Llamadas internacionales: </strong>${min_inter} * ${pre_inter} = ${total_inter} €<br/>
-			  	<strong>Internet: </strong>${min_internet} * ${pre_internet} = ${total_internet} €<br/>
-			  	<strong>Minibar: </strong>${total_bar} €<br/>
-			  	<strong>Total servicios: </strong>${total_servicios} €<br/>
-		  	</blockquote>
-		 </div>
-		 <br/> 
-		 <div>	
-		 <hr alingn="center" noshade="noshade" size="3" width="100%" /><br/>
-		 <h3>Datos de facturación:</h3>
-			 <blockquote>
-			  	<strong>Días: </strong>${dias} días.<br/>
-			  	<strong>Precio habitación: </strong>${precio_hab} €<br/>
-				<c:if test="${categoria.precio_categoria>1}">
-					<strong>Suplemento por categoría: </strong>${categoria.precio_categoria} <br/>
-				</c:if>
-			  	<c:if test="${reserva.cama_supletoria==true}">
-			  		<strong>Cama supletoria: </strong>${cama}<br/>
-			  	</c:if>
-			  	<strong>Total servicios: </strong>${total_servicios} €<br/>
-			  	<strong>Total estancia: </strong>${total} €
-			</blockquote>
-		</div>
-	  	<br/>
-	  	<form action="/HotelOasis/estancias?formpdf" method="post">
+		<h1>
+			<spring:message code="checkout_exito" /><br/>
+	  
+			<form action="/HotelOasis/estancias?formpdf" method="post">
+			
 			<input type="hidden" name="id" value="${reserva.id}"/>
 			<input type="hidden" name="total" value="${total}"/>
 			<input type="hidden" name="dias" value="${dias}"/>
@@ -108,8 +31,139 @@
 			<input type="hidden" name="pre_inter" value="${pre_inter}"/>
 			<input type="hidden" name="pre_internet" value="${pre_internet}"/>
 			
-			<h3 style="display:inline-block; margin-right:43px; margin-left:5px; color:#CB001D">Obtener en formato PDF</h3> 
-	  		<input type="submit" class ="enviar" name="action" value="Continuar"/>
+			<input type="submit" name="action" class="pdf"/>
+		
 		</form>	
+
+	  	</h1>
+	</c:if>
+	<c:if test="${origen == 'factura'}">
+		<h2 style="color:#113660; font-size:21px; margin-bottom:0px"><spring:message code="menu_item_estancia_factura_label" /></h2>
+		
+			<form action="/HotelOasis/estancias?formpdf" method="post">
+			
+			<input type="hidden" name="id" value="${reserva.id}"/>
+			<input type="hidden" name="total" value="${total}"/>
+			<input type="hidden" name="dias" value="${dias}"/>
+			<input type="hidden" name="precio_hab" value="${precio_hab}"/>
+			<input type="hidden" name="aux" value="${aux}"/>
+			<input type="hidden" name="origen" value="${origen}"/>
+			<input type="hidden" name="hotel" value="${hotel}"/>
+			
+			<input type="hidden" name="total_nac" value="${total_nac}"/>
+			<input type="hidden" name="total_inter" value="${total_inter}"/>
+			<input type="hidden" name="total_internet" value="${total_internet}"/>
+			<input type="hidden" name="total_bar" value="${total_bar}"/>
+			<input type="hidden" name="total_servicios" value="${total_servicios}"/>
+			
+			<input type="hidden" name="min_nac" value="${min_nac}"/>
+			<input type="hidden" name="min_inter" value="${min_inter}"/>
+			<input type="hidden" name="min_internet" value="${min_internet}"/>
+			<input type="hidden" name="pre_nac" value="${pre_nac}"/>
+			<input type="hidden" name="pre_inter" value="${pre_inter}"/>
+			<input type="hidden" name="pre_internet" value="${pre_internet}"/>
+			
+			<input type="submit" name="action" class="pdf"/>
+			</form>
+		
+	</c:if>
+  	<hr alingn="center" noshade="noshade" size="3" width="100%" /><br/>
+  	<c:if test="${aux==1}">
+  		<p style="margin-left:5px"><spring:message code="checkout_antes" /></p>
+  	</c:if>
+  	<c:if test="${aux==2}">
+  		<p style="margin-left:5px"><spring:message code="checkout_despues" /></p>
+  	</c:if>
+  	<blockquote>
+  	
+  		
+	  	<div style="margin-top: -10px">
+	  	<h3 style="text-decoration:underline; margin-left: 0px; margin-bottom: 12px"><spring:message code="datos_personales" /></h3>
+			  	<strong><spring:message code="label_es_uca_iw_hoteloasis_domain_usuario_nombre" />: </strong>${usuario.nombre} <br/>
+			  	<strong><spring:message code="label_es_uca_iw_hoteloasis_domain_usuario_primer_apellido" />: </strong>${usuario.primer_apellido}<br/>
+			  	<strong><spring:message code="label_es_uca_iw_hoteloasis_domain_usuario_segundo_apellido" />: </strong>${usuario.segundo_apellido}
+		</div>
+	  	<br/><br/>
+	  	<div style="margin-top: -10px">
+	  	<h3 style="text-decoration:underline; margin-left: 0px; margin-bottom: 12px"><spring:message code="datos_reserva" /></h3>
+			  	<strong><spring:message code="label_es_uca_iw_hoteloasis_domain_reserva_fecha_reserva" />: </strong> 
+			  		<fmt:formatDate type ="date" value="${reserva.fecha_reserva}" ></fmt:formatDate><br/>
+			  	<strong><spring:message code="label_es_uca_iw_hoteloasis_domain_reserva_fecha_entrada" />: </strong> 
+			  		<fmt:formatDate type ="date" value="${reserva.fecha_entrada}" ></fmt:formatDate><br/>
+			  	<strong><spring:message code="label_es_uca_iw_hoteloasis_domain_reserva_fecha_salida" />:  </strong>
+			  		<fmt:formatDate type ="date" value="${reserva.fecha_salida}" ></fmt:formatDate><br/>
+			  	<c:if test="${reserva.cama_supletoria==true}">
+			  		<strong><spring:message code="label_es_uca_iw_hoteloasis_domain_reserva_cama_supletoria" />: </strong>${reserva.cama_supletoria}
+			  	</c:if>
+		</div>
+	  	<br/><br/>
+	  	<div style="margin-top: -10px">
+	  	<h3 style="text-decoration:underline; margin-left: 0px; margin-bottom: 12px"><spring:message code="datos_estancia" /></h3>
+			  	<strong>Hotel: </strong>${hotel} <br/>
+			  	<strong><spring:message code="label_es_uca_iw_hoteloasis_domain_habitacion_numero" />: </strong>Nº ${habitacion.numero}<br/>
+			  	<strong><spring:message code="label_es_uca_iw_hoteloasis_domain_bebida_categoria" />: </strong>${categoria.nombre}<br/>
+			  	<strong><spring:message code="label_es_uca_iw_hoteloasis_domain_habitacion_tipo" />: </strong>${tipo}<br/>
+			  	<strong><spring:message code="label_es_uca_iw_hoteloasis_domain_reserva_fecha_entrada" />: </strong>
+			  		<fmt:formatDate type ="date" value="${estancia.fecha_check_in}" ></fmt:formatDate><br/>
+			  	<strong><spring:message code="label_es_uca_iw_hoteloasis_domain_reserva_fecha_salida" />: </strong>
+			  		<fmt:formatDate type ="date" value="${estancia.fecha_check_out}" ></fmt:formatDate><br/>
+		 </div>
+		 <br/><br/>
+		<div style="margin-top: -10px">
+	  	<h3 style="text-decoration:underline; margin-left: 0px; margin-bottom: 12px"><spring:message code="datos_servicios" /></h3>
+			  	<strong><spring:message code="label_es_uca_iw_hoteloasis_domain_tarifa_llamada_nacional" />: </strong>${min_nac}min x ${pre_nac}€ = ${total_nac} €<br/>
+			  	<strong><spring:message code="label_es_uca_iw_hoteloasis_domain_tarifa_llamada_internacional" />: </strong>${min_inter}min x ${pre_inter}€ = ${total_inter} €<br/>
+			  	<strong><spring:message code="label_es_uca_iw_hoteloasis_domain_tarifa_internet" />: </strong>${min_internet}min x ${pre_internet}€ = ${total_internet} € <br/>	
+	    		<strong><spring:message code="menu_category_minibar_label" />: </strong>${total_bar} €
+	    		
+	    		<c:if test="${reserva.cama_supletoria!=true}">
+			  	<br/><br/>
+			  	</c:if>
+	    		
+	    		<table style="float:left; margin-top:-20px">
+	    		<c:forEach items="${bar}" var="bar">
+	    		<tr>
+		    			<td>${bar.key.nombre}</td>
+		    			<td>${bar.key.coste} €</td>
+		    			<td>${bar.value}</td> <br/>
+		    	</tr>
+		    	</c:forEach>
+		    	</table>
+	    		 </div>
+	    		 
+	    		 <br/><br/>
+	    		 <c:if test="${reserva.cama_supletoria==true}">
+			  	 <br/><br/><br/>
+			  	 </c:if>
+
+			  	<strong><spring:message code="total_servicios" />: </strong>${total_servicios} €<br/><br/>
+			  	
+			  		 <div>	
+		
+		 <h3 style="margin-left:0px; text-decoration: underline"><spring:message code="datos_facturacion" /></h3>
+			
+			  	<strong><spring:message code="precio_habitacion" />: </strong>${precio_hab} €<br/>
+		
+				<c:if test="${categoria.precio_categoria>1}">
+					<strong><spring:message code="label_es_uca_iw_hoteloasis_domain_categoria_precio_categoria" />: </strong>${categoria.precio_categoria} <br/>
+				</c:if>
+			  	<c:if test="${reserva.cama_supletoria==true}">
+			  		<strong><spring:message code="coste_cama_supletoria" />: </strong>${coste_cama}€<br/>
+			  		
+			  	</c:if>
+			  			  	<strong><spring:message code="noches" />: </strong>${dias}<br/>
+			  		<strong><spring:message code="coste_estancia" />: </strong>${coste_noches}€<br/>
+			  	<strong><spring:message code="total_servicios" />: </strong>${total_servicios} €<br/>
+			  	<h1 style="font-size:17px; margin-left:1px; color:#CB001D"><strong><spring:message code="total" />: </strong>${total} €</h1>
+		
+		</div>
+  	<br/>
+		
+		 <br/> 
+
+	  	<br/>
+	  
   	</blockquote>
+  	</util:panel>
 </div>
+</jsp:root>

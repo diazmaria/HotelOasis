@@ -21,51 +21,74 @@
 	<intercept-url pattern="\A/hotels\Z" method="GET" access="hasAnyRole('Administrador', 'Recepcionista', 'Usuario')"/>
 	<intercept-url pattern="\A/hotels/\d*.*\Z" access="hasAnyRole('Recepcionista', 'Administrador')"/>
 	<intercept-url pattern="\A/hotels\?form\Z" access="hasAnyRole('Recepcionista', 'Administrador')"/>	
+	<intercept-url pattern="\A/hotels\?find\Z" access="hasAnyRole('Recepcionista', 'Administrador')"/>	
 
 	<!-- CATEGORIA -->
 	<intercept-url pattern="\A/categorias\Z" method="GET" access="hasAnyRole('Administrador', 'Recepcionista', 'Usuario')"/>
 	<intercept-url pattern="\A/categorias/\d*.*\Z" access="hasAnyRole('Recepcionista', 'Administrador')"/>
-	<intercept-url pattern="\A/categorias\?form\Z" access="hasAnyRole('Recepcionista', 'Administrador')"/>	
+	<intercept-url pattern="\A/categorias\?form\Z" access="hasAnyRole('Recepcionista', 'Administrador')"/>
+	<intercept-url pattern="\A/categorias\?find\Z" access="hasAnyRole('Recepcionista', 'Administrador')"/>	
 	
 	<!-- RESERVA -->
 	<intercept-url pattern="\A/reservas\Z" method="GET" access="hasAnyRole('Administrador', 'Recepcionista', 'Usuario')"/>
 	<intercept-url pattern="\A/reservas/\d*.*\Z" access="hasAnyRole('Recepcionista', 'Administrador')"/>
-	<intercept-url pattern="\A/reservas\?form\Z" access="hasAnyRole('Recepcionista', 'Administrador')"/>	
+	<intercept-url pattern="\A/reservas\?form\Z" access="hasAnyRole('Recepcionista', 'Administrador')"/>
+
 	
 	<!-- HABITACIÓN -->
 	<intercept-url pattern="\A/habitacions\Z" method="GET" access="hasAnyRole('Administrador', 'Recepcionista', 'Usuario')"/>
 	<intercept-url pattern="\A/habitacions\/\d*.*\Z" access="hasAnyRole('Recepcionista', 'Administrador')"/>
-	<intercept-url pattern="\A/habitacions\?form\Z" access="hasAnyRole('Recepcionista', 'Administrador')"/>	
+	<intercept-url pattern="\A/habitacions\?form\Z" access="hasAnyRole('Recepcionista', 'Administrador')"/>
+	<intercept-url pattern="\A/habitacions\?find\Z" access="hasAnyRole('Recepcionista', 'Administrador')"/>		
 	
 	<!-- ROL -->
 	<intercept-url pattern="\A/rols\Z" method="GET" access="hasAnyRole('Administrador', 'Recepcionista', 'Usuario')"/>
 	<intercept-url pattern="\A/rols/\d*.*\Z" access="hasAnyRole('Recepcionista', 'Administrador')"/>
-	<intercept-url pattern="\A/rols\?form\Z" access="hasAnyRole('Recepcionista', 'Administrador')"/>			
+	<intercept-url pattern="\A/rols\?form\Z" access="hasAnyRole('Recepcionista', 'Administrador')"/>
+	<intercept-url pattern="\A/rols\?find\Z" access="hasAnyRole('Recepcionista', 'Administrador')"/>			
 		
 	<!-- USUARIO -->
 	<intercept-url pattern="\A/usuarios\Z" method="GET" access="hasAnyRole('Administrador', 'Recepcionista', 'Usuario')"/>
 	<intercept-url pattern="\A/usuarios/\d*.*\Z" access="hasAnyRole('Recepcionista', 'Administrador')"/>
 	<intercept-url pattern="\A/usuarios\?form\Z" access="hasAnyRole('Recepcionista', 'Administrador')"/>
+	<intercept-url pattern="\A/usuarios\?find\Z" access="hasAnyRole('Recepcionista', 'Administrador')"/>
 	
 	<!-- ESTANCIA -->
 	<intercept-url pattern="\A/estancias\Z" method="GET" access="hasAnyRole('Administrador', 'Recepcionista', 'Usuario')"/>
 	<intercept-url pattern="\A/estancias/\d*.*\Z" access="hasAnyRole('Recepcionista', 'Administrador')"/>
 	<intercept-url pattern="\A/estancias\?form\Z" access="hasAnyRole('Recepcionista', 'Administrador')"/>
+	<intercept-url pattern="\A/estancias\?find\Z" access="hasAnyRole('Recepcionista', 'Administrador')"/>
+	<intercept-url pattern="\A/estancias\?checkin.*\Z" access="hasAnyRole('Recepcionista', 'Administrador', 'Usuario')"/>
+	<intercept-url pattern="\A/estancias\?checkout.*\Z" access="hasAnyRole('Recepcionista', 'Administrador', 'Usuario')"/>
+	<intercept-url pattern="\A/estancias\?factura.*\Z" access="hasAnyRole('Recepcionista', 'Administrador', 'Usuario')"/>
+	<intercept-url pattern="\A/estancias\?checkout.*\Z" access="hasAnyRole('Recepcionista', 'Administrador', 'Usuario')"/>
+	<intercept-url pattern="\A/estancias\?servicioInternet.*\Z" access="hasAnyRole('Recepcionista', 'Administrador', 'Usuario')"/>
+	<intercept-url pattern="\A/estancias\?servicioLlamada.*\Z" access="hasAnyRole('Recepcionista', 'Administrador', 'Usuario')"/>
+	<intercept-url pattern="\A/estancias\?servicioMinibar.*\Z" access="hasAnyRole('Recepcionista', 'Administrador', 'Usuario')"/>
 	
 	<!-- TARIFA -->
 	<intercept-url pattern="\A/tarifas\Z" method="GET" access="hasAnyRole('Administrador', 'Recepcionista', 'Usuario')"/>
 	<intercept-url pattern="\A/tarifas/\d*.*\Z" access="hasAnyRole('Recepcionista', 'Administrador')"/>
 	<intercept-url pattern="\A/tarifas\?form\Z" access="hasAnyRole('Recepcionista', 'Administrador')"/>
+	<intercept-url pattern="\A/tarifas\?find\Z" access="hasAnyRole('Recepcionista', 'Administrador')"/>
 	
+    <!-- BEBIDA -->
+	<intercept-url pattern="\A/bebidas\Z" method="GET" access="hasAnyRole('Administrador', 'Recepcionista', 'Usuario')"/>
+	<intercept-url pattern="\A/bebidas/\d*.*\Z" access="hasAnyRole('Recepcionista', 'Administrador')"/>
+	<intercept-url pattern="\A/bebidas\?form\Z" access="hasAnyRole('Recepcionista', 'Administrador')"/>
+	<intercept-url pattern="\A/bebidas\?find\Z" access="hasAnyRole('Recepcionista', 'Administrador')"/>
 	
+	<!-- CONSUMO BEBIDAS -->
+	<intercept-url pattern="\A/bebidas_consumoes\Z" method="GET" access="hasAnyRole('Administrador', 'Recepcionista', 'Usuario')"/>
+	<intercept-url pattern="\A/bebidas_consumoes/\d*.*\Z" access="hasAnyRole('Recepcionista', 'Administrador')"/>
+	<intercept-url pattern="\A/bebidas_consumoes\?form\Z" access="hasAnyRole('Recepcionista', 'Administrador')"/>
+	<intercept-url pattern="\A/bebidas_consumoes\?find\Z" access="hasAnyRole('Recepcionista', 'Administrador')"/>
 	
-	
-	
-	
-	
-	
-	
-	
+	<!-- LLAMADAS -->
+	<intercept-url pattern="\A/llamada\Z" method="GET" access="hasAnyRole('Administrador', 'Recepcionista', 'Usuario')"/>
+	<intercept-url pattern="\A/llamada/\d*.*\Z" access="hasAnyRole('Recepcionista', 'Administrador')"/>
+	<intercept-url pattern="\A/llamada\?form\Z" access="hasAnyRole('Recepcionista', 'Administrador')"/>
+	<intercept-url pattern="\A/llamada\?find\Z" access="hasAnyRole('Recepcionista', 'Administrador')"/>
 	
 	<!-- Configure these elements to secure URIs in your application -->
 	</http>

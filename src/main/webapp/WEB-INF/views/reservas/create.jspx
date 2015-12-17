@@ -3,7 +3,8 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <form:create id="fc_es_uca_iw_hoteloasis_domain_Reserva" modelAttribute="reserva" path="/reservas" render="${empty dependencies}" z="JlC/e6+ZRu7b8hisg7d2bzuERRM=">
-        <field:datetime dateTimePattern="${reserva_fecha_reserva_date_format}" field="fecha_reserva" id="c_es_uca_iw_hoteloasis_domain_Reserva_fecha_reserva" required="true" z="zVj1Ysw+oqCB9iCZXL1dekHNuBo="/>
+        <spring:message code="menu_item_reserva_new_label" var="val"/>	
+        <h1 style="color:#113660; text-transform: uppercase; text-decoration:underline"><spring:message code="crear" arguments="${val}"/></h1>        <field:datetime dateTimePattern="${reserva_fecha_reserva_date_format}" field="fecha_reserva" id="c_es_uca_iw_hoteloasis_domain_Reserva_fecha_reserva" required="true" z="zVj1Ysw+oqCB9iCZXL1dekHNuBo="/>
         <field:datetime dateTimePattern="${reserva_fecha_entrada_date_format}" field="fecha_entrada" id="c_es_uca_iw_hoteloasis_domain_Reserva_fecha_entrada" required="true" z="Pt4qJ7t74MvX4TmZDkCgKaC8UEY="/>
         <field:datetime dateTimePattern="${reserva_fecha_salida_date_format}" field="fecha_salida" id="c_es_uca_iw_hoteloasis_domain_Reserva_fecha_salida" required="true" z="c1YZB+M2AaWV+rK1hNj54jgU8dg="/>
         <field:checkbox field="cama_supletoria" id="c_es_uca_iw_hoteloasis_domain_Reserva_cama_supletoria" z="Iw4Pgl8K5HpLMOeLjuNe99NkYNA="/>

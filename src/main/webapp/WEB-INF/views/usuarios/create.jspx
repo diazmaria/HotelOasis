@@ -3,6 +3,8 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <form:create id="fc_es_uca_iw_hoteloasis_domain_Usuario" modelAttribute="usuario" path="/usuarios" render="${empty dependencies}" z="jnB0b2jbu6AtqYEvq6Ui7becdrI=">
+        <spring:message code="menu_item_usuario_new_label" var="val"/>	
+        <h1 style="color:#113660; text-transform: uppercase; text-decoration:underline"><spring:message code="crear" arguments="${val}"/></h1> 
         <field:input field="nombre" id="c_es_uca_iw_hoteloasis_domain_Usuario_nombre" max="30" min="2" required="true" z="Xf2DQth6H6AdlCVL4T0gIYH4R9Y="/>
         <field:input field="primer_apellido" id="c_es_uca_iw_hoteloasis_domain_Usuario_primer_apellido" max="30" min="2" required="true" z="+8JkNL7h7ZCA3+C/YVdMNv5116c="/>
         <field:input field="segundo_apellido" id="c_es_uca_iw_hoteloasis_domain_Usuario_segundo_apellido" max="30" min="2" required="true" z="SQh/j3WJJj0fxdZbn8Tg86pnm48="/>

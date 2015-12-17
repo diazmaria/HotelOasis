@@ -3,26 +3,23 @@
   <jsp:directive.page contentType="text/html;charset=UTF-8"/>
   <jsp:output omit-xml-declaration="yes"/>
 
-  <spring:url value="/" var="home"/>
-  <span>
-    <a href="${home}">
-      <spring:message code="button_home"/>
-    </a>
-  </span>
+	 <span class="login">
+      <a href="/HotelOasis">
+        <spring:message code="home"/>
+      </a>
+    </span>
 
    <c:if test="${pageContext['request'].userPrincipal == null}">
-    <c:out value=" | "/>
-    <span>
+    <span class="login">
       <spring:url value="/resources/j_spring_security_login" var="login"/>
       <a href="/HotelOasis/login">
         <spring:message code="security_login_title"/>
       </a>
     </span>
   </c:if>
-
+  
   <c:if test="${pageContext['request'].userPrincipal != null}">
-    <c:out value=" | "/>
-    <span>
+     <span class="login">
       <spring:url value="/resources/j_spring_security_logout" var="logout"/>
       <a href="${logout}">
         <spring:message code="security_logout"/>
@@ -30,20 +27,4 @@
     </span>
   </c:if>
 
-  <span id="language">
-    <c:out value=" | "/>
-    <spring:message code="global_language"/>
-    <c:out value=": "/>
-  <util:language label="English" locale="en"/>
-    <util:language label="Espanol" locale="es"/>
-    </span>
-  <util:theme/>
-
-  <spring:url value="/resources/images/springsource-logo.png" var="logo"/>
-  <spring:message code="global_sponsored" htmlEscape="false" var="sponsored"/>
-  <span>
-    <a href="http://springsource.com" title="${fn:escapeXml(sponsored)}">
-      <img align="right" alt="${fn:escapeXml(sponsored)}" src="${logo}"/>
-    </a>
-  </span>
 </div>

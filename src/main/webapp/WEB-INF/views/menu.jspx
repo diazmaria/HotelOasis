@@ -3,28 +3,15 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <menu:menu id="_menu" z="nZaf43BjUg1iM0v70HJVEsXDopc=">
-        <!-- CATEGORIA -->
-        <sec:authorize access="hasRole('Administrador')">
-            <menu:category id="c_categoria" z="XLnDEGJehr8l3YDLxVdbfHBP/oo=">
-                <menu:item id="i_categoria_new" messageCode="global_menu_new" url="/categorias?form" z="NYUpuLrfC7kdwPOtEghuKRyaHNA="/>
-                <menu:item id="i_categoria_list" messageCode="global_menu_list" url="/categorias?page=1&amp;size=${empty param.size ? 10 : param.size}" z="eydey0ZEQOKp1zkf+5SxUGiZeC8="/>
-            </menu:category>
-        </sec:authorize>
-        <!-- HOTEL -->
-        <sec:authorize access="hasRole('Administrador')">
-            <menu:category id="c_hotel" z="7C2zkXEvMSfnPf6jh5Nc/V6fQEY=">
-                <menu:item id="i_hotel_new" messageCode="global_menu_new" url="/hotels?form" z="/WBsNr/VgyUOmLXLfXZU5LJT9sY="/>
-                <menu:item id="i_hotel_list" messageCode="global_menu_list" url="/hotels?page=1&amp;size=${empty param.size ? 10 : param.size}" z="FOElud587FYY5+wmWtI8bb6O3OY="/>
-            </menu:category>
-        </sec:authorize>
+      
         <!-- RESERVA -->
         <menu:category id="c_reserva" z="2dv8KuUKN03nacLGmlbmHwLE18I=">
-            <sec:authorize access="permitAll">
-                <menu:item id="fi_habitaciones_disponibles" messageCode="global_menu_find" url="/reservas?find=HabitacionesDisponibles&amp;form" z="user-managed"/>
-            </sec:authorize>
             <sec:authorize access="hasAnyRole('Administrador', 'Recepcionista')">
                 <menu:item id="i_reserva_new" messageCode="global_menu_new" url="/reservas?form" z="/YDemNL7KpX4bazkkJ9CXIcPd2I="/>
                 <menu:item id="i_reserva_list" messageCode="global_menu_list" url="/reservas?page=1&amp;size=${empty param.size ? 10 : param.size}" z="SXqVfp1MeDZeV3cOwFeTM7bxywo="/>
+            </sec:authorize>
+            <sec:authorize access="permitAll">
+                <menu:item id="fi_habitaciones_disponibles" messageCode="global_menu_find" url="/reservas?find=HabitacionesDisponibles&amp;form" z="user-managed"/>
             </sec:authorize>
             <sec:authorize access="hasAnyRole('Administrador', 'Recepcionista','Usuario')">
                 <menu:item id="fi_reserva_usuario" url="/reservas?reservasActivas" z="user-managed"/>
@@ -44,13 +31,7 @@
                 <menu:item id="fi_estancia_factura" messageCode="global_generic" url="/estancias?facturaform" z="user-managed"/>
             </menu:category>
         </sec:authorize>
-        <!-- HABITACION -->
-        <sec:authorize access="hasRole('Administrador')">
-            <menu:category id="c_habitacion" z="RrtKJE3IGuh9SjqhuNimhB5sZJY=">
-                <menu:item id="i_habitacion_new" messageCode="global_menu_new" url="/habitacions?form" z="ZZ1kRKalrScVKjSFIvAZysaQIcA="/>
-                <menu:item id="i_habitacion_list" messageCode="global_menu_list" url="/habitacions?page=1&amp;size=${empty param.size ? 10 : param.size}" z="xK9yjAkHBEsjk8nBpkuDCj+HeZE="/>
-            </menu:category>
-        </sec:authorize>
+
         <!-- USUARIO -->
         <sec:authorize access="hasAnyRole('Administrador', 'Recepcionista')">
             <menu:category id="c_usuario" z="g6oG0656PcsmmvUYeBtpgiQROck=">
@@ -58,13 +39,7 @@
                 <menu:item id="i_usuario_list" messageCode="global_menu_list" url="/usuarios?page=1&amp;size=${empty param.size ? 10 : param.size}" z="P7ZIPrcTTBR41JYD0QldbYgsZrM="/>
             </menu:category>
         </sec:authorize>
-        <!-- ROL -->
-        <sec:authorize access="hasRole('Administrador')">
-            <menu:category id="c_rol" z="WyJ0DN0p4cfPsGF7WGHEFk6Ok1k=">
-                <menu:item id="i_rol_new" messageCode="global_menu_new" url="/rols?form" z="pci13zJkyKMJXhGhbCY9f9yBMb4="/>
-                <menu:item id="i_rol_list" messageCode="global_menu_list" url="/rols?page=1&amp;size=${empty param.size ? 10 : param.size}" z="GQHH+mdvcxfHlFAlkR2gFwHsv1s="/>
-            </menu:category>
-        </sec:authorize>
+        
         <!-- TARIFA -->
         <sec:authorize access="hasAnyRole('Administrador', 'Recepcionista')">
             <menu:category id="c_tarifa" z="58iuq9S7m8KodUcR5ujPMkBIMnc=">
@@ -93,6 +68,36 @@
             <menu:item id="i_llamada_new" messageCode="global_menu_new" url="/llamadas?form" z="Kdm6j0BFJnIyt3S01p4aKZF+l7A="/>
             <menu:item id="i_llamada_list" messageCode="global_menu_list" url="/llamadas?page=1&amp;size=${empty param.size ? 10 : param.size}" z="HxE3afWEaVWWNiRV9BUczeAAVAo="/>
         </menu:category>
+        </sec:authorize>
+        
+          <!-- HABITACION -->
+        <sec:authorize access="hasRole('Administrador')">
+            <menu:category id="c_habitacion" z="RrtKJE3IGuh9SjqhuNimhB5sZJY=">
+                <menu:item id="i_habitacion_new" messageCode="global_menu_new" url="/habitacions?form" z="ZZ1kRKalrScVKjSFIvAZysaQIcA="/>
+                <menu:item id="i_habitacion_list" messageCode="global_menu_list" url="/habitacions?page=1&amp;size=${empty param.size ? 10 : param.size}" z="xK9yjAkHBEsjk8nBpkuDCj+HeZE="/>
+            </menu:category>
+        </sec:authorize>
+        
+        <!-- ROL -->
+        <sec:authorize access="hasRole('Administrador')">
+            <menu:category id="c_rol" z="WyJ0DN0p4cfPsGF7WGHEFk6Ok1k=">
+                <menu:item id="i_rol_new" messageCode="global_menu_new" url="/rols?form" z="pci13zJkyKMJXhGhbCY9f9yBMb4="/>
+                <menu:item id="i_rol_list" messageCode="global_menu_list" url="/rols?page=1&amp;size=${empty param.size ? 10 : param.size}" z="GQHH+mdvcxfHlFAlkR2gFwHsv1s="/>
+            </menu:category>
+        </sec:authorize>
+          <!-- CATEGORIA -->
+        <sec:authorize access="hasRole('Administrador')">
+            <menu:category id="c_categoria" z="XLnDEGJehr8l3YDLxVdbfHBP/oo=">
+                <menu:item id="i_categoria_new" messageCode="global_menu_new" url="/categorias?form" z="NYUpuLrfC7kdwPOtEghuKRyaHNA="/>
+                <menu:item id="i_categoria_list" messageCode="global_menu_list" url="/categorias?page=1&amp;size=${empty param.size ? 10 : param.size}" z="eydey0ZEQOKp1zkf+5SxUGiZeC8="/>
+            </menu:category>
+        </sec:authorize>
+        <!-- HOTEL -->
+        <sec:authorize access="hasRole('Administrador')">
+            <menu:category id="c_hotel" z="7C2zkXEvMSfnPf6jh5Nc/V6fQEY=">
+                <menu:item id="i_hotel_new" messageCode="global_menu_new" url="/hotels?form" z="/WBsNr/VgyUOmLXLfXZU5LJT9sY="/>
+                <menu:item id="i_hotel_list" messageCode="global_menu_list" url="/hotels?page=1&amp;size=${empty param.size ? 10 : param.size}" z="FOElud587FYY5+wmWtI8bb6O3OY="/>
+            </menu:category>
         </sec:authorize>
     </menu:menu>
 </div>

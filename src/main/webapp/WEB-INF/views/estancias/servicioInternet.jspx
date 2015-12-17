@@ -3,17 +3,26 @@
 	<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
 	    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
 	    <jsp:output omit-xml-declaration="yes"/>
-	   
+	  	    <util:panel id="ff_es_uca_iw_domain_Estancia" title="Consumir minibar">    
 	    <div style="margin-left:5px">
 	    <form action="/HotelOasis/estancias" method="post">
 
-		   <h2 style="color:#113660">Acceso a internet</h2>	
-		   <div style="margin-left:5px">La tarifa el acceso a internet es de: ${tarifa} €/min</div><br/>
-			<p style="display:inline-block; margin-right:15px; margin-left:5px">¿Establecer conexión?</p> <input type="submit" class ="enviar" name="action" value="CONECTAR"/>  
+		   <h2 style="color:#113660"><spring:message code="acceso_internet"/></h2>	<img src="/HotelOasis/resources/images/internet.png" style="margin-left: 29px;
+			margin-top: -18px"/>
+		   <div class="coste_servicio"><spring:message code="tarifa_servicio" arguments="${tarifa}"/></div><br/>
+	
+ 			<spring:message code="comenzar" var="comenzar"/>	
+		   <input class="enviar" type="submit" name="internet" value="${comenzar}" style="padding-right:40px"/>
+		    	
+		   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Play_groen.png/600px-Play_groen.png" style="margin-left: -40px;
+			margin-top: 5px; position:absolute; width:23px"/>
+		    	
 		    	
 		    <input type="hidden" name="estancia" value="${estancia.id}"/>
 		    <input type="hidden" name="servicio" value="${servicio}"/>
+		    <input type="hidden" name="tarifa" value="${tarifa}"/>
 	    </form>
-	</div>
+	   </div>
+	   </util:panel>
 	</div>
 </jsp:root>

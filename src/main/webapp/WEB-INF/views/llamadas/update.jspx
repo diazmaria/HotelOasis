@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+<div xmlns:spring="http://www.springframework.org/tags" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <form:update id="fu_es_uca_iw_hoteloasis_domain_Llamada" modelAttribute="llamada" path="/llamadas" versionField="Version" z="/LOZEC7vs7PAZShzvdr6ju2uh28=">
+        <spring:message code="menu_item_llamada_new_label" var="val"/>	
+        <h1 style="color:#113660; text-transform: uppercase; text-decoration:underline"><spring:message code="editar" arguments="${val}"/></h1> 
         <field:input field="minutos_nacionales" id="c_es_uca_iw_hoteloasis_domain_Llamada_minutos_nacionales" z="Pu4I9rXTmeek9FccBoLe8rG+xSI="/>
         <field:input field="minutos_internacionales" id="c_es_uca_iw_hoteloasis_domain_Llamada_minutos_internacionales" z="KH0yZiiSjGebzTH2h7bFnCknczM="/>
         <field:select field="estancia" id="c_es_uca_iw_hoteloasis_domain_Llamada_estancia" itemValue="id" items="${estancias}" path="/estancias" z="+Z/R2xOLV8NSTJvvntiqaMwTkTg="/>

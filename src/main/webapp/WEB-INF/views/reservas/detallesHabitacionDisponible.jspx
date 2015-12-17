@@ -10,47 +10,74 @@
 		xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
 		<jsp:directive.page contentType="text/html;charset=UTF-8" />
 		<jsp:output omit-xml-declaration="yes" />
-		
+		  <util:panel id="title" title="Hotel Oasis">
 		<c:choose>
-			<c:when test="${habitacionesDisponibles >= 1}">
-				<h3 style="color: #2D9918">${mensaje}</h3>
+			<c:when test="${mensaje == 'hay_habitaciones'}">
+				<h3 style="color: #2D9918">
+				      <spring:message code="hay_habitaciones" arguments="${habitacionesDisponibles}" />
+				</h3>
 			</c:when>
-			<c:otherwise>
-				<h3 style="color: #CB001D">${mensaje}</h3>
-			</c:otherwise>
+			<c:when test="${mensaje == 'hay_habitacion'}">
+				<h3 style="color: #2D9918">
+				      <spring:message code="hay_habitacion" arguments="${habitacionesDisponibles}" />
+				</h3>
+			</c:when>			
+			<c:when test="${mensaje == 'hay_dobles'}">
+				<h3 style="color: #CB001D">
+				      <spring:message code="hay_dobles" arguments="${habitacionesDisponibles}" />
+				</h3>
+			</c:when>
+			
+			<c:when test="${mensaje == 'hay_doble'}">
+				<h3 style="color: #CB001D">
+				      <spring:message code="hay_doble" arguments="${habitacionesDisponibles}" />
+				</h3>
+			</c:when>
+			<c:when test="${mensaje == 'no_hay'}">
+				<h3 style="color: #CB001D">
+				      <spring:message code="no_hay" />
+				</h3>
+			</c:when>
+				<c:when test="${mensaje == 'no_hay_ninguna'}">
+				<h3 style="color: #CB001D">
+				      <spring:message code="no_hay_ninguna" />
+				</h3>
+			</c:when>
 		</c:choose>
+		
+		
 		<div style="margin-left:5px">
 			<p>
-				<b>Hotel:</b> ${hotel.nombre} (${hotel.estrellas} estrellas)
+				<b>Hotel:</b> ${hotel.nombre} (${hotel.estrellas} <spring:message code="estrellas"/>)
 			</p>
 			<p>
-				<b>Categoria:</b> ${categoria.nombre}
+				<b><spring:message code="label_es_uca_iw_hoteloasis_domain_habitacion_categoria"/>:</b> ${categoria.nombre}
 			</p>
 			<p>
-				<b>Tipo:</b> ${tipo}
+				<b><spring:message code="label_es_uca_iw_hoteloasis_domain_habitacion_tipo"/>:</b> ${tipo}
 			</p>
 			<p>
-				<b>Fecha de entrada:</b> ${fecha_entrada}
+				<b><spring:message code="label_es_uca_iw_hoteloasis_domain_reserva_fecha_entrada"/>:</b> ${fecha_entrada}
 			</p>
 			<p>
-				<b>Fecha de salida:</b> ${fecha_salida}
+				<b><spring:message code="label_es_uca_iw_hoteloasis_domain_reserva_fecha_salida"/>:</b> ${fecha_salida}
 			</p>
 		
 		<c:choose>
 			<c:when test="${habitacionesDisponibles >= 1}">
-				<h3 align="center" style="color: #113660">Importe:</h3>
+				<h3 align="center" style="color: #113660"><spring:message code="importe" />:</h3>
 				<div>
 					<table>
 						<tr>
-							<td align="center"><b><c:out value="Noches" /></b></td>
-							<td align="center"><b><c:out value="Coste/noche" /></b></td>
-							<td align="center"><b><c:out value="Factor categoría" /></b></td>
+							<td align="center"><b><spring:message code="noches" /></b></td>
+							<td align="center"><b><spring:message code="coste_noche" /></b></td>
+							<td align="center"><b><spring:message code="tasa_categoria" /></b></td>
 							<c:choose>
 								<c:when test="${cama_supletoria == true}">
-									<td align="center"><b><c:out value="Coste cama supletoria infantil/noche" /></b></td>
+									<td align="center"><b><spring:message code="coste_cama_supletoria" /></b></td>
 								</c:when>
 							</c:choose>
-							<td align="center"><b><c:out value="Importe total" /></b></td>
+							<td align="center"><b><c:out value="Total" /></b></td>
 						</tr>
 						<tr>
 							<td align="center"><c:out value="${dias}" /></td>
@@ -75,14 +102,18 @@
 				<input type="hidden" name="coste_reserva" value="${coste_reserva}"/>
 				<input type="hidden" name="cama_supletoria" value="${cama_supletoria}"/>
         		
-				<input type="submit" class ="enviar" name="action" value="reservar"/>
-			</form>	
-			<a href="/HotelOasis/reservas?find=HabitacionesDisponibles&amp;form" style="text-decoration: none"><input type="submit" class ="enviar" name="action" value="repetir busqueda"/></a>
+        		<spring:message code="reservar" var="reservar"/>
+				<input type="submit" class ="enviar search" name="action" value="${reservar}"/>
+			</form>
+			<spring:message code="repetir_busqueda" var="repetir_busqueda"/>	
+			<a href="/HotelOasis/reservas?find=HabitacionesDisponibles&amp;form" style="text-decoration: none"><input type="submit" class ="enviar search" name="action" value="${repetir_busqueda}"/></a>
 			</c:when>
 			<c:otherwise>
-				<a href="/HotelOasis/reservas?find=HabitacionesDisponibles&amp;form" style="text-decoration: none"><input type="submit" class ="enviar" name="action" value="repetir busqueda"/></a>	
+			    <spring:message code="repetir_busqueda" var="repetir_busqueda"/>	
+				<a href="/HotelOasis/reservas?find=HabitacionesDisponibles&amp;form" style="text-decoration: none"><input type="submit" class ="enviar search" name="action" value="${repetir_busqueda}"/></a>	
 			</c:otherwise>
 		</c:choose>
 		</div>
+		  </util:panel>
 	</div>
 </jsp:root>
