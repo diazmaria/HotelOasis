@@ -1,5 +1,5 @@
 ## Hotel Oasis Booking System
-![Image](http://i1030.photobucket.com/albums/y369/MariaPhotoB/Logo_zpsy2ewc8b7.png)
+![Image](https://image.ibb.co/bt8igv/Logo.png)
 
 
 ### Description
@@ -9,7 +9,7 @@ This web system will also handle **cancellations** (and its economic penalty), *
 The web system has an **administration interface** to manage hotels and their features, **language support for English :uk: and Spanish :es:** and **security control** (authentication and authorization). All the requisites were specified on an assignment for the “Ingeniería Web” (Web Engineering) module that I took at university (2014-2015). One of my classmates participated with me during this project.
 
 ### Technology
-![Image](http://i1030.photobucket.com/albums/y369/MariaPhotoB/Technologies_zpslh3qreit.png)
+![Image](https://image.ibb.co/do6rZF/Technologies.png)
 - **Java**
 - Java Platform Enterprise Edition (**Java EE**)
 - **Spring Framework**, that utilizes the MVC architecture.
@@ -38,5 +38,5 @@ You must have installed and configured the Java Development Kit (JDK), Spring To
 
 ### Demo
 
-![demo](http://i1030.photobucket.com/albums/y369/MariaPhotoB/HotelOasis_zpsskvcpr7l.gif)
+![demo](https://thumbs.gfycat.com/HardWholeAsiandamselfly-size_restricted.gif)
 
